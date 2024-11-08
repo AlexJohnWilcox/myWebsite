@@ -2,18 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f3f4f6;
+    background-color: #f9f9f9; /* Very light gray background */
 }
 
 header {
     width: 100%;
     background-color: #343541;
     color: white;
-    padding: 1em;
+    padding: 1.5em; /* Slightly larger padding for a bigger banner */
     position: fixed;
     top: 0;
     left: 0;
@@ -21,6 +17,7 @@ header {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.2em; /* Slightly larger text */
 }
 
 .navbar {
@@ -37,10 +34,15 @@ header {
     font-size: 1.5em;
 }
 
+.site-name a {
+    color: white;
+    text-decoration: none;
+}
+
 nav ul {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 20px;
     margin: 0;
     padding: 0;
 }
@@ -48,7 +50,6 @@ nav ul {
 nav a {
     color: white;
     text-decoration: none;
-    font-size: 1em;
     transition: color 0.3s;
 }
 
@@ -57,16 +58,8 @@ nav a:hover {
 }
 
 section {
-    margin: 80px 20px 20px;
+    margin: 100px 20px 20px;
     padding: 20px;
     max-width: 1100px;
     text-align: center;
-}
-
-footer {
-    margin-top: auto;
-    text-align: center;
-    padding: 1em;
-    background-color: #343541;
-    color: white;
 }
