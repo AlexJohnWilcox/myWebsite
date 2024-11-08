@@ -2,14 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* Very light gray background */
+    background-color: #e0e0e0; /* Set to a light gray background */
 }
 
 header {
     width: 100%;
     background-color: #343541;
     color: white;
-    padding: 1.5em; /* Slightly larger padding for a bigger banner */
+    padding: 1.5em;
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@ header {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    font-size: 1.2em; /* Slightly larger text */
+    font-size: 1.2em;
 }
 
 .navbar {
@@ -37,6 +37,10 @@ header {
 .site-name a {
     color: white;
     text-decoration: none;
+}
+
+nav {
+    margin-left: auto; /* Pushes the nav to the far right */
 }
 
 nav ul {
@@ -62,4 +66,7 @@ section {
     padding: 20px;
     max-width: 1100px;
     text-align: center;
+    background-color: #fff; /* Keep sections white for readability */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
