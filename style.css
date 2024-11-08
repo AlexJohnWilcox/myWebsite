@@ -1,8 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Use a professional font like Roboto */
     margin: 0;
     padding: 0;
-    background-color: #e0e0e0; /* Set to a light gray background */
+    background-color: #e0e0e0; /* Light gray background */
 }
 
 header {
@@ -14,7 +14,6 @@ header {
     top: 0;
     left: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     font-size: 1.2em;
@@ -32,15 +31,12 @@ header {
 .site-name {
     margin: 0;
     font-size: 1.5em;
+    margin-right: auto; /* Moves the name to the far left */
 }
 
 .site-name a {
     color: white;
     text-decoration: none;
-}
-
-nav {
-    margin-left: auto; /* Pushes the nav to the far right */
 }
 
 nav ul {
