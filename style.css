@@ -1,42 +1,21 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Use a professional font like Roboto */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0e0e0; /* Light gray background */
+    background-color: #e0e0e0;
 }
 
 header {
     width: 100%;
     background-color: #343541;
     color: white;
-    padding: 1.5em;
+    padding: 1em;
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
-    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    font-size: 1.2em;
-}
-
-.navbar {
-    width: 100%;
-    max-width: 1100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-}
-
-.site-name {
-    margin: 0;
-    font-size: 1.5em;
-    margin-right: auto; /* Moves the name to the far left */
-}
-
-.site-name a {
-    color: white;
-    text-decoration: none;
 }
 
 nav ul {
@@ -47,14 +26,22 @@ nav ul {
     padding: 0;
 }
 
-nav a {
+.nav-link {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    transition: color 0.3s, background-color 0.3s;
 }
 
-nav a:hover {
+.nav-link:hover {
     color: #ddd;
+}
+
+.active {
+    color: #343541;
+    background-color: orange;
+    border-radius: 4px;
 }
 
 section {
@@ -62,7 +49,7 @@ section {
     padding: 20px;
     max-width: 1100px;
     text-align: center;
-    background-color: #fff; /* Keep sections white for readability */
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
