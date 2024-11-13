@@ -205,13 +205,6 @@ nav ul {
     background-color: #4CAF50;
 }
 
-/* Fun Facts Section */
-.fun-facts-section p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
 .contact-section {
     max-width: 600px;
     margin: 100px auto;
