@@ -32,17 +32,9 @@
             <p><i class="fas fa-phone"></i> Phone: <a href="tel:+17039455007">+1 703-945-5007</a></p>
         </div>
 
-        <!-- Contact Form using Netlify -->
+        <!-- Contact Form -->
         <h3>Send a Message</h3>
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <!-- Hidden field for Netlify form name -->
-            <input type="hidden" name="form-name" value="contact">
-            <!-- Honeypot field for spam prevention -->
-            <p style="display: none;">
-                <label>Don’t fill this out if you're human: <input name="bot-field"></label>
-            </p>
-
-            <!-- Form Fields -->
+        <form class="contact-form" action="https://formsubmit.co/alex@alexwilcox.net" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
