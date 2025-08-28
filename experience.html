@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Experience & Timeline — Alex J. Wilcox</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Split timeline styles */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 36px;
+    }
+    .exp-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .exp-entry {
+      background: #0f1724;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(2,6,23,0.13);
+      padding: 22px 20px;
+      margin: 0;
+    }
+    .exp-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    .exp-year {
+      font-size: 1.02rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 2px;
+      letter-spacing: 0.2px;
+    }
+    .exp-desc {
+      color: var(--muted);
+      font-size: 1.01rem;
+      margin-bottom: 0;
+    }
+    @media (max-width:900px){
+      .experience-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="nav-link">HOME</a></li>
+        <li><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
+        <li><a href="experience.html" class="nav-link active">EXPERIENCE & TIMELINE</a></li>
+        <li class="nav-dropdown-parent">
+          <span class="nav-link nav-dropdown-toggle">SOCIALS</span>
+          <div class="nav-dropdown">
+            <a href="https://github.com/AlexJohnWilcox" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" target="_blank">Resume (PDF)</a>
+          </div>
+        </li>
+        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <section class="card">
+      <h2>Experience Timeline</h2>
+      <div class="experience-grid">
+        <!-- LEFT COLUMN: Odd years (2025, 2023, 2021, 2019, 2017) -->
+        <div class="exp-col">
+          <div class="exp-entry">
+            <div class="exp-year">May 2025 – August 2025</div>
+            <div class="exp-title">Systems Administration Internship</div>
+            <div class="exp-desc"><em>In the summer between my junior and senior year I had the amazing opportunity to work at Digital Cloak LLC as a systems administration intern. In this role, I worked with three other interns on various projects such as an external network assessment, the creation of a C2 server, and my personal phishing project. I spent most of the time working on my personal project, which was an in depth phishing campaign using Evilginx2 to host a reverse proxy of various sites, and multiple Gophish campaigns in an attempt to harvest credentials in an ethical and regulated way. Check out the projects tab to view my final presentation from my project!</em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2023 – August 2023</div>
+            <div class="exp-title">CompTIA A+ Certification</div>
+            <div class="exp-desc"><em>After my first year of college I felt driven to keep learning and expanding on my technical skills by studying for and passing the CompTIA A+ Core 1 and 2 exam. This certification contained a wide range of solid foundational knowledge in various topics and would later motivate me to keep going with the Network+ exam the following summer.</em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2021 – August 2021</div>
+            <div class="exp-title">Private Swim Coach</div>
+            <div class="exp-desc"><em>After an entirely online junior year of high school, I had the idea to put my swimming skills to good use by becoming a private swim coach and teaching kids in my neighborhood to float, swim, and have fun in the water. This experience was great for me since the families in my neighborhood are very friendly, and after being inside for most of junior year, I got to be outside for most of the day swimming and teaching.</em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2019 – August 2019</div>
+            <div class="exp-title">Lifeguarding</div>
+            <div class="exp-desc"><em>Between freshman and sophomore year of high school I took the common competitive swimmer to lifeguard pipeline and worked at my local pool I had swam at for all my life. I worked as a lifeguard from May to August at Chesterbrook Swim and Tennis Club, which was probably my favorite job I've worked to this day.</em></div>
+          </div>
+        </div>
+        <!-- RIGHT COLUMN: Even years (2024, 2022, 2020, 2018) -->
+        <div class="exp-col">
+          <div class="exp-entry">
+            <div class="exp-year">May 2024 – August 2024</div>
+            <div class="exp-title">CompTIA Network+ Certification</div>
+            <div class="exp-desc"><em>In the summer between my sophomore and junior year I wanted to expand on my knowledge of IT by studying for and taking the CompTIA Network+ exam. I spent most of the summer studying and preparing for this test and passed the exam in July, which is valid for four years and expires in July of 2028.</em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2022 – August 2022</div>
+            <div class="exp-title">Early Summer Classes</div>
+            <div class="exp-desc"><em>After my senior year of high school, I wanted to get ahead on college coursework and also familiarize myself with a new enviroment seeing as how I had never left home before. So, in the summer of 2022 I went to High Point University and completed their Summer Advantage program. </em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2020 – August 2020</div>
+            <div class="exp-title">Self Taught Coding</div>
+            <div class="exp-desc"><em>Unfortunately between my sophomore and junior year of high school, a global pandemic had interrupted most of normal life, so I didn't have many opportunities to work jobs or help in my community. So, I took the time to learn some basic coding in Python and C using various online resources like W3 schools and YouTube. This was my first ever experience with programming and led to me taking AP Computer Science Principles in my junior year. </em></div>
+          </div>
+          <div class="exp-entry">
+            <div class="exp-year">May 2018 – August 2018</div>
+            <div class="exp-title">Front Desk & Snackbar</div>
+            <div class="exp-desc"><em>Before going into high school I spent my summer working at my local pool while swimming competitively there. This was the first job I ever worked and in my role I helped by working at the snack bar half the time, and the front desk the other half.</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
