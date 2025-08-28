@@ -13,50 +13,136 @@
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link active">ABOUT</a></li>
         <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
-        <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
-        <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
-        <li><a href="https://github.com/AlexJohnWilcox" class="nav-link">GITHUB</a></li>
+        <li><a href="experience.html" class="nav-link">EXPERIENCE & TIMELINE</a></li>
+        <li class="nav-dropdown-parent">
+          <span class="nav-link nav-dropdown-toggle">SOCIALS</span>
+          <div class="nav-dropdown">
+            <a href="https://github.com/AlexJohnWilcox" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" target="_blank">Resume (PDF)</a>
+          </div>
+        </li>
         <li><a href="contact.html" class="nav-link">CONTACT</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="main-container">
-    <div class="about-grid">
-      <section class="card">
-        <h2>Bio</h2>
-        <p class="bio-text">Hello — and thank you for visiting my portfolio. I'm Alex Wilcox, a senior at High Point University completing a B.S. in Computer Science with a cybersecurity specialization. I've loved technology since I was very young, built my first PC in high school, and expanded my skills in college through high‑level courses, CompTIA certificates, and a systems administration internship last summer.</p>
+    <!-- add horizontal inset so cards ("bubbles") don't touch screen edges -->
+    <div style="padding: 0 24px; box-sizing:border-box;">
 
-        <p class="bio-text">Right now I'm finishing senior coursework, studying for CompTIA Security+, and building a game in Unity. I'm seeking a post-graduation role (May 2026) in IT, cybersecurity, or penetration testing. From playing video gaming and speed-typing to network management and penetration testing today, I'll always find myself expanding my skills and knowledge in anything computer related.</p>
-      </section>
+      <!-- Hero: profile picture + name + tagline -->
+      <div class="about-hero card" style="margin-bottom:22px;">
+        <div class="profile-pic" style="width:140px; height:140px;">
+          <img src="PFP" alt="Alex J. Wilcox">
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:center;">
+          <h1 style="margin:0 0 6px;">Alex J. Wilcox</h1>
+          <p class="tagline" style="margin:0;">Senior — B.S. Computer Science (Cybersecurity specialization)</p>
+        </div>
+      </div>
 
-      <aside class="card">
-        <h2>Quick Info</h2>
+      <!-- Two-column split: left = Bio (top) + Interests (below); right = Skills (top) + Certifications (below) -->
+      <div class="about-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; align-items:start;">
+        <!-- LEFT COLUMN -->
+        <div class="about-left" style="display:flex; flex-direction:column; gap:18px;">
+          <section class="card">
+            <h2>Bio</h2>
+            <p class="bio-text">Hello and thank you for visiting my portfolio website! My name is Alex Wilcox and I'm a senior at High Point University completing a B.S. in Computer Science with a cybersecurity specialization. Ever since six year old me used my familys old mac desktop I've been in love with technology. I built my first PC in high school and took what courses were offered, in college, I greatly expanded my skills through high-level courses, CompTIA certificates, and a systems administration internship last summer.</p>
 
-        <h3 style="color:var(--text); margin-top:12px;">Skills</h3>
-        <ul class="info-list">
-          <li>C++ / C# · Python · Java · JavaScript</li>
-          <li>HTML / CSS · Git · Linux · Unity</li>
-        </ul>
+            <p class="bio-text">I'm currently working on my senior year coursework, studying for CompTIA Security+, and building a video game in Unity. I'm seeking a post-graduation role (May 2026) in IT, cybersecurity, or penetration testing. From playing video gaming and speed-typing to network management and penetration testing today, I'm constantly looking to expand my technical knowledge and skills.</p>
+          </section>
 
-        <h3 style="color:var(--text); margin-top:12px;">Certifications</h3>
-        <ul class="info-list">
-          <li>CompTIA A+</li>
-          <li>CompTIA Network+</li>
-          <li>Working toward Security+</li>
-        </ul>
-      </aside>
-    </div>
+          <section class="card">
+            <h2>Interests</h2>
+            <ul class="info-list">
+              <li>Cybersecurity & Penetration Testing</li>
+              <li>Game Development & Video Games</li>
+              <li>Body Building & Nutrition</li>
+              <li>Philosophy & Psychology</li>
+            </ul>
+          </section>
+        </div>
 
-    <section class="card">
-      <h2>Interests</h2>
-      <ul class="info-list">
-        <li>Cybersecurity & Penetration Testing</li>
-        <li>Game Development & Systems Programming</li>
-        <li>Weight Training & Nutrition</li>
-        <li>Art, Design & Philosophy</li>
-      </ul>
-    </section>
+        <!-- RIGHT COLUMN -->
+        <aside class="about-right" style="display:flex; flex-direction:column; gap:18px;">
+          <section class="card">
+            <h2>Skills</h2>
+
+            <div class="skill-category">
+              <h3>Languages & Frameworks</h3>
+              <div class="skill-list" style="margin-top:10px;">
+                <span class="skill-pill">C++</span>
+                <span class="skill-pill">C#</span>
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">Java</span>
+                <span class="skill-pill">HTML &amp; CSS</span>
+                <span class="skill-pill">AI Copilots</span>
+              </div>
+              <p class="skill-desc">Comfortable building apps, scripts, and small games; solid object-oriented and systems fundamentals.</p>
+            </div>
+
+            <div class="skill-category" style="margin-top:14px;">
+              <h3>Tools & Security</h3>
+              <div class="skill-list" style="margin-top:10px;">
+                <span class="skill-pill">Linux</span>
+                <span class="skill-pill">Git</span>
+                <span class="skill-pill">Docker</span>
+                <span class="skill-pill">Nmap</span>
+                <span class="skill-pill">Wireshark</span>
+                <span class="skill-pill">Burp Suite</span>
+              </div>
+              <p class="skill-desc">Experience with various linux distributions, container basics, and common security tooling used during pentesting.</p>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Certifications</h2>
+            <ul class="info-list cert-list" style="margin-bottom:12px;">
+              <li>
+                <span>CompTIA A+</span>
+                <a href="A+.pdf" download="CompTIA_A+_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="cert-download">
+                  Download PDF
+                </a>
+              </li>
+
+              <li>
+                <span>CompTIA Network+</span>
+                <a href="Network+.pdf" download="CompTIA_Network+_Certificate.pdf" target="_blank" rel="noopener noreferrer" class="cert-download">
+                  Download PDF
+                </a>
+              </li>
+
+              <li>Working toward Security+</li>
+            </ul>
+          </section>
+
+          <!-- New bubble: Courses Completed -->
+          <section class="card">
+            <h2>Relevant Coursework</h2>
+
+            <h3 style="color:var(--text); margin-top:8px;">Completed</h3>
+            <ul class="info-list">
+              <li>Systems Security</li>
+              <li>Information Security</li>
+              <li>Operating Systems</li>
+              <li>Database Systems</li>
+              <li>Computer Systems</li>
+              <li>Advanced Data Structures and Algorithms</li>
+              <li>Advanced Programming and Data Structures</li>
+            </ul>
+
+            <h3 style="color:var(--text); margin-top:12px;">In Progress</h3>
+            <ul class="info-list">
+              <li>Programming Language Development and Translation</li>
+              <li>Web Development</li>
+              <li>Software Development</li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+
+    </div> <!-- end inset padding -->
   </main>
 </body>
 </html>

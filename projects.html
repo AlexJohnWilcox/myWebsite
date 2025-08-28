@@ -13,9 +13,15 @@
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link">ABOUT</a></li>
         <li><a href="projects.html" class="nav-link active">PROJECTS</a></li>
-        <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
-        <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
-        <li><a href="https://github.com/AlexJohnWilcox" class="nav-link">GITHUB</a></li>
+        <li><a href="experience.html" class="nav-link">EXPERIENCE & TIMELINE</a></li>
+        <li class="nav-dropdown-parent">
+          <span class="nav-link nav-dropdown-toggle">SOCIALS</span>
+          <div class="nav-dropdown">
+            <a href="https://github.com/AlexJohnWilcox" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" target="_blank">Resume (PDF)</a>
+          </div>
+        </li>
         <li><a href="contact.html" class="nav-link">CONTACT</a></li>
       </ul>
     </nav>
@@ -27,8 +33,38 @@
       <ul class="projects-grid">
         <li class="project-card">
           <div class="meta">
-            <h3>Personal Website</h3>
-            <p>My portfolio website — static HTML/CSS, hosted on GitHub Pages.</p>
+            <h3>Intern Phishing Project</h3>
+            <p><!-- Add your description here -->
+              <em>At the end of my internship we were given the option to work on a personal project individually. I chose to learn a few different tools in order to attempt to legally harvest credentials from employees at the company. I thoroughly researched Evilginx2, Gophish, Docker, and a few other tools in order to achieve my goals. I successfully set up a reverse proxy site of the main login pages for a few different sites and managed to harvest some credentials which I can't divulge the information of. For more information on what I did, check out the presentation I made below!</em>
+            </p>
+            <div class="project-actions">
+              <a href="https://docs.google.com/presentation/d/1NYeMiGC9d2wED-uW1CiVo3rg7JsbSFgAR_VoeXqugJo/edit?slide=id.p#slide=id.p" target="_blank">
+                Presentation
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <div class="meta">
+            <h3>C2 Server</h3>
+            <p>Although this project wasn't hosted through GitHub, I spent many days working with my group of three other inters to build and manage a Command and Control server. I did this over the summer in 2025 while working a systems administration internship at Digital Cloak LLC. The C2 server consisted of six seperate subdomains, hosting various services like Covenant, Sliver, Red ELK, Metasploit, OpenVAS, Nmap, Wireshark, Evilginx2, and Gophish. This project was incredibly fun and I learned more from it than any other project I've worked on before.</p>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <div class="meta">
+            <h3>External Network Assessment</h3>
+            <p><!-- Add your description here -->
+              <em>The first project I worked on individually during my internship was an external network assessment and OSINT investigation of the employees at Digital Cloak. Although I can't link my report to it since it contains sensitive informaiton, I can elaborate on what tools I used. I did most of my recon work using Nmap and other linux tools to reveal subdomains, check for vulnerabiltiies, and perform enumeration on potentially weak web servers. I learned how to use Docker to host tools and give them a GUI to streamline vulnerability scanning and Gophish to try and phish credentials out of employees to gain access. This project was incredibly fun and was my first real taste of what red teaming is like, and I'm excited for another opportunity to demonstrate my pentesting skills.</em>
+            </p>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <div class="meta">
+            <h3>Personal Website Portfolio</h3>
+            <p>This is the website you're currently visiting! I built it using HTML & CSS through VSCode, the files are all in my repository on GitHub and I host the website through Netlify. I've also begun learning how to use AI Copilots to seamlessly edit and update the website in a much more efficient way.</p>
             <div class="project-actions">
               <a href="https://github.com/AlexJohnWilcox/myWebsite" target="_blank">Source</a>
             </div>
@@ -37,15 +73,8 @@
 
         <li class="project-card">
           <div class="meta">
-            <h3>C2 Server</h3>
-            <p>Worked with three other interns to build and manage a C2 server used to penetrate vulnerable machines and learn what goes into penetration testing.</p>
-          </div>
-        </li>
-
-        <li class="project-card">
-          <div class="meta">
             <h3>A Narrow Path</h3>
-            <p>Text-based Android game built in Android Studio. Simple narrative-driven mechanics.</p>
+            <p>This was my final project for my Mobile App Development class, and my second ever video game I've developed. It is a text based, story-driven mobile game that I had a lot of fun letting my creativity run wild on.</p>
             <div class="project-actions">
               <a href="https://github.com/AlexJohnWilcox/aNarrowPath" target="_blank">Source</a>
             </div>
@@ -55,13 +84,12 @@
         <li class="project-card">
           <div class="meta">
             <h3>Command Line Game</h3>
-            <p>Terminal-run text adventure created for an intro programming class.</p>
+            <p>My first ever video game I made in my intro to programming class. Creating this game was what led me to my love of game design and therefore deserved a spot in my projects section. It's a simple choose a direction, fight enemies, collect gold, and escape type of game that I created for </p>
             <div class="project-actions">
               <a href="https://github.com/AlexJohnWilcox/commandLineGame" target="_blank">Source</a>
             </div>
           </div>
         </li>
-
       </ul>
     </section>
   </main>
