@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projects — Alex J. Wilcox</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="nav-link">HOME</a></li>
-                <li><a href="about.html" class="nav-link">ABOUT</a></li>
-                <li><a href="projects.html" class="nav-link active">PROJECTS</a></li>
-                <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
-                <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
-                <li><a href="https://github.com/AlexJohnWilcox" class="nav-link" target="_blank">GITHUB</a></li>
-                <li><a href="contact.html" class="nav-link">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="nav-link">HOME</a></li>
+        <li><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li><a href="projects.html" class="nav-link active">PROJECTS</a></li>
+        <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
+        <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
+        <li><a href="https://github.com/AlexJohnWilcox" class="nav-link">GITHUB</a></li>
+        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="projects-section">
-        <!-- Personal Projects Section -->
-        <section class="project-category">
-            <h2>Personal Projects</h2>
-            <ul class="project-list">
-                <li>
-                    <h3>Personal Website</h3>
-                    <p>This is my personal website, built in mostly HTML and deployed through GitHub. <a href="https://github.com/AlexJohnWilcox/myWebsite" target="_blank">View on GitHub</a></p>
-                </li>
-                <li>
-                    <h3>A Narrow Path</h3>
-                    <p>Text based video game made through Android Studio and made for the app store. <a href="https://github.com/AlexJohnWilcox/aNarrowPath" target="_blank">View on GitHub</a></p>
-                </li>
-                <!-- Add more personal projects as needed -->
-            </ul>
-        </section>
+  <main class="main-container">
+    <section class="card">
+      <h2>Featured Projects</h2>
+      <ul class="projects-grid">
+        <li class="project-card">
+          <div class="meta">
+            <h3>Personal Website</h3>
+            <p>My portfolio website — static HTML/CSS, hosted on GitHub Pages.</p>
+            <div class="project-actions">
+              <a href="https://github.com/AlexJohnWilcox/myWebsite" target="_blank">Source</a>
+            </div>
+          </div>
+        </li>
 
-        <!-- Academic Projects Section -->
-        <section class="project-category">
-            <h2>Academic Projects</h2>
-            <ul class="project-list">
-                <li>
-                    <h3>Command Line Video Game</h3>
-                    <p>Text based video game you can run in a terminal. Created in my intro coding class. <a href="https://github.com/AlexJohnWilcox/commandLineGame" target="_blank">View on GitHub</a></p>
-                </li>
-                <!-- Add more academic projects as needed -->
-            </ul>
-        </section>
-    </main>
+        <li class="project-card">
+          <div class="meta">
+            <h3>C2 Server</h3>
+            <p>Worked with three other interns to build and manage a C2 server used to penetrate vulnerable machines and learn what goes into penetration testing.</p>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <div class="meta">
+            <h3>A Narrow Path</h3>
+            <p>Text-based Android game built in Android Studio. Simple narrative-driven mechanics.</p>
+            <div class="project-actions">
+              <a href="https://github.com/AlexJohnWilcox/aNarrowPath" target="_blank">Source</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="project-card">
+          <div class="meta">
+            <h3>Command Line Game</h3>
+            <p>Terminal-run text adventure created for an intro programming class.</p>
+            <div class="project-actions">
+              <a href="https://github.com/AlexJohnWilcox/commandLineGame" target="_blank">Source</a>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

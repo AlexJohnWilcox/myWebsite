@@ -1,102 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About — Alex J. Wilcox</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="nav-link">HOME</a></li>
-                <li><a href="about.html" class="nav-link active">ABOUT</a></li>
-                <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
-                <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
-                <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
-                <li><a href="https://github.com/AlexJohnWilcox" class="nav-link" target="_blank">GITHUB</a></li>
-                <li><a href="contact.html" class="nav-link">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="nav-link">HOME</a></li>
+        <li><a href="about.html" class="nav-link active">ABOUT</a></li>
+        <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
+        <li><a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/Resume - Wilcox, Alex.pdf" class="nav-link" target="_blank">RESUME</a></li>
+        <li><a href="https://www.linkedin.com/in/alexjwilcox/" class="nav-link" target="_blank">LINKEDIN</a></li>
+        <li><a href="https://github.com/AlexJohnWilcox" class="nav-link">GITHUB</a></li>
+        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="about-section">
-        <!-- Bio Section -->
-        <section class="bio-section">
-            <h2>Bio</h2>
-            <p>Hi! My name's Alex, I am a senior at High Point University currently pursuing a B.S. in computer science with a specialization in cybersecurity. I grew up in McLean, VA and was a dedicated swimmer, going as far as the Junior Olympics in middle school. In high school, I began my career towards computer science by building my own computer and taking what courses were offered. Now, in college, I've expanded greatly on my academics by obtaining multiple certificates, taking high-level courses, and working as an information technology assistant at High Point's IT desk. I'm currently working on CompTIA's Security+ exam, this website and creating a video game through Unity. I'm excited to see where my interests and skills take me and am always looking for something new to learn.</p>
-        </section>
+  <main class="main-container">
+    <div class="about-grid">
+      <section class="card">
+        <h2>Bio</h2>
+        <p class="bio-text">Hello — and thank you for visiting my portfolio. I'm Alex Wilcox, a senior at High Point University completing a B.S. in Computer Science with a cybersecurity specialization. I've loved technology since I was very young, built my first PC in high school, and expanded my skills in college through high‑level courses, CompTIA certificates, and a systems administration internship last summer.</p>
 
-        <!-- Interests Section -->
-        <section class="interests-section">
-            <h2>Interests</h2>
-            <ul>
-                <li>Cybersecurity + Penetration Testing</li>
-                <li>Software Development + Game Design</li>
-                <li>Weight Lifting + Nutrition</li>
-                <li>Philosophy + Art</li>
-            </ul>
-        </section>
+        <p class="bio-text">Right now I'm finishing senior coursework, studying for CompTIA Security+, and building a game in Unity. I'm seeking a post-graduation role (May 2026) in IT, cybersecurity, or penetration testing. From playing video gaming and speed-typing to network management and penetration testing today, I'll always find myself expanding my skills and knowledge in anything computer related.</p>
+      </section>
 
-        <!-- Skills Section -->
-        <section class="skills-section">
-            <h2>Skills</h2>
-            <div class="skills-list">
-                <h3>Programming Languages</h3>
-                <ul>
-                    <li>C++/C/C#</li>
-                    <li>Python</li>
-                    <li>Java</li>
-                    <li>HTML</li>
-                </ul>
-                <p><em>Example: Throughout my academic career I have developed my C, C++ and Python skills through projects and more recently through coding competitions. Also I began using Java in Android Studio to create a video game.</em></p>
+      <aside class="card">
+        <h2>Quick Info</h2>
 
-                <h3>Information Technology</h3>
-                <ul>
-                    <li>Computer Architecture/Assembly</li>
-                    <li>Network Architecture/Assembly</li>
-                    <li>ServiceNow Ticketing</li>
-                    <li>VirtualBox</li>
-                </ul>
-                <p><em>Example: Completed my A+ and Network+ certifications which delve into computer hardware and network architecture. I also began working with ServiceNow ticketing and recently have started learning and utilizing VirtualBox.</em></p>
+        <h3 style="color:var(--text); margin-top:12px;">Skills</h3>
+        <ul class="info-list">
+          <li>C++ / C# · Python · Java · JavaScript</li>
+          <li>HTML / CSS · Git · Linux · Unity</li>
+        </ul>
 
-                <h3>Cybersecurity</h3>
-                <ul>
-                    <li>Linux/Linux Tools</li>
-                    <li>Network Security</li>
-                    <li>Burp Suite</li>
-                    <li>Nmap</li>
-                </ul>
-                <p><em>Example: Began using Linux in high school and have developed all my coding projects through vi in Linux. Learned advanced network security concepts in Network+ certificate and systems security class. I also researched various pentesting tools extensively during my summer internship at Digital Cloak.</em></p>
+        <h3 style="color:var(--text); margin-top:12px;">Certifications</h3>
+        <ul class="info-list">
+          <li>CompTIA A+</li>
+          <li>CompTIA Network+</li>
+          <li>Working toward Security+</li>
+        </ul>
+      </aside>
+    </div>
 
-                <h3>Other</h3>
-                <ul>
-                    <li>Android Studio</li>
-                    <li>Database Management</li>
-                    <li>Microsoft Office Tools</li>
-                    <li>Algorithms/Data Structures</li>
-                </ul>
-                <p><em>Example: Developed video game through Android Studio, learned and utilized databases in my database systems class. Utilized microsoft tools in many of my academic coursework and personal work. Learned and utilized algorithms in classes and through personal projects.</em></p>
-            </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section class="certifications-section">
-            <h2>Certifications</h2>
-
-            <!-- CompTIA A+ Certificate -->
-            <h3>CompTIA A+</h3>
-            <a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/CompTIA%20A%2B%20ce%20certificate.pdf" target="_blank">
-                View CompTIA A+ Certificate
-            </a>
-
-            <!-- CompTIA Network+ Certificate -->
-            <h3>CompTIA Network+</h3>
-            <a href="https://github.com/AlexJohnWilcox/myWebsite/raw/main/CompTIA%20Network%2B%20ce%20certificate.pdf" target="_blank">
-                View CompTIA Network+ Certificate
-            </a>
-        </section>
-    </main>
+    <section class="card">
+      <h2>Interests</h2>
+      <ul class="info-list">
+        <li>Cybersecurity & Penetration Testing</li>
+        <li>Game Development & Systems Programming</li>
+        <li>Weight Training & Nutrition</li>
+        <li>Art, Design & Philosophy</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
