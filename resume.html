@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Resume — Alex J. Wilcox</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .resume-container {
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 0;
+    }
+    .resume-frame {
+      width: 90vw;
+      max-width: 900px;
+      height: 1100px;
+      border: none;
+      box-shadow: 0 8px 32px rgba(2,6,23,0.18);
+      border-radius: 16px;
+      background: #fff;
+    }
+    @media (max-width: 900px) {
+      .resume-frame {
+        width: 98vw;
+        height: 80vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="nav-link">HOME</a></li>
+        <li><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li><a href="projects.html" class="nav-link">PROJECTS</a></li>
+        <li><a href="experience.html" class="nav-link">EXPERIENCE & TIMELINE</a></li>
+        <li><a href="resume.html" class="nav-link active">RESUME</a></li>
+        <li class="nav-dropdown-parent">
+          <span class="nav-link nav-dropdown-toggle">SOCIALS</span>
+          <div class="nav-dropdown">
+            <a href="https://github.com/AlexJohnWilcox" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">LinkedIn</a>
+          </div>
+        </li>
+        <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-container">
+    <div class="resume-container">
+      <iframe class="resume-frame" src="Resume - Wilcox, Alex.pdf"></iframe>
+    </div>
+  </main>
+</body>
+</html>
