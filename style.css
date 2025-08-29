@@ -1,4 +1,3 @@
-/* Complete site stylesheet — updated layout, readable contrast, consistent card style */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 :root{
@@ -16,7 +15,6 @@
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:linear-gradient(180deg,var(--bg) 0%, #021021 100%);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
-/* Header / nav — center and larger */
 header{
   background: rgba(6,10,20,0.55);
   position:sticky;
@@ -24,7 +22,7 @@ header{
   z-index:50;
   backdrop-filter: blur(6px);
   border-bottom:1px solid rgba(255,255,255,0.03);
-  padding:8px 0; /* slightly taller header */
+  padding:8px 0;
 }
 
 nav{
@@ -33,7 +31,7 @@ nav{
   padding:6px 24px;
   display:flex;
   align-items:center;
-  justify-content:center; /* center the nav */
+  justify-content:center;
 }
 
 nav ul{
@@ -46,7 +44,6 @@ nav ul{
   justify-content:center;
 }
 
-/* make nav items larger and a bit more prominent */
 .nav-link{
   color:var(--muted);
   text-decoration:none;
@@ -55,7 +52,7 @@ nav ul{
   font-weight:700;
   letter-spacing:0.6px;
   transition:all .16s ease;
-  font-size:1.05rem; /* increased ~2px */
+  font-size:1.05rem;
 }
 .nav-link.active {
   background: #fff;
@@ -67,7 +64,6 @@ nav ul{
   border: 2px solid #eaf6ff;
 }
 
-/* Navbar heading with dropdown */
 .nav-heading-dropdown {
   position: relative;
   display: inline-block;
@@ -91,7 +87,6 @@ nav ul{
   color: #fff;
 }
 
-/* Navbar dropdown for SOCIALS */
 .nav-dropdown-parent {
   position: relative;
   display: inline-block;
@@ -133,29 +128,25 @@ nav ul{
   color: #4f46e5;
 }
 
-/* Home page scale-up: increase overall sizes in welcome section */
 .welcome-section{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:20px;
-  padding:36px 30px; /* larger padding */
+  padding:36px 30px;
   border-radius:14px;
   background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
   box-shadow:0 10px 40px rgba(2,6,23,0.6);
 }
 
-/* bigger profile image and ensure it's near the top */
 .profile-pic{ width:200px; height:200px; border-radius:50%; overflow:hidden; border:4px solid rgba(255,255,255,0.04); box-shadow:0 12px 48px rgba(2,6,23,0.6); }
 .profile-pic img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-/* increase heading sizes by ~2px */
 .welcome-section h1{ margin:6px 0 0; font-size:2.4rem; color:var(--text); text-align:center; }
 .welcome-section h2{ margin:6px 0 0; font-size:1.15rem; color:var(--muted); text-align:center; font-weight:500; }
 .tagline{ font-size:1rem; color:var(--muted); margin-top:6px; }
 
-/* social + CTA */
 .social-links{ display:flex; gap:14px; margin-top:6px; }
 .social-links a{ color:var(--muted); font-size:1.5rem; padding:8px; border-radius:8px; transition:all .12s ease; }
 .social-links a:hover{ color:var(--text); transform:translateY(-3px); }
@@ -165,7 +156,7 @@ nav ul{
   margin-top:8px;
   background:linear-gradient(90deg,var(--accent),var(--accent-2));
   color:white;
-  padding:12px 22px; /* larger button */
+  padding:12px 22px;
   border-radius:12px;
   text-decoration:none;
   font-weight:800;
@@ -173,7 +164,6 @@ nav ul{
   box-shadow:0 14px 40px rgba(91,77,240,0.12);
 }
 
-/* generic section cards (dark, readable) */
 section.card{
   background-color:var(--card);
   border-radius:10px;
@@ -185,13 +175,11 @@ section.card{
 }
 section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.03); }
 
-/* About page: two-column on wide screens */
 .about-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
 .bio-text{ line-height:1.6; color:var(--muted); margin-top:12px; }
 .info-list{ margin-top:12px; color:var(--muted); }
 .info-list li{ margin:8px 0; }
 
-/* Projects: card grid */
 .projects-grid{
   display:grid;
   grid-template-columns:1fr;
@@ -215,13 +203,11 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 .project-card .meta{ display:block; }
 .project-card h3{ margin:0 0 8px; color:var(--text); font-size:1.08rem; }
 .project-card p{ margin:0; color:var(--muted); line-height:1.5; }
-/* Small extra spacing between project description and action button */
 .project-card .meta p {
-  margin-bottom: 18px; /* increased gap so buttons sit a bit lower */
+  margin-bottom: 18px; 
 }
 .project-actions{ margin-top:auto; display:flex; gap:10px; }
 
-/* Project action buttons: light-blue, rounded, prominent */
 .project-actions a{
   display:inline-block;
   background: linear-gradient(90deg, #8fd1ff 0%, #5fb8ff 100%);
@@ -240,12 +226,10 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   opacity:0.98;
 }
 
-/* two columns on wider screens (2x2 for four projects) */
 @media (min-width:900px){
   .projects-grid{ grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Contact page */
 .contact-grid{ display:grid; grid-template-columns:1fr; gap:18px; align-items:start; }
 .contact-info{ color:var(--muted); }
 .contact-info a{ color:var(--muted); text-decoration:none; }
@@ -253,7 +237,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 .contact-form input, .contact-form textarea{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--text); padding:10px 12px; border-radius:8px; }
 .contact-form button{ background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; padding:10px 14px; border:0; border-radius:8px; font-weight:700; cursor:pointer; }
 
-/* Skills — larger, clearer, pleasant badges & layout */
 .skills-section{ padding-top:6px; }
 .skills-grid{
   display:grid;
@@ -263,7 +246,7 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 }
 .skill-category h3{
   margin:0 0 8px;
-  font-size:1.08rem; /* slightly larger */
+  font-size:1.08rem;
   color:var(--text);
   letter-spacing:0.2px;
 }
@@ -281,13 +264,12 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   padding:8px 12px;
   border-radius:999px;
   font-weight:600;
-  font-size:0.98rem; /* larger readable pills */
+  font-size:0.98rem; 
   box-shadow:0 6px 18px rgba(2,6,23,0.45);
   transition:transform .12s ease, box-shadow .12s ease;
 }
 .skill-pill:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(2,6,23,0.55); }
 
-/* subtle category descriptions */
 .skill-desc{
   color:var(--muted);
   font-size:0.98rem;
@@ -295,7 +277,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   line-height:1.5;
 }
 
-/* About page layout and brighter skill pills */
 
 .about-hero{
   display:flex;
@@ -312,7 +293,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 .about-hero h1{ margin:6px 0 0; font-size:1.9rem; color:var(--text); }
 .about-hero p.tagline{ margin:4px 0 0; color:var(--muted); text-align:center; font-size:0.98rem; }
 
-/* Main about layout: two columns on wide screens, stacked on mobile */
 .about-main{
   display:grid;
   grid-template-columns:1fr;
@@ -325,14 +305,12 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   gap:14px;
 }
 
-/* make bio easier to read */
 .bio-text{ color:var(--muted); line-height:1.7; font-size:1.02rem; }
 
-/* Brighter skill pills */
 .skill-pill{
   display:inline-block;
-  background: linear-gradient(90deg, #8fd1ff 0%, #9ef1d9 100%); /* bright, readable */
-  color: #041025; /* dark text for contrast */
+  background: linear-gradient(90deg, #8fd1ff 0%, #9ef1d9 100%); 
+  color: #041025; 
   padding:10px 14px;
   border-radius:999px;
   font-weight:700;
@@ -343,14 +321,11 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 }
 .skill-pill:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(2,6,23,0.28); }
 
-/* Skill groups spacing */
 .skill-category h3{ margin:0 0 8px; color:var(--text); font-size:1.05rem; }
 .skill-list{ display:flex; flex-wrap:wrap; gap:10px; }
 
-/* certifications & quick info styling */
 .info-list li{ margin:8px 0; color:var(--muted); font-size:1rem; }
 
-/* Certification list bullets (override flex hiding the default marker) */
 .cert-list{
   list-style:none;
   margin:0;
@@ -363,7 +338,7 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   justify-content:space-between;
   gap:12px;
   flex-wrap:wrap;
-  padding-left:36px; /* room for the bullet */
+  padding-left:36px;
   margin-bottom:10px;
 }
 .cert-list li::before{
@@ -376,7 +351,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   font-size:1.15rem;
   line-height:1;
 }
-/* keep the pill-style download buttons */
 .cert-download{
   display:inline-block;
   background: linear-gradient(90deg,#8fd1ff 0%,#5fb8ff 100%);
@@ -388,7 +362,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   box-shadow:0 10px 30px rgba(95,152,255,0.12);
 }
 
-/* Footer placement for homepage -- fixed bottom-left */
 .home-footer{
   position:fixed;
   left:18px;
@@ -406,7 +379,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   line-height:1;
 }
 
-/* mobile tweak so footer doesn't overlap UI */
 @media (max-width:520px){
   .nav-link{ font-size:0.95rem; padding:8px 10px; }
   .profile-pic{ width:140px; height:140px; }
