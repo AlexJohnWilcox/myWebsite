@@ -28,10 +28,7 @@
   </header>
 
   <main class="main-container">
-    <!-- add horizontal inset so cards ("bubbles") don't touch screen edges -->
     <div style="padding: 0 24px; box-sizing:border-box;">
-
-      <!-- Hero: profile picture + name + tagline -->
       <div class="about-hero card" style="margin-bottom:22px;">
         <div class="profile-pic" style="width:140px; height:140px;">
           <img src="PFP" alt="Alex J. Wilcox">
@@ -42,9 +39,7 @@
         </div>
       </div>
 
-      <!-- Two-column split: left = Bio (top) + Interests (below); right = Skills (top) + Certifications (below) -->
       <div class="about-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; align-items:start;">
-        <!-- LEFT COLUMN -->
         <div class="about-left" style="display:flex; flex-direction:column; gap:18px;">
           <section class="card">
             <h2>Bio</h2>
@@ -64,14 +59,22 @@
           </section>
 
           <section class="card">
-            <h2>Extra</h2>
-            <p class="bio-text">
-                <em>More Information</em>
-            </p>
+            <h2>Leadership & Community Involvement</h2>
+            <h3 style="margin-bottom:6px;">Beta Theta Pi, Eta Xi – High Point, NC <span style="font-weight:400;">Sep 2022 - Present</span></h3>
+            <ul class="info-list">
+              <li>Member</li>
+              <li>Supported fraternity fundraising efforts, helping to raise money for various philanthropies which change yearly.</li>
+              <li>Engaged in regular chapter meetings, events, and activities, contributing to the fraternity’s goals and initiatives.</li>
+            </ul>
+            <h3 style="margin-top:18px; margin-bottom:6px;">Computer Science Society (C.O.D.E. Club) – High Point, NC <span style="font-weight:400;">Oct 2024 - Present</span></h3>
+            <ul class="info-list">
+              <li>Member</li>
+              <li>Participated in sessions focused on industry trends and emerging technologies, gaining insight into the latest advancements in software development, cyber security, and information technology.</li>
+              <li>Worked with peers on coding projects and participated in weekly coding challenges to enhance problem-solving skills.</li>
+            </ul>
           </section>
         </div>
 
-        <!-- RIGHT COLUMN -->
         <aside class="about-right" style="display:flex; flex-direction:column; gap:18px;">
           <section class="card">
             <h2>Skills</h2>
@@ -86,7 +89,7 @@
                 <span class="skill-pill">Java</span>
                 <span class="skill-pill">HTML &amp; CSS</span>
               </div>
-              <p class="skill-desc">Comfortable building apps, scripts, and small games; solid programming and computer system fundamentals. Most comfortable programming in any C variant with some intermediate knowledge in other listed languages.</p>
+              <p class="skill-desc">Comfortable building apps, scripts, and small games. Solid programming and computer systems knowledge with a focus on low level languages. </p>
             </div>
 
             <div class="skill-category" style="margin-top:14px;">
@@ -129,7 +132,6 @@
             </ul>
           </section>
 
-          <!-- New bubble: Courses Completed -->
           <section class="card">
             <h2>Relevant Coursework</h2>
 
@@ -150,11 +152,11 @@
               <li>Web Development</li>
               <li>Software Engineering</li>
             </ul>
-          </section>
+        </section>
         </aside>
       </div>
 
-    </div> <!-- end inset padding -->
+    </div>
   </main>
 </body>
 </html>
