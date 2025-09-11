@@ -6,6 +6,93 @@
   <title>Home — Alex J. Wilcox</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Bubble: Check out my new game (improved readability) */
+    .promo-bubble{
+      position:fixed;
+      left:18px;
+      top:50%;
+      transform:translateY(-50%);
+      background:#ffffff;
+      padding:18px 20px 16px;
+      border-radius:14px;
+      box-shadow:0 6px 22px rgba(0,0,0,0.28);
+      max-width:240px;
+      font-size:1rem;
+      z-index:1000;
+      line-height:1.5;
+      border:1px solid #cfd8e0;
+      color:#111;
+      transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .promo-bubble a{
+      text-decoration:none;
+      color:#111;
+      display:block;
+      transition:color .25s ease;
+    }
+    .promo-bubble-header{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 8px;
+      font-weight:800;
+      font-size:1.08rem;
+      letter-spacing:.4px;
+      color:#0d1520;
+      transition:color .25s ease;
+    }
+    .promo-bubble-header span.icon{
+      font-size:1.25rem;
+      transition:transform .35s ease;
+    }
+    .promo-bubble small{
+      display:block;
+      font-size:.72rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      margin-bottom:6px;
+      color:#333;
+      transition:color .25s ease;
+    }
+    .promo-bubble p{
+      margin:0;
+      font-size:.9rem;
+      font-weight:600;
+      color:#222;
+      transition:color .25s ease;
+    }
+    .promo-bubble:hover{
+      box-shadow:0 12px 36px rgba(0,0,0,0.38);
+      transform:translateY(-50%) translateY(-4px);
+      border-color:#b2c2cf;
+      background:#fdfdfd;
+    }
+    .promo-bubble:hover .promo-bubble-header span.icon{
+      transform:rotate(-8deg) scale(1.15);
+    }
+    .promo-bubble:hover .promo-bubble-header span:not(.icon){
+      text-decoration:underline;
+    }
+    .promo-bubble a:focus-visible{
+      outline:3px solid #111;
+      outline-offset:4px;
+      border-radius:10px;
+    }
+    @media (max-width:800px){
+      .promo-bubble{
+        position:static;
+        transform:none;
+        margin:18px auto 0;
+        width:100%;
+        max-width:500px;
+      }
+      .promo-bubble:hover{
+        transform:none;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -27,6 +114,18 @@
       </ul>
     </nav>
   </header>
+
+  <!-- New left-side bubble -->
+  <div class="promo-bubble">
+    <a href="https://starsinthevoid.com" target="_blank" rel="noopener noreferrer" aria-label="Check out my new game">
+      <small>New</small>
+      <div class="promo-bubble-header">
+        <span class="icon">🎮</span>
+        <span>Check out my new game!</span>
+      </div>
+      <p>A text based idle game I've been working on for a few weeks. Take a look!</p>
+    </a>
+  </div>
 
   <main class="welcome-section main-container">
         <div class="profile-pic">
