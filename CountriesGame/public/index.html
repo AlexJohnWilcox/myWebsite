@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Countries of the World</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────────────── -->
+  <header>
+    <h1>Countries of the World</h1>
+    <div class="stats">
+      <div class="stat-box">
+        <span class="stat-label">Guessed</span>
+        <span class="stat-value" id="count">0 / 197</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Time</span>
+        <span class="stat-value" id="timer">0:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Input row ──────────────────────────────────────────────── -->
+  <div class="input-row">
+    <input
+      id="countryInput"
+      type="text"
+      placeholder="Type a country name…"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button id="giveUpBtn" class="btn btn-danger">Give Up</button>
+    <button id="newGameBtn" class="btn btn-primary">New Game</button>
+    <button id="historyBtn" class="btn btn-secondary">History</button>
+  </div>
+
+  <!-- ── Feedback toast ─────────────────────────────────────────── -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- ── Overlay (win / give-up) ───────────────────────────────── -->
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-box">
+      <button id="overlayX" class="overlay-x-btn" style="display:none">×</button>
+      <h2 id="overlayTitle"></h2>
+      <p  id="overlayBody"></p>
+      <button id="overlayClose" class="btn btn-primary">Play Again</button>
+    </div>
+  </div>
+
+  <!-- ── Map controls ──────────────────────────────────────────── -->
+  <div class="map-controls">
+    <label class="toggle-label" title="Show a dot on every country to help locate tiny nations">
+      <span class="toggle-text">Country Dots</span>
+      <div class="toggle-switch">
+        <input type="checkbox" id="dotsToggle" />
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+    <label class="toggle-label" title="Switch between dark and light theme">
+      <span class="toggle-text">Light Mode</span>
+      <div class="toggle-switch">
+        <input type="checkbox" id="themeToggle" />
+        <span class="toggle-slider"></span>
+      </div>
+    </label>
+  </div>
+
+  <!-- ── Map ───────────────────────────────────────────────────── -->
+  <div id="map-container">
+    <div id="map-loading">Loading map…</div>
+    <svg id="world-map"></svg>
+  </div>
+
+  <!-- ── Country list (by continent) ───────────────────────────── -->
+  <section id="country-list">
+    <h2>Countries by Continent</h2>
+    <div id="continents-grid"></div>
+  </section>
+
+  <!-- ── Session history ───────────────────────────────────────── -->
+  <section id="history-section" class="hidden">
+    <div class="history-header">
+      <h2>Session History</h2>
+      <button id="clearAllBtn" class="btn btn-danger btn-sm" onclick="clearAllSessions()" style="display:none">
+        Clear All
+      </button>
+    </div>
+    <div id="history-table-wrap">
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Libraries ─────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
