@@ -6,6 +6,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>About — Alex J. Wilcox</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Purple glow on all cards for this page */
+    section.card{
+      box-shadow:
+        0 0 22px rgba(107,92,242,0.1),
+        0 6px 24px rgba(2,6,23,0.5);
+    }
+    section.card:hover{
+      box-shadow:
+        0 0 32px rgba(107,92,242,0.18),
+        0 10px 32px rgba(2,6,23,0.55);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -28,58 +41,24 @@
     </nav>
   </header>
 
-  <main class="main-container">
-    <div style="padding: 0 24px; box-sizing:border-box;">
-          <div class="about-hero card" style="margin-bottom:22px;">
-        <div class="profile-pic" style="width:140px; height:140px;">
-          <img src="Images/PFP" alt="Alex J. Wilcox">
+  <main class="main-container" style="padding:0 24px;">
+    <div class="about-layout">
+
+      <!-- Bio ─────────────────────────────────────────────────── -->
+      <section class="card about-bio-card">
+        <div class="about-bio-header">
+          <h1>Alex J. Wilcox</h1>
+          <p class="tagline">Senior — B.S. Computer Science · Cybersecurity Specialization · High Point University</p>
         </div>
-        <div style="display:flex;flex-direction:column;justify-content:center;">
-          <h1 style="margin:0 0 6px;">Alex J. Wilcox</h1>
-          <p class="tagline" style="margin:0;">Senior — B.S. Computer Science (Cybersecurity specialization)</p>
-        </div>
-      </div>
+        <p class="bio-text">Hello! My name is Alex Wilcox and I'm a senior at High Point University completing a B.S. in Computer Science with a cybersecurity specialization. Computers and technology have always fascinated me ever since I was a kid. I built my first PC in high school and took what classes were offered. In college, I greatly expanded my skills through high-level courses, CompTIA certificates, and a systems administration internship last summer.</p>
+        <p class="bio-text" style="margin-top:10px;">I'm currently working on my senior year coursework, applying to full-time positions, and building a video game in Unity in my spare time. I'm seeking a post-graduation role (May 2026) in IT, cybersecurity, or penetration testing. From playing video games and speed-typing tests, to network management and penetration testing today, I'm constantly looking to expand my technical knowledge and skills.</p>
+      </section>
 
-      <div class="about-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; align-items:start;">
-        <div class="about-left" style="display:flex; flex-direction:column; gap:18px;">
-          <section class="card">
-            <h2>Bio</h2>
-            <p class="bio-text">Hello! My name is Alex Wilcox and I'm a senior at High Point University completing a B.S. in Computer Science with a cybersecurity specialization. Computers and technology have always fascinated me ever since I was a kid. I built my first PC in high school and took what classes were offered. In college, I greatly expanded my skills through high-level courses, CompTIA certificates, and a systems administration internship last summer.</p>
-
-            <p class="bio-text">I'm currently working on my senior year coursework, applying to full-time positions, and building a video game in Unity in my spare time. I'm seeking a post-graduation role (May 2026) in IT, cybersecurity, or penetration testing. From playing video games and speed-typing tests, to network management and penetration testing today, I'm constantly looking to expand my technical knowledge and skills.</p>
-          </section>
-
-          <section class="card">
-            <h2>Interests</h2>
-            <ul class="info-list">
-              <li>Cybersecurity & Penetration Testing</li>
-              <li>Game Development & Programming</li>
-              <li>Bodybuilding & Nutrition</li>
-              <li>Philosophy & Psychology</li>
-            </ul>
-          </section>
-
-          <section class="card">
-            <h2>Leadership & Community Involvement</h2>
-            <h3 style="margin-bottom:6px;">Beta Theta Pi, Eta Xi – High Point, NC <span style="font-weight:400;">Sep 2022 - Present</span></h3>
-            <ul class="info-list">
-              <li>Member</li>
-              <li>Supported fraternity fundraising efforts, helping to raise money for various philanthropies which change yearly.</li>
-              <li>Engaged in regular chapter meetings, events, and activities, contributing to the fraternity’s goals and initiatives.</li>
-            </ul>
-            <h3 style="margin-top:18px; margin-bottom:6px;">Computer Science Society (C.O.D.E. Club) – High Point, NC <span style="font-weight:400;">Oct 2024 - Present</span></h3>
-            <ul class="info-list">
-              <li>Member</li>
-              <li>Participated in sessions focused on industry trends and emerging technologies, gaining insight into the latest advancements in software development, cybersecurity, and information technology.</li>
-              <li>Worked with peers on coding projects and participated in weekly coding challenges to enhance problem-solving skills.</li>
-            </ul>
-          </section>
-        </div>
-
-        <aside class="about-right" style="display:flex; flex-direction:column; gap:18px;">
-          <section class="card">
-            <h2>Skills</h2>
-
+      <!-- Skills + Certs ──────────────────────────────────────── -->
+      <div class="about-skills-certs">
+        <section class="card">
+          <h2>Skills</h2>
+          <div class="skills-two-col">
             <div class="skill-category">
               <h3>Languages</h3>
               <div class="skill-list" style="margin-top:10px;">
@@ -90,11 +69,10 @@
                 <span class="skill-pill">Java</span>
                 <span class="skill-pill">HTML &amp; CSS</span>
               </div>
-              <p class="skill-desc">Comfortable building apps, scripts, and small games. Solid programming and computer systems knowledge with a focus on low-level languages. </p>
+              <p class="skill-desc">Comfortable building apps, scripts, and small games. Solid programming and computer systems knowledge with a focus on low-level languages.</p>
             </div>
-
             <div class="skill-category" style="margin-top:14px;">
-              <h3>Tools & Security</h3>
+              <h3>Tools &amp; Security</h3>
               <div class="skill-list" style="margin-top:10px;">
                 <span class="skill-pill">Linux</span>
                 <span class="skill-pill">Git</span>
@@ -106,72 +84,100 @@
               </div>
               <p class="skill-desc">Experience with various Linux distributions, container basics, and common security tooling used during pentesting. Extensive knowledge regarding network architecture and network tools.</p>
             </div>
-          </section>
-
-          <section class="card">
-            <h2>Certifications</h2>
-            <ul class="info-list cert-list" style="margin-bottom:12px;">
-                <li>
-                    <span>CompTIA A+</span>
-                    <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20A%2B%20ce%20certificate.pdf" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="cert-download">
-                    View PDF
-                    </a>
-                </li>
-                <li>
-                    <span>CompTIA Network+</span>
-                    <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20Network%2B%20ce%20certificate.pdf" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="cert-download">
-                    View PDF
-                    </a>
-                </li>
-                <li>
-                    <span>CompTIA Security+</span>
-                    <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20Security%2B%20ce%20certificate.pdf" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="cert-download">
-                    View PDF
-                    </a>
-                </li>
-                <li>
-                  <span>Mastermind ISO/IEC 27001:2022 Lead Auditor</span>
-                  <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/Mastermind%20-%20ISO%2027001%20Certification.pdf" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  class="cert-download">
-                  View PDF
-                  </a>
-                </li>
-            </ul>
-          </section>
-
-          <section class="card">
-            <h2>Relevant Coursework</h2>
-
-            <h3 style="color:var(--text); margin-top:8px;">Completed</h3>
-            <ul class="info-list">
-              <li>Systems Security</li>
-              <li>Information Security</li>
-              <li>Operating Systems</li>
-              <li>Database Systems</li>
-              <li>Computer Systems</li>
-              <li>Web Development</li>
-              <li>Advanced Data Structures and Algorithms</li>
-              <li>Advanced Programming and Data Structures</li>
-              <li>Programming Language Development and Translation</li>
-            </ul>
-            
-            <h3 style="color:var(--text); margin-top:12px;">In Progress</h3>
-            <ul class="info-list">
-              <li>Software Engineering</li>
-            </ul>
+          </div>
         </section>
-        </aside>
+
+        <section class="card">
+          <h2>Certifications</h2>
+          <div class="cert-badge-grid" style="grid-template-columns:repeat(2,1fr);">
+            <div class="cert-badge">
+              <span class="cert-badge-icon">💻</span>
+              <span class="cert-badge-name">CompTIA A+</span>
+              <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20A%2B%20ce%20certificate.pdf"
+                 target="_blank" rel="noopener noreferrer" class="cert-download">View PDF</a>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-badge-icon">🌐</span>
+              <span class="cert-badge-name">CompTIA Network+</span>
+              <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20Network%2B%20ce%20certificate.pdf"
+                 target="_blank" rel="noopener noreferrer" class="cert-download">View PDF</a>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-badge-icon">🔒</span>
+              <span class="cert-badge-name">CompTIA Security+</span>
+              <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/CompTIA%20Security%2B%20ce%20certificate.pdf"
+                 target="_blank" rel="noopener noreferrer" class="cert-download">View PDF</a>
+            </div>
+            <div class="cert-badge">
+              <span class="cert-badge-icon">📋</span>
+              <span class="cert-badge-name">ISO/IEC 27001:2022 Lead Auditor</span>
+              <a href="https://raw.githubusercontent.com/AlexJohnWilcox/myWebsite/main/Images/Mastermind%20-%20ISO%2027001%20Certification.pdf"
+                 target="_blank" rel="noopener noreferrer" class="cert-download">View PDF</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Leadership ──────────────────────────────────────────── -->
+      <section class="card">
+        <h2>Leadership &amp; Community Involvement</h2>
+        <div class="leadership-grid">
+          <div class="leadership-card">
+            <div class="leadership-header">
+              <h3>Beta Theta Pi, Eta Xi</h3>
+              <span class="leadership-date">Sep 2022 – Present</span>
+            </div>
+            <p class="leadership-place">High Point, NC &nbsp;·&nbsp; Member</p>
+            <ul class="info-list">
+              <li>Supported fraternity fundraising efforts, helping to raise money for various philanthropies which change yearly.</li>
+              <li>Engaged in regular chapter meetings, events, and activities, contributing to the fraternity's goals and initiatives.</li>
+            </ul>
+          </div>
+          <div class="leadership-card">
+            <div class="leadership-header">
+              <h3>Computer Science Society (C.O.D.E. Club)</h3>
+              <span class="leadership-date">Oct 2024 – Present</span>
+            </div>
+            <p class="leadership-place">High Point, NC &nbsp;·&nbsp; Member</p>
+            <ul class="info-list">
+              <li>Participated in sessions focused on industry trends and emerging technologies, gaining insight into the latest advancements in software development, cybersecurity, and information technology.</li>
+              <li>Worked with peers on coding projects and participated in weekly coding challenges to enhance problem-solving skills.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interests + Coursework ──────────────────────────────── -->
+      <div class="about-interests-coursework">
+        <section class="card">
+          <h2>Interests</h2>
+          <ul class="info-list">
+            <li>Cybersecurity &amp; Penetration Testing</li>
+            <li>Game Development &amp; Programming</li>
+            <li>Bodybuilding &amp; Nutrition</li>
+            <li>Philosophy &amp; Psychology</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Relevant Coursework</h2>
+          <h3 style="color:var(--text); margin-top:8px;">Completed</h3>
+          <ul class="info-list">
+            <li>Systems Security</li>
+            <li>Information Security</li>
+            <li>Operating Systems</li>
+            <li>Database Systems</li>
+            <li>Computer Systems</li>
+            <li>Web Development</li>
+            <li>Advanced Data Structures and Algorithms</li>
+            <li>Advanced Programming and Data Structures</li>
+            <li>Programming Language Development and Translation</li>
+          </ul>
+          <h3 style="color:var(--text); margin-top:12px;">In Progress</h3>
+          <ul class="info-list">
+            <li>Software Engineering</li>
+          </ul>
+        </section>
       </div>
 
     </div>
