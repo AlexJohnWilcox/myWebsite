@@ -379,6 +379,132 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
   line-height:1;
 }
 
+/* ── Scroll progress bar ─────────────────────────────────────────── */
+#scroll-bar{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  width:0%;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index:9999;
+  pointer-events:none;
+  transition:width 0.08s linear;
+}
+
+/* ── Typewriter cursor ───────────────────────────────────────────── */
+.tw-cursor{
+  display:inline-block;
+  width:2px;
+  background:var(--accent-2);
+  margin-left:3px;
+  animation:blink 0.9s step-end infinite;
+  vertical-align:baseline;
+  height:1.1em;
+  border-radius:1px;
+  position:relative;
+  top:2px;
+}
+@keyframes blink{
+  0%,100%{ opacity:1; }
+  50%{     opacity:0; }
+}
+
+/* ── Available badge ─────────────────────────────────────────────── */
+.avail-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(6,182,212,0.08);
+  border:1px solid rgba(6,182,212,0.28);
+  color:var(--accent-2);
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:0.88rem;
+  font-weight:600;
+  letter-spacing:0.2px;
+}
+.avail-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent-2);
+  flex-shrink:0;
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{ opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(6,182,212,0.5); }
+  50%{     opacity:0.7; transform:scale(0.85); box-shadow:0 0 0 4px rgba(6,182,212,0); }
+}
+
+/* ── Project card: lift + glow on hover ──────────────────────────── */
+.project-card{
+  transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.project-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(91,77,240,0.55);
+  box-shadow:0 0 22px rgba(91,77,240,0.18), 0 12px 32px rgba(2,6,23,0.5);
+}
+
+/* ── Experience card: same lift + glow on hover ──────────────────── */
+.exp-entry{
+  transition:transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  border:1px solid transparent;
+}
+.exp-entry:hover{
+  transform:translateY(-4px);
+  border-color:rgba(91,77,240,0.45);
+  box-shadow:0 0 20px rgba(91,77,240,0.15), 0 12px 28px rgba(2,6,23,0.5);
+}
+
+/* ── Social pill buttons ─────────────────────────────────────────── */
+.social-links{
+  display:flex;
+  gap:10px;
+  margin-top:6px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.social-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.04);
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:600;
+  font-size:0.95rem;
+  transition:all 0.18s ease;
+}
+.social-pill i{ font-size:1.1rem; }
+.social-pill:hover{
+  background:rgba(255,255,255,0.09);
+  border-color:rgba(255,255,255,0.22);
+  color:var(--text);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ── Copy email button ───────────────────────────────────────────── */
+.copy-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:0.85rem;
+  padding:2px 6px;
+  border-radius:4px;
+  transition:color 0.15s, background 0.15s;
+  vertical-align:middle;
+  margin-left:4px;
+}
+.copy-btn:hover{ color:var(--accent-2); background:rgba(6,182,212,0.08); }
+.copy-btn.copied{ color:#22c55e; }
+
 @media (max-width:520px){
   .nav-link{ font-size:0.95rem; padding:8px 10px; }
   .profile-pic{ width:140px; height:140px; }
