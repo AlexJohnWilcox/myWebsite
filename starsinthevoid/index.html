@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ASCII Adventure Game</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="lore-text.css">
+</head>
+<body>
+    <div id="top-buttons" style="position:fixed;top:0;left:0;z-index:2000;display:flex;flex-direction:row;gap:0;">
+	<button id="save-slot-btn" style="padding:6px 14px;font-size:15px;background:#222;color:#fff;border:none;border-radius:0 0 0 12px;box-shadow:0 2px 8px #000a;cursor:pointer;">Save</button>
+	<button id="wipe-save-btn" style="padding:6px 14px;font-size:15px;background:#222;color:#fff;border:none;border-radius:0 0 12px 0;box-shadow:0 2px 8px #000a;cursor:pointer;">Wipe Save</button>
+    </div>
+    <div id="top-right-buttons" style="position:fixed;top:0;right:0;z-index:2000;display:flex;flex-direction:row;gap:0;">
+	<button id="logbook-btn" style="padding:6px 14px;font-size:15px;background:#222;color:#fff;border:none;border-radius:0 0 12px 12px;box-shadow:0 2px 8px #000a;cursor:pointer;">Logbook</button>
+    </div>
+	<div id="save-msg" style="position:fixed;top:48px;left:0;z-index:2001;padding:8px 24px;font-size:18px;background:#222;color:#fff;border-radius:0 0 12px 0;box-shadow:0 2px 8px #000a;display:none;">Game saved!</div>
+
+
+	<div id="main-flex" style="display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:0; position:relative; width:100%;">
+		<div id="content-row" style="display:flex; flex-direction:row; align-items:flex-start; gap:48px; width:100%;">
+			<!-- Left column: game + materials bubble -->
+			<div id="left-col" style="display:flex; flex-direction:column; align-items:flex-start; gap:16px; flex:0 0 auto;">
+				<div id="game-container" style="overflow:visible; position:relative; margin-left:0px; margin-right:24px; max-height:540px;">
+					<div id="ascii" class="ascii-art"></div>
+					<div id="ly-toggle-wrapper" style="display:none; margin:12px 0 0 0; text-align:center;">
+						<label style="display:inline-flex;align-items:center;gap:6px;font-size:16px;">
+							<input type="checkbox" id="ly-switch" checked style="width:18px;height:18px;">
+							<span>Engine On</span>
+						</label>
+						<button id="systems-btn" style="display:none;margin-left:16px;padding:6px 14px;font-size:14px;border:none;border-radius:6px;background:#555;color:#fff;cursor:pointer;box-shadow:0 2px 8px #000a;min-width:168px;text-align:center;">Systems</button>
+						<button id="collapserbay-btn" style="display:none;margin-left:10px;padding:6px 14px;font-size:14px;border:none;border-radius:6px;background:#555;color:#fff;cursor:pointer;box-shadow:0 2px 8px #000a;min-width:168px;text-align:center;">Collapser Bay</button>
+					</div>
+					<div id="output"></div>
+					<div id="name-entry" style="display:none; text-align:center; margin-top:16px;">
+						<input id="name-input" type="text" autocomplete="off" placeholder="Enter your name..." style="width:60%; font-size:18px;" />
+						<button id="name-submit">Submit</button>
+					</div>
+				</div>
+				<div id="bottom-bubble" style="display:none; position:static; width:100%; min-height:80px; background:#222; z-index:20; box-shadow:0 0 18px #000a; border-radius:18px; margin:16px 0 0 0; max-width:1600px; align-items:center; justify-content:flex-start;">
+					<div id="fuel-section" style="display:flex;align-items:center;gap:18px;min-width:320px;max-width:400px;padding:18px 18px;background:none;border-radius:12px;box-shadow:none;color:#fff;font-size:18px;">
+						<span id="fuel-count" style="font-size:16px;color:#fff;">Dark-Matter: 0</span>
+						<button id="fuel-btn" style="font-size:16px;padding:4px 12px;border-radius:6px;background:#444;color:#fff;border:none;box-shadow:0 2px 8px #000a;">Dump Fuel (+1)</button>
+					</div>
+					<div id="upgrades" style="display:flex;align-items:center;gap:24px;margin-left:24px;"></div>
+					<div id="stardust-section" style="display:none;align-items:center;gap:14px;margin-left:24px;color:#fff;">
+						<span id="stardust-count" style="font-size:16px;">Stardust: 0</span>
+						<button id="collapse-btn" style="font-size:16px;padding:4px 12px;border-radius:6px;background:#555;color:#fff;border:none;box-shadow:0 2px 8px #000a;">Collapse</button>
+					</div>
+				</div>
+			</div>
+			<!-- Right column: lore feed -->
+			<div id="right-col" style="display:flex; flex-direction:column; flex:1 1 auto; min-width:320px;">
+				<div id="lore-text" style="width:100%; margin-top:0;"></div>
+			</div>
+		</div>
+	</div>
+	<div id="save-load-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:3000; align-items:center; justify-content:center;">
+  <div style="background:#222; color:#fff; border-radius:12px; box-shadow:0 2px 8px #000a; padding:32px 48px; min-width:320px; display:flex; flex-direction:column; align-items:center; gap:24px;">
+    <div style="font-size:22px; margin-bottom:12px;">Game Save/Load</div>
+    <button id="modal-save-btn" style="font-size:18px; padding:8px 32px; border-radius:6px; background:#444; color:#fff; border:none;">Save Game</button>
+    <button id="modal-load-btn" style="font-size:18px; padding:8px 32px; border-radius:6px; background:#444; color:#fff; border:none;">Load Game</button>
+    <button id="modal-close-btn" style="font-size:16px; margin-top:8px; padding:4px 18px; border-radius:6px; background:#333; color:#fff; border:none;">Close</button>
+    <div id="modal-msg" style="font-size:16px; color:#8f8; margin-top:8px; display:none;"></div>
+  </div>
+</div>
+	<script src="lore.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
+
