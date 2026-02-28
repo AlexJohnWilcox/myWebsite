@@ -8,18 +8,23 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .promo-bubble{
+    .promo-stack{
       position:fixed;
       left:18px;
       top:50%;
       transform:translateY(-50%);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      z-index:1000;
+      max-width:240px;
+    }
+    .promo-bubble{
       background:#ffffff;
       padding:18px 20px 16px;
       border-radius:14px;
       box-shadow:0 6px 22px rgba(0,0,0,0.28);
-      max-width:240px;
       font-size:1rem;
-      z-index:1000;
       line-height:1.5;
       border:1px solid #cfd8e0;
       color:#111;
@@ -65,7 +70,7 @@
     }
     .promo-bubble:hover{
       box-shadow:0 12px 36px rgba(0,0,0,0.38);
-      transform:translateY(-50%) translateY(-4px);
+      transform:translateY(-4px);
       border-color:#b2c2cf;
       background:#fdfdfd;
     }
@@ -81,7 +86,7 @@
       border-radius:10px;
     }
     @media (max-width:800px){
-      .promo-bubble{
+      .promo-stack{
         position:static;
         transform:none;
         margin:18px auto 0;
@@ -115,15 +120,27 @@
     </nav>
   </header>
 
-  <div class="promo-bubble">
-    <a href="/starsinthevoid" aria-label="Check out my new game">
-      <small>New</small>
-      <div class="promo-bubble-header">
-        <span class="icon">🎮</span>
-        <span>Check out my new game!</span>
-      </div>
-      <p>A text based idle game I've been working on for a few weeks. Take a look!</p>
-    </a>
+  <div class="promo-stack">
+    <div class="promo-bubble">
+      <a href="/starsinthevoid" aria-label="Check out Stars in the Void">
+        <small>Game</small>
+        <div class="promo-bubble-header">
+          <span class="icon">🎮</span>
+          <span>Stars in the Void</span>
+        </div>
+        <p>A text based idle game I've been working on for a few weeks. Take a look!</p>
+      </a>
+    </div>
+    <div class="promo-bubble">
+      <a href="/CountriesGame/public" aria-label="Check out Countries of the World">
+        <small>Game</small>
+        <div class="promo-bubble-header">
+          <span class="icon">🌍</span>
+          <span>Countries of the World</span>
+        </div>
+        <p>Can you name all 197 countries? Test your geography knowledge!</p>
+      </a>
+    </div>
   </div>
 
   <main class="welcome-section main-container">
