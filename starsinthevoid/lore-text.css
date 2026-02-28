@@ -1,0 +1,16 @@
+#lore-text {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    max-width: 420px;
+    min-width: 220px;
+    background: #222;
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 24px #000a;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 24px 18px;
+    z-index: 1000;
+    margin-right: 32px; /* Not touching edge */
+}
