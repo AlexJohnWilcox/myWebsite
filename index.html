@@ -10,24 +10,28 @@
   <style>
     .promo-stack{
       position:fixed;
-      left:18px;
-      top:50%;
-      transform:translateY(-50%);
+      bottom:20px;
+      left:20px;
+      right:20px;
       display:flex;
-      flex-direction:column;
-      gap:14px;
+      flex-direction:row;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:0;
       z-index:1000;
-      max-width:240px;
+      pointer-events:none;
     }
     .promo-bubble{
       background:#ffffff;
-      padding:18px 20px 16px;
+      padding:18px 22px 16px;
       border-radius:14px;
-      box-shadow:0 6px 22px rgba(0,0,0,0.28);
+      box-shadow:0 8px 28px rgba(0,0,0,0.32);
       font-size:1rem;
       line-height:1.5;
       border:1px solid #cfd8e0;
       color:#111;
+      width:290px;
+      pointer-events:auto;
       transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease, background .25s ease;
     }
     .promo-bubble a{
@@ -85,17 +89,27 @@
       outline-offset:4px;
       border-radius:10px;
     }
-    @media (max-width:800px){
-      .promo-stack{
-        position:static;
-        transform:none;
-        margin:18px auto 0;
-        width:100%;
-        max-width:500px;
-      }
-      .promo-bubble:hover{
-        transform:none;
-      }
+    @media (max-width:700px){
+      .promo-stack{ display:none; }
+    }
+
+    /* ── 3D hero tilt ───────────────────────────────────────────── */
+    .welcome-section{
+      transition: transform 0.12s ease;
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+
+    /* ── Profile pic: glow ring ──────────────────────────────────── */
+    .welcome-section .profile-pic{
+      box-shadow:
+        0 0 0 3px rgba(107,92,242,0.5),
+        0 0 32px rgba(107,92,242,0.25),
+        0 0 70px rgba(6,200,232,0.12),
+        0 14px 50px rgba(2,6,23,0.65) !important;
+    }
+    @media(max-width:800px){
+      .welcome-section{ transform:none !important; }
     }
   </style>
 </head>
@@ -151,7 +165,6 @@
 
     <h1>Alex J. Wilcox</h1>
     <h2><span id="tw-text"></span><span class="tw-cursor"></span></h2>
-    <p class="tagline">Computer Science Student at High Point University</p>
     <div class="avail-badge"><span class="avail-dot"></span>Available for Opportunities · May 2026</div>
 
     <div class="social-links">
@@ -166,10 +179,6 @@
       </a>
     </div>
 
-    <div style="display:flex; justify-content:center; gap:18px; margin-top:18px;">
-      <a class="cta-button" href="about.html">About</a>
-      <a class="cta-button" href="contact.html">Contact</a>
-    </div>
   </main>
 
   <script>
@@ -179,6 +188,23 @@
       const max = document.body.scrollHeight - window.innerHeight;
       bar.style.width = (window.scrollY / max * 100) + '%';
     }, { passive: true });
+
+    // ── 3D hero tilt on mouse move ────────────────────────────────
+    const hero = document.querySelector('.welcome-section');
+    let ticking = false;
+    document.addEventListener('mousemove', e => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const rx = ((e.clientY / window.innerHeight) - 0.5) * -7;
+        const ry = ((e.clientX / window.innerWidth)  - 0.5) *  7;
+        hero.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        ticking = false;
+      });
+    });
+    document.addEventListener('mouseleave', () => {
+      hero.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    });
 
     // ── Typewriter ────────────────────────────────────────────────
     const roles = [
