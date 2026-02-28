@@ -100,6 +100,7 @@
   </style>
 </head>
 <body>
+  <div id="scroll-bar"></div>
   <header>
     <nav>
       <ul>
@@ -122,6 +123,16 @@
 
   <div class="promo-stack">
     <div class="promo-bubble">
+      <a href="/CountriesGame/public" aria-label="Check out Countries of the World">
+        <small>Game</small>
+        <div class="promo-bubble-header">
+          <span class="icon">🌍</span>
+          <span>Countries of the World</span>
+        </div>
+        <p>Can you name all 197 countries? Check out this game I made!</p>
+      </a>
+    </div>
+    <div class="promo-bubble">
       <a href="/starsinthevoid" aria-label="Check out Stars in the Void">
         <small>Game</small>
         <div class="promo-bubble-header">
@@ -129,16 +140,6 @@
           <span>Stars in the Void</span>
         </div>
         <p>A text based idle game I've been working on for a few weeks. Take a look!</p>
-      </a>
-    </div>
-    <div class="promo-bubble">
-      <a href="/CountriesGame/public" aria-label="Check out Countries of the World">
-        <small>Game</small>
-        <div class="promo-bubble-header">
-          <span class="icon">🌍</span>
-          <span>Countries of the World</span>
-        </div>
-        <p>Can you name all 197 countries? Test your geography knowledge!</p>
       </a>
     </div>
   </div>
@@ -149,14 +150,19 @@
         </div>
 
     <h1>Alex J. Wilcox</h1>
-    <h2>Cyber Security · Information Technology · Game Design</h2>
+    <h2><span id="tw-text"></span><span class="tw-cursor"></span></h2>
     <p class="tagline">Computer Science Student at High Point University</p>
+    <div class="avail-badge"><span class="avail-dot"></span>Available for Opportunities · May 2026</div>
 
-    <div class="social-links" style="align-items:center;">
-      <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/AlexJohnWilcox" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="Images/Resume-Wilcox,A.pdf" download="Resume-Wilcox,A.pdf" title="Download Resume PDF" style="display:flex;align-items:center;">
-        <i class="fas fa-file-pdf" style="vertical-align:middle;"></i>
+    <div class="social-links">
+      <a class="social-pill" href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a class="social-pill" href="https://github.com/AlexJohnWilcox" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a class="social-pill" href="Images/Resume-Wilcox,A.pdf" download="Resume-Wilcox,A.pdf">
+        <i class="fas fa-file-pdf"></i> Resume
       </a>
     </div>
 
@@ -166,5 +172,42 @@
     </div>
   </main>
 
+  <script>
+    // ── Scroll progress bar ───────────────────────────────────────
+    const bar = document.getElementById('scroll-bar');
+    window.addEventListener('scroll', () => {
+      const max = document.body.scrollHeight - window.innerHeight;
+      bar.style.width = (window.scrollY / max * 100) + '%';
+    }, { passive: true });
+
+    // ── Typewriter ────────────────────────────────────────────────
+    const roles = [
+      'Cyber Security Specialist',
+      'Penetration Tester',
+      'Game Developer',
+      'IT Professional',
+      'CS Student at HPU'
+    ];
+    let rIdx = 0, cIdx = 0, deleting = false;
+    const twEl = document.getElementById('tw-text');
+
+    function type() {
+      const word = roles[rIdx];
+      twEl.textContent = deleting ? word.slice(0, cIdx - 1) : word.slice(0, cIdx + 1);
+      deleting ? cIdx-- : cIdx++;
+
+      if (!deleting && cIdx === word.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+      if (deleting && cIdx === 0) {
+        deleting = false;
+        rIdx = (rIdx + 1) % roles.length;
+      }
+      setTimeout(type, deleting ? 55 : 90);
+    }
+    type();
+  </script>
 </body>
 </html>

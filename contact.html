@@ -34,7 +34,7 @@
       <div>
         <h2>Contact Me</h2>
         <div class="contact-info">
-          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:alex@alexwilcox.net">alex@alexwilcox.net</a></p>
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:alex@alexwilcox.net">alex@alexwilcox.net</a><button class="copy-btn" id="copy-email" title="Copy email"><i class="fas fa-copy"></i></button></p>
           <p><i class="fas fa-phone"></i> Phone: <a href="tel:+17039455007">+1 703-945-5007</a></p>
         </div>
       </div>
@@ -50,5 +50,17 @@
       </div>
     </section>
   </main>
+  <script>
+    document.getElementById('copy-email').addEventListener('click', function() {
+      navigator.clipboard.writeText('alex@alexwilcox.net').then(() => {
+        this.innerHTML = '<i class="fas fa-check"></i>';
+        this.classList.add('copied');
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-copy"></i>';
+          this.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  </script>
 </body>
 </html>
