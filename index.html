@@ -230,16 +230,6 @@
     }
     type();
 
-    // ── Easter egg: type "6869" (hex for "hi") to unlock ──────────
-    (function(){
-      const CODE = '6869';
-      let buf = '';
-      document.addEventListener('keydown', e => {
-        buf = (buf + e.key).slice(-CODE.length);
-        if(buf === CODE) window.location.href = '/easteregg/';
-      });
-    })();
-
     // ── Mobile nav toggle ─────────────────────────────────────────
     (function(){
       const nav = document.querySelector('nav');
@@ -370,6 +360,9 @@
 
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; scheduleDraw(); }, {passive: true});
 
+    const EGG_SEQ = ['6','8','6','9'];
+    let eggBuf = [];
+
     document.addEventListener('click', () => {
       if(mouse.x < -100) return;
       const cw = cv.width / 2, ch = cv.height / 2;
@@ -381,6 +374,11 @@
         if(minD <= R * (0.45 + 0.55 * t)){
           pulses.push({ x: nearest.x, y: nearest.y, start: performance.now() });
           scheduleDraw();
+
+          // Easter egg: click hexes spelling 6-8-6-9 in sequence
+          eggBuf.push(nearest.bit);
+          if(eggBuf.length > EGG_SEQ.length) eggBuf.shift();
+          if(eggBuf.join('') === EGG_SEQ.join('')) window.location.href = '/easteregg/';
         }
       }
     });
