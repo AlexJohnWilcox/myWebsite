@@ -19,9 +19,10 @@
     }
   </style>
 </head>
-<body>
+<body class="page-with-sides">
   <header>
     <nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link active">ABOUT</a></li>
@@ -40,7 +41,7 @@
     </nav>
   </header>
 
-  <main class="main-container" style="padding:0 24px;">
+  <main class="main-container">
     <div class="about-layout">
 
       <!-- 01 · About Me ───────────────────────────────────────────── -->
@@ -179,5 +180,24 @@
 
     </div>
   </main>
+  <script>
+  (function(){
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('.nav-toggle');
+    btn.addEventListener('click',()=>{
+      const open = nav.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded',open);
+    });
+    nav.querySelectorAll('a.nav-link').forEach(a=>a.addEventListener('click',()=>{
+      nav.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded','false');
+    }));
+    nav.querySelectorAll('.nav-dropdown-parent').forEach(p=>{
+      p.querySelector('.nav-dropdown-toggle').addEventListener('click',()=>{
+        if(window.innerWidth<=760) p.classList.toggle('dd-open');
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
 <body>
   <header>
     <nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -29,7 +30,7 @@
     </nav>
   </header>
 
-  <main class="main-container" style="padding:0 24px;">
+  <main class="main-container">
     <section class="card contact-card">
       <h2 class="asec-title">Contact Me</h2>
       <p class="contact-intro">
@@ -48,6 +49,24 @@
   </main>
 
   <script>
+    (function(){
+      const nav = document.querySelector('nav');
+      const btn = document.querySelector('.nav-toggle');
+      btn.addEventListener('click',()=>{
+        const open = nav.classList.toggle('nav-open');
+        btn.setAttribute('aria-expanded',open);
+      });
+      nav.querySelectorAll('a.nav-link').forEach(a=>a.addEventListener('click',()=>{
+        nav.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded','false');
+      }));
+      nav.querySelectorAll('.nav-dropdown-parent').forEach(p=>{
+        p.querySelector('.nav-dropdown-toggle').addEventListener('click',()=>{
+          if(window.innerWidth<=760) p.classList.toggle('dd-open');
+        });
+      });
+    })();
+
     document.getElementById('copy-email').addEventListener('click', function() {
       navigator.clipboard.writeText('alex@alexwilcox.net').then(() => {
         this.innerHTML = '<i class="fas fa-check"></i>';
