@@ -252,6 +252,7 @@
     let mouse   = {x: -9999, y: -9999};
     let centers = [];
     let raf;
+    let pulses  = [];
 
     function buildGrid(){
       centers = [];
@@ -291,6 +292,9 @@
     }
 
     function draw(){
+      const now = performance.now();
+      pulses = pulses.filter(p => now - p.start < 2600);
+
       ctx.clearRect(0, 0, cv.width, cv.height);
       const {active, neighbors} = getHighlighted();
       const cw = cv.width / 2, ch = cv.height / 2;
@@ -300,8 +304,22 @@
         const isActive   = c === active;
         const isNeighbor = neighbors && neighbors.has(c);
         const t = Math.min(1, Math.hypot(c.x - cw, c.y - ch) / maxDist);
-        // All hexes use their depth-scaled size — no popping
         const r = R * (0.45 + 0.55 * t);
+
+        // Pulse ring contribution for this hex
+        let pAlpha = 0;
+        for(const p of pulses){
+          const elapsed = now - p.start;
+          const radius  = elapsed * 0.30;            // ~300 px/s expansion
+          const dist    = Math.hypot(c.x - p.x, c.y - p.y);
+          const bw      = W * 1.1;                   // ring bandwidth
+          const diff    = Math.abs(dist - radius);
+          if(diff < bw){
+            const wave = 1 - diff / bw;
+            const fade = Math.max(0, 1 - elapsed / 2600);
+            pAlpha = Math.max(pAlpha, wave * wave * fade);
+          }
+        }
 
         hexPath(c.x, c.y, r);
         if(isActive){
@@ -312,14 +330,19 @@
           ctx.fillStyle = 'rgba(245,166,35,0.06)';
           ctx.fill();
           ctx.strokeStyle = 'rgba(245,166,35,0.20)';
+        } else if(pAlpha > 0.01){
+          ctx.fillStyle = `rgba(245,166,35,${pAlpha * 0.15})`;
+          ctx.fill();
+          ctx.strokeStyle = `rgba(245,166,35,${0.1 + pAlpha * 0.55})`;
         } else {
-          // Dimmer + smaller at center (far), brighter + full at edges (near)
           ctx.strokeStyle = `rgba(255,255,255,${0.025 + 0.075 * t})`;
         }
         ctx.lineWidth = 1;
         ctx.stroke();
       }
+
       raf = undefined;
+      if(pulses.length > 0) scheduleDraw();
     }
 
     function scheduleDraw(){
@@ -334,6 +357,22 @@
     }
 
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; scheduleDraw(); }, {passive: true});
+
+    document.addEventListener('click', () => {
+      if(mouse.x < -100) return;
+      const cw = cv.width / 2, ch = cv.height / 2;
+      const maxDist = Math.hypot(cw, ch);
+      let minD = Infinity, nearest = null;
+      for(const c of centers){ const d = Math.hypot(c.x - mouse.x, c.y - mouse.y); if(d < minD){ minD = d; nearest = c; } }
+      if(nearest){
+        const t = Math.min(1, Math.hypot(nearest.x - cw, nearest.y - ch) / maxDist);
+        if(minD <= R * (0.45 + 0.55 * t)){
+          pulses.push({ x: nearest.x, y: nearest.y, start: performance.now() });
+          scheduleDraw();
+        }
+      }
+    });
+
     window.addEventListener('resize', resize);
     resize();
   })();
