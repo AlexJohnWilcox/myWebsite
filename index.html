@@ -256,11 +256,13 @@
 
     function buildGrid(){
       centers = [];
+      const HEX = '0123456789abcdef';
+      let hi = 0;
       const cols = Math.ceil(cv.width  / W) + 2;
       const rows = Math.ceil(cv.height / (R * 1.5)) + 2;
       for(let row = -1; row <= rows; row++)
         for(let col = -1; col <= cols; col++)
-          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5, bit: (row + col) & 1 ? '1' : '0' });
+          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5, bit: HEX[hi++ % 16] });
     }
 
     function hexPath(cx, cy, r){
