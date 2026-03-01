@@ -1170,21 +1170,23 @@ section.card .asec-title{
 /* ── Mobile nav hamburger ────────────────────────────────────────── */
 .nav-toggle{
   display: none;
-  background: none;
+  background: none !important;
+  -webkit-appearance: none;
+  appearance: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 8px;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   flex-shrink: 0;
 }
 .nav-toggle span{
   display: block;
   width: 28px;
   height: 3px;
-  background: #ffffff;
+  background-color: #ffffff !important;
   border-radius: 3px;
-  box-shadow: 0 0 6px rgba(255,255,255,0.55);
+  box-shadow: 0 0 8px rgba(255,255,255,0.7);
   transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
