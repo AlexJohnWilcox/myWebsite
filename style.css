@@ -1182,7 +1182,7 @@ section.card .asec-title{
   display: block;
   width: 26px;
   height: 2px;
-  background: var(--text);
+  background: #fff;
   border-radius: 2px;
   transition: transform 0.22s ease, opacity 0.22s ease;
 }
