@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>You Found It</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <style>
+    *{ box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: #0b1628;
+      color: #eaf6ff;
+      font-family: 'Poppins', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+    canvas#bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+    .scene {
+      position: relative; z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 24px;
+      text-align: center;
+    }
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #10e09e;
+      border: 1px solid rgba(16,224,158,0.35);
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(16,224,158,0.07);
+      animation: fadein 0.6s ease both;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      animation: fadein 0.7s 0.1s ease both;
+    }
+    h1 .accent { color: #f5a623; }
+    .hex-label {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(178,212,240,0.7);
+      font-family: monospace;
+      letter-spacing: 3px;
+      animation: fadein 0.7s 0.2s ease both;
+    }
+    .sub {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: rgba(178,212,240,0.55);
+      max-width: 480px;
+      line-height: 1.6;
+      animation: fadein 0.7s 0.3s ease both;
+    }
+    .back-link {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #f5a623;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid rgba(245,166,35,0.4);
+      padding: 10px 24px;
+      border-radius: 10px;
+      background: rgba(245,166,35,0.07);
+      transition: background 0.2s, box-shadow 0.2s;
+      animation: fadein 0.7s 0.45s ease both;
+    }
+    .back-link:hover {
+      background: rgba(245,166,35,0.16);
+      box-shadow: 0 0 24px rgba(245,166,35,0.25);
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="scene">
+    <span class="badge">Easter Egg Unlocked</span>
+    <h1>You found the<br><span class="accent">secret.</span></h1>
+    <div class="hex-label">0x68 0x69 &nbsp;→&nbsp; "hi"</div>
+    <p class="sub">You typed "hi" in hexadecimal on the home page. Not many people would think to try that. Respect.</p>
+    <a class="back-link" href="/">← Back to Portfolio</a>
+  </div>
+
+  <script>
+  // Animated hex rain background
+  (function(){
+    const cv  = document.getElementById('bg');
+    const ctx = cv.getContext('2d');
+    const HEX = '0123456789abcdef';
+    let drops = [];
+
+    function resize(){
+      cv.width  = window.innerWidth;
+      cv.height = window.innerHeight;
+      drops = [];
+      const cols = Math.floor(cv.width / 22);
+      for(let i = 0; i < cols; i++){
+        drops.push({
+          x: i * 22 + 11,
+          y: Math.random() * -cv.height,
+          speed: 0.4 + Math.random() * 0.7,
+          len: 8 + Math.floor(Math.random() * 14),
+          chars: Array.from({length: 24}, () => HEX[Math.floor(Math.random()*16)]),
+          tick: 0
+        });
+      }
+    }
+
+    function draw(){
+      ctx.fillStyle = 'rgba(11,22,40,0.22)';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+
+      for(const d of drops){
+        d.y += d.speed;
+        d.tick++;
+        if(d.tick % 8 === 0){
+          const ri = Math.floor(Math.random() * d.chars.length);
+          d.chars[ri] = HEX[Math.floor(Math.random()*16)];
+        }
+        for(let j = 0; j < d.len; j++){
+          const cy = d.y - j * 18;
+          if(cy < -18 || cy > cv.height + 18) continue;
+          const fade = 1 - j / d.len;
+          if(j === 0){
+            ctx.fillStyle = `rgba(245,166,35,${fade * 0.9})`;
+          } else {
+            ctx.fillStyle = `rgba(16,224,158,${fade * 0.35})`;
+          }
+          ctx.font = '13px monospace';
+          ctx.fillText(d.chars[j % d.chars.length], d.x, cy);
+        }
+        if(d.y - d.len * 18 > cv.height) d.y = -20;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  })();
+  </script>
+</body>
+</html>

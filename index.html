@@ -230,6 +230,16 @@
     }
     type();
 
+    // ── Easter egg: type "6869" (hex for "hi") to unlock ──────────
+    (function(){
+      const CODE = '6869';
+      let buf = '';
+      document.addEventListener('keydown', e => {
+        buf = (buf + e.key).slice(-CODE.length);
+        if(buf === CODE) window.location.href = '/easteregg/';
+      });
+    })();
+
     // ── Mobile nav toggle ─────────────────────────────────────────
     (function(){
       const nav = document.querySelector('nav');
