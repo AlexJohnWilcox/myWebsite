@@ -6,6 +6,262 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Experience & Timeline — Alex J. Wilcox</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Full-viewport no-scroll layout ──────────────────────────── */
+    body {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header { position: relative; z-index: 50; }
+
+    /* ── Timeline viewport ────────────────────────────────────────── */
+    .tl-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    /* Center horizontal line */
+    .tl-line {
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(245,166,35,0.5) 4%,
+        rgba(245,166,35,0.8) 20%,
+        rgba(245,166,35,0.8) 80%,
+        rgba(245,166,35,0.5) 96%,
+        transparent 100%);
+      transform: translateY(-50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── Arrow navigation buttons ─────────────────────────────────── */
+    .tl-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(14,30,56,0.85);
+      border: 1.5px solid rgba(245,166,35,0.45);
+      color: rgba(245,166,35,0.9);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+      backdrop-filter: blur(4px);
+    }
+    .tl-arrow:hover {
+      background: rgba(245,166,35,0.15);
+      border-color: rgba(245,166,35,0.8);
+    }
+    .tl-arrow-left  { left:  14px; }
+    .tl-arrow-right { right: 14px; }
+
+    /* ── Track wrapper & track ────────────────────────────────────── */
+    .tl-track-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .tl-track {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      /* first entry starts after left arrow + breathing room */
+      padding-left: 72px;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+    }
+
+    /* ── Individual timeline entry ───────────────────────────────── */
+    .tl-entry {
+      width: 420px;
+      flex-shrink: 0;
+      margin-right: 60px;
+      position: relative;
+      height: 100%;
+    }
+
+    /* Card: anchored above or below center line */
+    .tl-card {
+      position: absolute;
+      left: 0; right: 0;
+      background: #0f1724;
+      border-radius: 12px;
+      padding: 18px 16px;
+      border: 1px solid transparent;
+      border-left: 3px solid var(--ec, var(--accent-4));
+      box-shadow: 0 4px 24px rgba(2,6,23,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      max-height: calc(50% - 36px);
+      overflow: hidden;
+    }
+    .tl-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(2,6,23,0.55);
+      border-color: var(--ec, var(--accent-4));
+    }
+
+    /* Top-half card: bottom edge sits 28px above center */
+    .tl-top .tl-card {
+      bottom: calc(50% + 28px);
+    }
+    /* Bottom-half card: top edge sits 28px below center */
+    .tl-bot .tl-card {
+      top: calc(50% + 28px);
+    }
+
+    /* Vertical stem connecting card to dot */
+    .tl-stem {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 28px;
+      background: var(--ec, rgba(245,166,35,0.5));
+      opacity: 0.6;
+    }
+    .tl-top .tl-stem { bottom: 50%; }
+    .tl-bot .tl-stem { top:    50%; }
+
+    /* Dot on the center line */
+    .tl-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ec, var(--accent-4));
+      border: 2.5px solid #0b1628;
+      z-index: 2;
+      box-shadow: 0 0 10px var(--ec, rgba(245,166,35,0.5));
+    }
+
+    /* ── Card content typography ──────────────────────────────────── */
+    .tl-year {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ec, var(--accent-4));
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+      opacity: 0.9;
+    }
+    .tl-title {
+      font-size: 0.97rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .tl-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Year label on the center line ───────────────────────────── */
+    .tl-year-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% + 22px));
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(245,166,35,0.65);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ── Navigation hint labels ───────────────────────────────────── */
+    .tl-hint {
+      position: absolute;
+      bottom: 14px;
+      font-size: 0.72rem;
+      color: rgba(178,212,240,0.4);
+      letter-spacing: 0.5px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .tl-hint-left  { left:  70px; }
+    .tl-hint-right { right: 70px; }
+
+    /* ── Mobile: vertical stacked list ───────────────────────────── */
+    @media(max-width:760px){
+      body { overflow: auto; height: auto; }
+      header {
+        position: sticky !important;
+        top: 0;
+        z-index: 50 !important;
+        background: rgba(11,22,40,0.97) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+      body.page-with-sides::before,
+      body.page-with-sides::after { display: none; }
+
+      .tl-viewport {
+        overflow: visible;
+        flex: none;
+        height: auto;
+      }
+      .tl-line,
+      .tl-arrow,
+      .tl-stem,
+      .tl-dot,
+      .tl-year-badge,
+      .tl-hint { display: none; }
+
+      .tl-track-wrap {
+        position: static;
+        overflow: visible;
+      }
+      .tl-track {
+        flex-direction: column;
+        padding: 20px 16px 40px;
+        gap: 16px;
+        height: auto;
+        transform: none !important;
+        transition: none;
+      }
+      .tl-entry {
+        width: 100%;
+        margin-right: 0;
+        height: auto;
+      }
+      .tl-card {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        bottom: auto; top: auto;
+      }
+      .tl-desc {
+        -webkit-line-clamp: unset;
+        display: block;
+      }
+    }
+  </style>
 </head>
 <body class="page-with-sides">
   <header>
@@ -29,68 +285,144 @@
     </nav>
   </header>
 
-  <main class="main-container">
-    <section class="card">
-      <h2>Experience & Timeline</h2>
-      <div class="experience-grid">
-        <div class="exp-col">
-          <div class="exp-entry">
-            <div class="exp-year">May 2025 – August 2025</div>
-            <div class="exp-title">Systems Administration Internship</div>
-            <div class="exp-desc"><em>In the summer between my junior and senior year I had the amazing opportunity to work at Digital Cloak LLC as a systems administration intern. In this role, I worked with three other interns on various projects such as an external network assessment, the creation of a C2 server, and my personal phishing project. I spent most of the time working on my personal project, which was an in-depth phishing campaign using Evilginx2 to host a reverse proxy of various sites, and multiple Gophish campaigns in an attempt to harvest credentials in an ethical and regulated way. Check out the projects tab to view my final presentation from my project!</em></div>
+  <div class="tl-viewport">
+    <div class="tl-line"></div>
+
+    <button class="tl-arrow tl-arrow-left"  id="tl-prev" aria-label="Newer">&#8249;</button>
+    <button class="tl-arrow tl-arrow-right" id="tl-next" aria-label="Older">&#8250;</button>
+
+    <span class="tl-hint tl-hint-left">← Newer</span>
+    <span class="tl-hint tl-hint-right">Older →</span>
+
+    <div class="tl-track-wrap" id="tl-wrap">
+      <div class="tl-track" id="tl-track">
+
+        <!-- 1 · Systems Administration Internship -->
+        <div class="tl-entry tl-top" style="--ec: var(--accent)">
+          <div class="tl-card">
+            <div class="tl-year">May 2025 – August 2025</div>
+            <div class="tl-title">Systems Administration Internship</div>
+            <p class="tl-desc">Worked at Digital Cloak LLC with three other interns on an external network assessment, building a C2 server, and my personal phishing project using Evilginx2 and Gophish to harvest credentials in an ethical and regulated environment.</p>
           </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2024 – August 2024</div>
-            <div class="exp-title">CompTIA Network+ Certification</div>
-            <div class="exp-desc"><em>In the summer between my sophomore and junior year I wanted to expand on my knowledge of IT by studying for and taking the CompTIA Network+ exam. I spent most of the summer studying and preparing for this test and passed the exam in July, which is valid for four years and expires in July of 2028.</em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2022 – August 2022</div>
-            <div class="exp-title">Early Summer Classes</div>
-            <div class="exp-desc"><em>After my senior year of high school, I wanted to get ahead on college coursework and also familiarize myself with a new environment seeing as how I had never left home before. So, in the summer of 2022 I went to High Point University and completed their Summer Advantage program. </em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2020 – August 2020</div>
-            <div class="exp-title">Self Taught Coding</div>
-            <div class="exp-desc"><em>Unfortunately between my sophomore and junior year of high school, a global pandemic had interrupted most of daily life, so I didn't have many opportunities to work jobs or help in my community. So, I took the time to learn some basic coding in Python and C using various online resources like W3 schools and YouTube. This was my first experience with programming and led to me taking AP Computer Science Principles in my junior year. </em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2018 – August 2018</div>
-            <div class="exp-title">Front Desk Assistant</div>
-            <div class="exp-desc"><em>Before going into high school I spent my summer working at my local pool while swimming competitively there. This was the second job I ever worked and in my role I helped at the front desk, signing in patrons and helping manage various tasks.</em></div>
-          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2025</span>
         </div>
-        <div class="exp-col">
-          <div class="exp-entry">
-            <div class="exp-year">August 2024 – January 2025</div>
-            <div class="exp-title">IT Desk Assistant</div>
-            <div class="exp-desc"><em>During the fall semester of my junior year at college, I had the incredible opportunity of working at High Point's IT desk along with some other students and full time employees. This was my first experience working a job in the field that I love and I enjoyed every moment. I got to help deliver technical support to faculty and students by diagnosing and resolving complex software, network, and hardware problems. I also got to gain some practical experience using the ServiceNow ticketing system, and helped to educate students and faculty on IT best practices such as password management, responsible data use, and phishing attempts.</em></div>
+
+        <!-- 2 · IT Desk Assistant -->
+        <div class="tl-entry tl-bot" style="--ec: var(--accent)">
+          <div class="tl-card">
+            <div class="tl-year">August 2024 – January 2025</div>
+            <div class="tl-title">IT Desk Assistant</div>
+            <p class="tl-desc">Delivered technical support to faculty and students at HPU's IT desk, diagnosing hardware, software, and network issues. Gained hands-on experience with the ServiceNow ticketing system and educated users on IT best practices.</p>
           </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2023 – August 2023</div>
-            <div class="exp-title">CompTIA A+ Certification</div>
-            <div class="exp-desc"><em>After my first year of college I felt driven to keep learning and expanding on my technical skills by studying for and passing the CompTIA A+ Core 1 and 2 exam. This certification contained a wide range of solid foundational knowledge in various topics and would later motivate me to keep going with the Network+ exam the following summer.</em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2021 – August 2021</div>
-            <div class="exp-title">Private Swim Coach</div>
-            <div class="exp-desc"><em>After an entirely online junior year of high school, I had the idea to put my swimming skills to good use by becoming a private swim coach and teaching kids in my neighborhood to float, swim, and have fun in the water. This experience was great for me since the families in my neighborhood are very friendly, and after being inside for most of junior year, I got to be outside for most of the day swimming and teaching.</em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2019 – August 2019</div>
-            <div class="exp-title">Lifeguarding</div>
-            <div class="exp-desc"><em>Between freshman and sophomore year of high school I took the common competitive swimmer to lifeguard pipeline and worked at my local pool I had swum at for all my life. I worked as a lifeguard from May to August at Chesterbrook Swim and Tennis Club, which was probably my favorite job I've worked to this day.</em></div>
-          </div>
-          <div class="exp-entry">
-            <div class="exp-year">May 2017 – August 2017</div>
-            <div class="exp-title">Snack Bar</div>
-            <div class="exp-desc"><em>The first job I ever worked was the snack bar at my local pool. It was the summer between 7th and 8th grade for me, and I wanted to work at the snack bar for the pool that I spent every summer at swimming competitively.</em></div>
-          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2024</span>
         </div>
-      </div>
-    </section>
-  </main>
+
+        <!-- 3 · CompTIA Network+ -->
+        <div class="tl-entry tl-top" style="--ec: var(--accent-3)">
+          <div class="tl-card">
+            <div class="tl-year">May 2024 – August 2024</div>
+            <div class="tl-title">CompTIA Network+ Certification</div>
+            <p class="tl-desc">Studied and passed the CompTIA Network+ exam in July 2024, earning a certification valid until July 2028. Built on my A+ knowledge by diving deeper into networking concepts, protocols, and troubleshooting.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2024</span>
+        </div>
+
+        <!-- 4 · CompTIA A+ -->
+        <div class="tl-entry tl-bot" style="--ec: var(--accent-3)">
+          <div class="tl-card">
+            <div class="tl-year">May 2023 – August 2023</div>
+            <div class="tl-title">CompTIA A+ Certification</div>
+            <p class="tl-desc">After my first year of college I studied for and passed both CompTIA A+ Core 1 and Core 2 exams, earning a solid foundational certification in hardware, software, and IT support that motivated me to pursue further certifications.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2023</span>
+        </div>
+
+        <!-- 5 · Early Summer Classes -->
+        <div class="tl-entry tl-top" style="--ec: var(--accent-2)">
+          <div class="tl-card">
+            <div class="tl-year">May 2022 – August 2022</div>
+            <div class="tl-title">Early Summer Classes at HPU</div>
+            <p class="tl-desc">Completed High Point University's Summer Advantage program after my senior year of high school to get ahead on college coursework and familiarize myself with a new environment before officially starting my degree.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2022</span>
+        </div>
+
+        <!-- 6 · Private Swim Coach -->
+        <div class="tl-entry tl-bot" style="--ec: var(--accent-4)">
+          <div class="tl-card">
+            <div class="tl-year">May 2021 – August 2021</div>
+            <div class="tl-title">Private Swim Coach</div>
+            <p class="tl-desc">After an entirely online junior year, I became a private swim coach teaching neighborhood kids to float, swim, and have fun in the water — a welcome change of pace that got me outside every day after months of remote learning.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2021</span>
+        </div>
+
+        <!-- 7 · Self-Taught Coding -->
+        <div class="tl-entry tl-top" style="--ec: var(--accent-2)">
+          <div class="tl-card">
+            <div class="tl-year">May 2020 – August 2020</div>
+            <div class="tl-title">Self-Taught Coding</div>
+            <p class="tl-desc">During the pandemic summer I taught myself the basics of Python and C using W3Schools and YouTube. This was my first experience with programming and led directly to taking AP Computer Science Principles the following year.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2020</span>
+        </div>
+
+        <!-- 8 · Lifeguarding -->
+        <div class="tl-entry tl-bot" style="--ec: var(--accent-4)">
+          <div class="tl-card">
+            <div class="tl-year">May 2019 – August 2019</div>
+            <div class="tl-title">Lifeguarding</div>
+            <p class="tl-desc">Worked as a lifeguard at Chesterbrook Swim and Tennis Club — the same pool I'd swum competitively at my whole life. Probably my favorite job I've ever worked. Kept guard from May through August between freshman and sophomore year of high school.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2019</span>
+        </div>
+
+        <!-- 9 · Front Desk Assistant -->
+        <div class="tl-entry tl-top" style="--ec: var(--accent-4)">
+          <div class="tl-card">
+            <div class="tl-year">May 2018 – August 2018</div>
+            <div class="tl-title">Front Desk Assistant</div>
+            <p class="tl-desc">Before starting high school I worked the front desk at my local pool, signing in patrons and helping manage daily tasks — all while still swimming competitively there. My second job ever.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2018</span>
+        </div>
+
+        <!-- 10 · Snack Bar -->
+        <div class="tl-entry tl-bot" style="--ec: var(--accent-4)">
+          <div class="tl-card">
+            <div class="tl-year">May 2017 – August 2017</div>
+            <div class="tl-title">Snack Bar</div>
+            <p class="tl-desc">My very first job — running the snack bar at the pool I spent every summer at as a competitive swimmer. It was the summer between 7th and 8th grade, and a great introduction to working with the public.</p>
+          </div>
+          <div class="tl-stem"></div>
+          <div class="tl-dot"></div>
+          <span class="tl-year-badge">2017</span>
+        </div>
+
+      </div><!-- /tl-track -->
+    </div><!-- /tl-track-wrap -->
+  </div><!-- /tl-viewport -->
+
   <script>
+  // ── Mobile nav toggle ───────────────────────────────────────────
   (function(){
     const nav = document.querySelector('nav');
     const btn = document.querySelector('.nav-toggle');
@@ -107,6 +439,37 @@
         if(window.innerWidth<=760) p.classList.toggle('dd-open');
       });
     });
+  })();
+
+  // ── Timeline navigation ─────────────────────────────────────────
+  (function(){
+    const track   = document.getElementById('tl-track');
+    const wrap    = document.getElementById('tl-wrap');
+    const prevBtn = document.getElementById('tl-prev');
+    const nextBtn = document.getElementById('tl-next');
+    const ENTRY_W = 480; // 420px card + 60px gap
+    const TOTAL   = 10;
+    let idx = 0;
+
+    function maxIdx(){
+      const visible = Math.floor((wrap.clientWidth - 72) / ENTRY_W);
+      return Math.max(0, TOTAL - Math.max(1, visible));
+    }
+
+    function update(){
+      if(window.innerWidth <= 760) return; // mobile: CSS handles it
+      track.style.transform = `translateX(-${idx * ENTRY_W}px)`;
+      const hi = maxIdx();
+      prevBtn.style.opacity       = idx === 0  ? '0' : '1';
+      prevBtn.style.pointerEvents = idx === 0  ? 'none' : '';
+      nextBtn.style.opacity       = idx >= hi  ? '0' : '1';
+      nextBtn.style.pointerEvents = idx >= hi  ? 'none' : '';
+    }
+
+    prevBtn.addEventListener('click', ()=>{ if(idx > 0)        { idx--; update(); } });
+    nextBtn.addEventListener('click', ()=>{ if(idx < maxIdx()) { idx++; update(); } });
+    window.addEventListener('resize', ()=>{ idx = Math.min(idx, maxIdx()); update(); });
+    update();
   })();
   </script>
 </body>
