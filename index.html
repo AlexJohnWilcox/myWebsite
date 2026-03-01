@@ -260,7 +260,7 @@
       const rows = Math.ceil(cv.height / (R * 1.5)) + 2;
       for(let row = -1; row <= rows; row++)
         for(let col = -1; col <= cols; col++)
-          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5 });
+          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5, bit: (row + col) & 1 ? '1' : '0' });
     }
 
     function hexPath(cx, cy, r){
@@ -275,20 +275,16 @@
     }
 
     function getHighlighted(){
-      if(mouse.x < -100) return { active: null, neighbors: null };
+      if(mouse.x < -100) return { active: null };
       const cw = cv.width / 2, ch = cv.height / 2;
       const maxDist = Math.hypot(cw, ch);
       let minD = Infinity, active = null;
       for(const c of centers){ const d = Math.hypot(c.x-mouse.x, c.y-mouse.y); if(d < minD){ minD = d; active = c; } }
-      // Only activate if cursor is inside the hex's actual drawn radius
       if(active){
         const t = Math.min(1, Math.hypot(active.x-cw, active.y-ch) / maxDist);
-        const drawR = R * (0.45 + 0.55 * t);
-        if(minD > drawR) return { active: null, neighbors: null };
+        if(minD > R * (0.45 + 0.55 * t)) return { active: null };
       }
-      const neighbors = new Set();
-      for(const c of centers){ if(c !== active && Math.hypot(c.x-active.x, c.y-active.y) < W*1.1) neighbors.add(c); }
-      return { active, neighbors };
+      return { active };
     }
 
     function draw(){
@@ -296,13 +292,12 @@
       pulses = pulses.filter(p => now - p.start < 2600);
 
       ctx.clearRect(0, 0, cv.width, cv.height);
-      const {active, neighbors} = getHighlighted();
+      const {active} = getHighlighted();
       const cw = cv.width / 2, ch = cv.height / 2;
       const maxDist = Math.hypot(cw, ch);
 
       for(const c of centers){
-        const isActive   = c === active;
-        const isNeighbor = neighbors && neighbors.has(c);
+        const isActive = c === active;
         const t = Math.min(1, Math.hypot(c.x - cw, c.y - ch) / maxDist);
         const r = R * (0.45 + 0.55 * t);
 
@@ -310,9 +305,9 @@
         let pAlpha = 0;
         for(const p of pulses){
           const elapsed = now - p.start;
-          const radius  = elapsed * 0.30;            // ~300 px/s expansion
+          const radius  = elapsed * 0.30;
           const dist    = Math.hypot(c.x - p.x, c.y - p.y);
-          const bw      = W * 1.1;                   // ring bandwidth
+          const bw      = W * 1.1;
           const diff    = Math.abs(dist - radius);
           if(diff < bw){
             const wave = 1 - diff / bw;
@@ -326,10 +321,6 @@
           ctx.fillStyle = 'rgba(245,166,35,0.18)';
           ctx.fill();
           ctx.strokeStyle = 'rgba(245,166,35,0.55)';
-        } else if(isNeighbor){
-          ctx.fillStyle = 'rgba(245,166,35,0.06)';
-          ctx.fill();
-          ctx.strokeStyle = 'rgba(245,166,35,0.20)';
         } else if(pAlpha > 0.01){
           ctx.fillStyle = `rgba(245,166,35,${pAlpha * 0.15})`;
           ctx.fill();
@@ -339,6 +330,15 @@
         }
         ctx.lineWidth = 1;
         ctx.stroke();
+
+        // Draw alternating 0/1 label
+        const textAlpha = isActive ? 0.55 : (0.04 + 0.08 * t + pAlpha * 0.3);
+        const textColor = isActive ? `rgba(245,166,35,${textAlpha})` : `rgba(255,255,255,${textAlpha})`;
+        ctx.fillStyle = textColor;
+        ctx.font = `${Math.round(r * 0.38)}px monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(c.bit, c.x, c.y);
       }
 
       raf = undefined;
