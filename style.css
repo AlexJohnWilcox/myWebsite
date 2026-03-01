@@ -1180,10 +1180,11 @@ section.card .asec-title{
 }
 .nav-toggle span{
   display: block;
-  width: 26px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
+  width: 28px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(255,255,255,0.55);
   transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
