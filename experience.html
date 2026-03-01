@@ -88,9 +88,9 @@
 
     /* ── Individual timeline entry ───────────────────────────────── */
     .tl-entry {
-      width: 380px;
+      width: 520px;
       flex-shrink: 0;
-      margin-right: 260px;
+      margin-right: 70px;
       position: relative;
       height: 100%;
     }
@@ -106,7 +106,7 @@
       border-left: 4px solid var(--ec, var(--accent-4));
       box-shadow: 0 4px 24px rgba(2,6,23,0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      max-height: calc(50% - 28px);
+      max-height: calc(50% - 22px);
       overflow: hidden;
     }
     .tl-card:hover {
@@ -471,7 +471,7 @@
     const wrap    = document.getElementById('tl-wrap');
     const prevBtn = document.getElementById('tl-prev');
     const nextBtn = document.getElementById('tl-next');
-    const ENTRY_W = 640; // 380px card + 260px gap
+    const ENTRY_W = 590; // 520px card + 70px gap
     const TOTAL   = 12;
     let idx = 0;
 
