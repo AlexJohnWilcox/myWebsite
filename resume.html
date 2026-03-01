@@ -126,8 +126,14 @@
 
     function getHighlighted(){
       if(mouse.x < -100) return {active:null,neighbors:null};
+      const cw = cv.width/2, ch = cv.height/2;
+      const maxDist = Math.hypot(cw, ch);
       let minD = Infinity, active = null;
       for(const c of centers){ const d = Math.hypot(c.x-mouse.x,c.y-mouse.y); if(d<minD){minD=d;active=c;} }
+      if(active){
+        const t = Math.min(1, Math.hypot(active.x-cw, active.y-ch) / maxDist);
+        if(minD > R * (0.45 + 0.55 * t)) return {active:null,neighbors:null};
+      }
       const neighbors = new Set();
       for(const c of centers){ if(c!==active && Math.hypot(c.x-active.x,c.y-active.y)<W*1.1) neighbors.add(c); }
       return {active,neighbors};
@@ -142,7 +148,7 @@
         const isActive   = c === active;
         const isNeighbor = neighbors && neighbors.has(c);
         const t = Math.min(1, Math.hypot(c.x-cw, c.y-ch) / maxDist);
-        const r = (isActive || isNeighbor) ? R : R * (0.45 + 0.55 * t);
+        const r = R * (0.45 + 0.55 * t);
         hexPath(c.x, c.y, r);
         if(isActive){
           ctx.fillStyle = 'rgba(245,166,35,0.18)'; ctx.fill();

@@ -266,8 +266,16 @@
 
     function getHighlighted(){
       if(mouse.x < -100) return { active: null, neighbors: null };
+      const cw = cv.width / 2, ch = cv.height / 2;
+      const maxDist = Math.hypot(cw, ch);
       let minD = Infinity, active = null;
       for(const c of centers){ const d = Math.hypot(c.x-mouse.x, c.y-mouse.y); if(d < minD){ minD = d; active = c; } }
+      // Only activate if cursor is inside the hex's actual drawn radius
+      if(active){
+        const t = Math.min(1, Math.hypot(active.x-cw, active.y-ch) / maxDist);
+        const drawR = R * (0.45 + 0.55 * t);
+        if(minD > drawR) return { active: null, neighbors: null };
+      }
       const neighbors = new Set();
       for(const c of centers){ if(c !== active && Math.hypot(c.x-active.x, c.y-active.y) < W*1.1) neighbors.add(c); }
       return { active, neighbors };
@@ -276,7 +284,6 @@
     function draw(){
       ctx.clearRect(0, 0, cv.width, cv.height);
       const {active, neighbors} = getHighlighted();
-      // Depth: measure each hex's distance from screen center
       const cw = cv.width / 2, ch = cv.height / 2;
       const maxDist = Math.hypot(cw, ch);
 
@@ -284,8 +291,8 @@
         const isActive   = c === active;
         const isNeighbor = neighbors && neighbors.has(c);
         const t = Math.min(1, Math.hypot(c.x - cw, c.y - ch) / maxDist);
-        // Active/neighbor: pop to full size; rest: shrink toward center
-        const r = (isActive || isNeighbor) ? R : R * (0.45 + 0.55 * t);
+        // All hexes use their depth-scaled size — no popping
+        const r = R * (0.45 + 0.55 * t);
 
         hexPath(c.x, c.y, r);
         if(isActive){
