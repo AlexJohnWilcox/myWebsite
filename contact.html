@@ -29,27 +29,24 @@
     </nav>
   </header>
 
-  <main class="main-container">
-    <section class="card contact-grid">
-      <div>
-        <h2>Contact Me</h2>
-        <div class="contact-info">
-          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:alex@alexwilcox.net">alex@alexwilcox.net</a><button class="copy-btn" id="copy-email" title="Copy email"><i class="fas fa-copy"></i></button></p>
-          <p><i class="fas fa-phone"></i> Phone: <a href="tel:+17039455007">+1 703-945-5007</a></p>
-        </div>
-      </div>
-
-      <div>
-        <h2 style="margin-top:0;">Send a Message</h2>
-        <form class="contact-form" action="https://formsubmit.co/alex@alexwilcox.net" method="POST">
+  <main class="main-container" style="padding:0 24px;">
+    <section class="card contact-card">
+      <h2 class="asec-title">Contact Me</h2>
+      <p class="contact-intro">
+        Let's connect — fill out the form below or reach me directly at
+        <a href="mailto:alex@alexwilcox.net" target="_blank" rel="noopener noreferrer">alex@alexwilcox.net</a><button class="copy-btn" id="copy-email" title="Copy email"><i class="fas fa-copy"></i></button>
+      </p>
+      <form class="contact-form" action="https://formsubmit.co/alex@alexwilcox.net" method="POST">
+        <div class="contact-row">
           <input type="text" id="name" name="name" placeholder="Your name" required>
           <input type="email" id="email" name="email" placeholder="Your email" required>
-          <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
+        </div>
+        <textarea id="message" name="message" rows="9" placeholder="Your message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
     </section>
   </main>
+
   <script>
     document.getElementById('copy-email').addEventListener('click', function() {
       navigator.clipboard.writeText('alex@alexwilcox.net').then(() => {
