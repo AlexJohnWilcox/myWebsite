@@ -1196,6 +1196,15 @@ section.card .asec-title{
 
 /* Mobile: hamburger replaces nav bar */
 @media(max-width:760px){
+  /* Solid header on mobile so it's always visible */
+  header{
+    background: rgba(11,22,40,0.97) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* Hide side vignette on narrow screens */
+  body.page-with-sides::before,
+  body.page-with-sides::after{ display: none; }
   nav{
     position: relative;
     flex-direction: row;

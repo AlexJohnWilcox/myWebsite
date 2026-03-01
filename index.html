@@ -61,6 +61,15 @@
     }
     /* Stats strip pinned to bottom */
     .stats-strip{ position:relative; z-index:1; flex-shrink:0; }
+    /* Mobile overrides */
+    @media(max-width:760px){
+      body{ overflow:auto; height:auto; }
+      header{ position:sticky !important; top:0; z-index:50 !important; background:rgba(11,22,40,0.97) !important; }
+      #hex-bg{ display:none; }
+      .home-sidebar{ display:none; }
+      .home-layout{ overflow:visible; }
+      .stats-strip{ flex-shrink:1; }
+    }
     /* 3D tilt */
     .hero-inner{
       transition: transform 0.12s ease;
