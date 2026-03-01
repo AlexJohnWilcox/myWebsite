@@ -88,9 +88,9 @@
 
     /* ── Individual timeline entry ───────────────────────────────── */
     .tl-entry {
-      width: 420px;
+      width: 620px;
       flex-shrink: 0;
-      margin-right: 60px;
+      margin-right: 90px;
       position: relative;
       height: 100%;
     }
@@ -100,28 +100,28 @@
       position: absolute;
       left: 0; right: 0;
       background: #0f1724;
-      border-radius: 12px;
-      padding: 18px 16px;
+      border-radius: 16px;
+      padding: 28px 26px;
       border: 1px solid transparent;
-      border-left: 3px solid var(--ec, var(--accent-4));
+      border-left: 4px solid var(--ec, var(--accent-4));
       box-shadow: 0 4px 24px rgba(2,6,23,0.4);
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      max-height: calc(50% - 36px);
+      max-height: calc(50% - 56px);
       overflow: hidden;
     }
     .tl-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(2,6,23,0.55);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.6);
       border-color: var(--ec, var(--accent-4));
     }
 
-    /* Top-half card: bottom edge sits 28px above center */
+    /* Top-half card: bottom edge sits 48px above center */
     .tl-top .tl-card {
-      bottom: calc(50% + 28px);
+      bottom: calc(50% + 48px);
     }
-    /* Bottom-half card: top edge sits 28px below center */
+    /* Bottom-half card: top edge sits 48px below center */
     .tl-bot .tl-card {
-      top: calc(50% + 28px);
+      top: calc(50% + 48px);
     }
 
     /* Vertical stem connecting card to dot */
@@ -130,7 +130,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 28px;
+      height: 48px;
       background: var(--ec, rgba(245,166,35,0.5));
       opacity: 0.6;
     }
@@ -143,38 +143,38 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: var(--ec, var(--accent-4));
-      border: 2.5px solid #0b1628;
+      border: 3px solid #0b1628;
       z-index: 2;
-      box-shadow: 0 0 10px var(--ec, rgba(245,166,35,0.5));
+      box-shadow: 0 0 18px var(--ec, rgba(245,166,35,0.6));
     }
 
     /* ── Card content typography ──────────────────────────────────── */
     .tl-year {
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: var(--ec, var(--accent-4));
       letter-spacing: 0.4px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       opacity: 0.9;
     }
     .tl-title {
-      font-size: 0.97rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       line-height: 1.3;
     }
     .tl-desc {
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
       margin: 0;
       display: -webkit-box;
-      -webkit-line-clamp: 7;
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -471,7 +471,7 @@
     const wrap    = document.getElementById('tl-wrap');
     const prevBtn = document.getElementById('tl-prev');
     const nextBtn = document.getElementById('tl-next');
-    const ENTRY_W = 480; // 420px card + 60px gap
+    const ENTRY_W = 710; // 620px card + 90px gap
     const TOTAL   = 12;
     let idx = 0;
 
