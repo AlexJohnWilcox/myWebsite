@@ -7,34 +7,41 @@
   <title>Resume — Alex J. Wilcox</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    #hex-bg{
+      position:fixed;top:0;left:0;
+      width:100%;height:100%;
+      z-index:0;pointer-events:none;
+    }
+    header,main{ position:relative;z-index:1; }
+    /* Ensure nav dropdown renders above the PDF iframe */
+    header{ z-index: 9999 !important; }
+
+    main.main-container{ padding: 16px 24px; }
     .resume-container {
       width: 100%;
-      min-height: 80vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 32px 0;
     }
     .resume-frame {
       width: 90vw;
       max-width: 900px;
-      height: 1100px;
+      height: calc(100vh - 122px);
       border: none;
       box-shadow: 0 8px 40px rgba(2,6,23,0.5), 0 0 0 3px rgba(245,166,35,0.65), 0 0 40px rgba(245,166,35,0.18);
       border-radius: 16px;
       background: #fff;
     }
-    @media (max-width: 900px) {
-      .resume-frame {
-        width: 98vw;
-        height: 80vh;
-      }
+    @media(max-width:900px){
+      .resume-frame{ width: 98vw; }
     }
   </style>
 </head>
 <body>
+  <canvas id="hex-bg"></canvas>
   <header>
     <nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -58,5 +65,110 @@
       <iframe class="resume-frame" src="Images/Resume-Wilcox,A.pdf"></iframe>
     </div>
   </main>
+
+  <script>
+  // ── Mobile nav toggle ───────────────────────────────────────────
+  (function(){
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('.nav-toggle');
+    btn.addEventListener('click',()=>{
+      const open = nav.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded',open);
+    });
+    nav.querySelectorAll('a.nav-link').forEach(a=>a.addEventListener('click',()=>{
+      nav.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded','false');
+    }));
+    nav.querySelectorAll('.nav-dropdown-parent').forEach(p=>{
+      p.querySelector('.nav-dropdown-toggle').addEventListener('click',()=>{
+        if(window.innerWidth<=760) p.classList.toggle('dd-open');
+      });
+    });
+  })();
+
+  // ── Disable iframe pointer-events while Socials dropdown is open ─
+  (function(){
+    const iframe = document.querySelector('.resume-frame');
+    const socials = document.querySelector('.nav-dropdown-parent');
+    if(!iframe || !socials) return;
+    socials.addEventListener('mouseenter', () => { iframe.style.pointerEvents = 'none'; });
+    socials.addEventListener('mouseleave', () => { iframe.style.pointerEvents = ''; });
+  })();
+
+  // ── Hex background: depth-perspective ──────────────────────────
+  (function(){
+    const cv  = document.getElementById('hex-bg');
+    const ctx = cv.getContext('2d');
+    const R   = 90;
+    const W   = R * Math.sqrt(3);
+    let mouse   = {x:-9999,y:-9999};
+    let centers = [];
+    let raf;
+
+    function buildGrid(){
+      centers = [];
+      const cols = Math.ceil(cv.width  / W) + 2;
+      const rows = Math.ceil(cv.height / (R * 1.5)) + 2;
+      for(let row = -1; row <= rows; row++)
+        for(let col = -1; col <= cols; col++)
+          centers.push({ x: col * W + (row & 1 ? W/2 : 0), y: row * R * 1.5 });
+    }
+
+    function hexPath(cx, cy, r){
+      ctx.beginPath();
+      for(let i = 0; i < 6; i++){
+        const a = Math.PI/3*i - Math.PI/6;
+        i === 0 ? ctx.moveTo(cx + r*Math.cos(a), cy + r*Math.sin(a))
+                : ctx.lineTo(cx + r*Math.cos(a), cy + r*Math.sin(a));
+      }
+      ctx.closePath();
+    }
+
+    function getHighlighted(){
+      if(mouse.x < -100) return {active:null,neighbors:null};
+      let minD = Infinity, active = null;
+      for(const c of centers){ const d = Math.hypot(c.x-mouse.x,c.y-mouse.y); if(d<minD){minD=d;active=c;} }
+      const neighbors = new Set();
+      for(const c of centers){ if(c!==active && Math.hypot(c.x-active.x,c.y-active.y)<W*1.1) neighbors.add(c); }
+      return {active,neighbors};
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      const {active, neighbors} = getHighlighted();
+      const cw = cv.width/2, ch = cv.height/2;
+      const maxDist = Math.hypot(cw, ch);
+      for(const c of centers){
+        const isActive   = c === active;
+        const isNeighbor = neighbors && neighbors.has(c);
+        const t = Math.min(1, Math.hypot(c.x-cw, c.y-ch) / maxDist);
+        const r = (isActive || isNeighbor) ? R : R * (0.45 + 0.55 * t);
+        hexPath(c.x, c.y, r);
+        if(isActive){
+          ctx.fillStyle = 'rgba(245,166,35,0.18)'; ctx.fill();
+          ctx.strokeStyle = 'rgba(245,166,35,0.55)';
+        } else if(isNeighbor){
+          ctx.fillStyle = 'rgba(245,166,35,0.06)'; ctx.fill();
+          ctx.strokeStyle = 'rgba(245,166,35,0.20)';
+        } else {
+          ctx.strokeStyle = `rgba(255,255,255,${0.025 + 0.075 * t})`;
+        }
+        ctx.lineWidth = 1; ctx.stroke();
+      }
+      raf = undefined;
+    }
+
+    function scheduleDraw(){ if(!raf) raf = requestAnimationFrame(draw); }
+
+    function resize(){
+      cv.width = window.innerWidth; cv.height = window.innerHeight;
+      buildGrid(); draw();
+    }
+
+    document.addEventListener('mousemove',e=>{ mouse.x=e.clientX; mouse.y=e.clientY; scheduleDraw(); },{passive:true});
+    window.addEventListener('resize', resize);
+    resize();
+  })();
+  </script>
 </body>
 </html>

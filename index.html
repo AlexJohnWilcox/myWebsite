@@ -8,115 +8,83 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    .promo-stack{
-      position:fixed;
-      bottom:20px;
-      left:20px;
-      right:20px;
+    #hex-bg{
+      position:fixed;top:0;left:0;
+      width:100%;height:100%;
+      z-index:0;pointer-events:none;
+    }
+    /* No-scroll full-viewport layout */
+    body{
+      overflow:hidden;
       display:flex;
-      flex-direction:row;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:0;
-      z-index:1000;
-      pointer-events:none;
+      flex-direction:column;
+      height:100vh;
     }
-    .promo-bubble{
-      background:#ffffff;
-      padding:18px 22px 16px;
-      border-radius:14px;
-      box-shadow:0 8px 28px rgba(0,0,0,0.32);
-      font-size:1rem;
-      line-height:1.5;
-      border:1px solid #cfd8e0;
-      color:#111;
-      width:290px;
-      pointer-events:auto;
-      transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease, background .25s ease;
-    }
-    .promo-bubble a{
-      text-decoration:none;
-      color:#111;
-      display:block;
-      transition:color .25s ease;
-    }
-    .promo-bubble-header{
+    header{ position:relative; z-index:1; }
+    .home-layout{
+      flex:1;
       display:flex;
-      align-items:center;
-      gap:10px;
-      margin:0 0 8px;
-      font-weight:800;
-      font-size:1.08rem;
-      letter-spacing:.4px;
-      color:#0d1520;
-      transition:color .25s ease;
+      min-height:0;
+      overflow:hidden;
+      position:relative;
+      z-index:1;
     }
-    .promo-bubble-header span.icon{
-      font-size:1.25rem;
-      transition:transform .35s ease;
+    /* Hero fills remaining left space */
+    .hero{
+      min-height:0;
+      flex:1;
+      position:relative;
+      padding:24px;
     }
-    .promo-bubble small{
-      display:block;
-      font-size:.72rem;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.15em;
-      margin-bottom:6px;
-      color:#333;
-      transition:color .25s ease;
+    /* Right sidebar: three featured cards */
+    .home-sidebar{
+      width:310px;
+      flex-shrink:0;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding:16px 24px 16px 0;
+      justify-content:center;
+      overflow:hidden;
+      position:relative;
+      z-index:1;
     }
-    .promo-bubble p{
-      margin:0;
-      font-size:.9rem;
-      font-weight:600;
-      color:#222;
-      transition:color .25s ease;
+    .home-sidebar .featured-card{ padding:18px 20px; gap:8px; }
+    .home-sidebar .featured-card h3{ font-size:1rem; margin:0 0 4px; }
+    .home-sidebar .featured-card p{
+      font-size:0.82rem;
+      line-height:1.52;
+      display:-webkit-box;
+      -webkit-line-clamp:4;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
     }
-    .promo-bubble:hover{
-      box-shadow:0 12px 36px rgba(0,0,0,0.38);
-      transform:translateY(-4px);
-      border-color:#b2c2cf;
-      background:#fdfdfd;
-    }
-    .promo-bubble:hover .promo-bubble-header span.icon{
-      transform:rotate(-8deg) scale(1.15);
-    }
-    .promo-bubble:hover .promo-bubble-header span:not(.icon){
-      text-decoration:underline;
-    }
-    .promo-bubble a:focus-visible{
-      outline:3px solid #111;
-      outline-offset:4px;
-      border-radius:10px;
-    }
-    @media (max-width:700px){
-      .promo-stack{ display:none; }
-    }
-
-    /* ── 3D hero tilt ───────────────────────────────────────────── */
-    .welcome-section{
+    /* Stats strip pinned to bottom */
+    .stats-strip{ position:relative; z-index:1; flex-shrink:0; }
+    /* 3D tilt */
+    .hero-inner{
       transition: transform 0.12s ease;
       will-change: transform;
       transform-style: preserve-3d;
     }
-
-    /* ── Profile pic: glow ring ──────────────────────────────────── */
-    .welcome-section .profile-pic{
+    @media(max-width:800px){
+      .hero-inner{ transform: none !important; }
+    }
+    /* Profile pic glow ring */
+    .hero-photo .profile-pic{
       box-shadow:
         0 0 0 3px rgba(107,92,242,0.5),
         0 0 32px rgba(107,92,242,0.25),
         0 0 70px rgba(6,200,232,0.12),
         0 14px 50px rgba(2,6,23,0.65) !important;
     }
-    @media(max-width:800px){
-      .welcome-section{ transform:none !important; }
-    }
   </style>
 </head>
 <body>
-  <div id="scroll-bar"></div>
+  <canvas id="hex-bg"></canvas>
   <header>
     <nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="index.html" class="nav-link active">HOME</a></li>
         <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -126,8 +94,8 @@
         <li class="nav-dropdown-parent">
           <span class="nav-link nav-dropdown-toggle">SOCIALS</span>
           <div class="nav-dropdown">
-            <a href="https://github.com/AlexJohnWilcox" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/AlexJohnWilcox" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </li>
         <li><a href="contact.html" class="nav-link">CONTACT</a></li>
@@ -135,62 +103,89 @@
     </nav>
   </header>
 
-  <div class="promo-stack">
-    <div class="promo-bubble">
-      <a href="/CountriesGame/public" aria-label="Check out Countries of the World" target="_blank" rel="noopener noreferrer">
-        <small>Game</small>
-        <div class="promo-bubble-header">
-          <span class="icon">🌍</span>
-          <span>Countries of the World</span>
+  <!-- ── No-scroll layout: hero left, cards right ─────────────────── -->
+  <div class="home-layout">
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-photo">
+          <div class="profile-pic">
+            <img src="Images/PFP" alt="Alex J. Wilcox">
+          </div>
         </div>
-        <p>Can you name all 197 countries? Check out this game I made!</p>
+        <div class="hero-text">
+          <h1 class="hero-name">Alex J. Wilcox</h1>
+          <p class="hero-sub"><span id="tw-text"></span><span class="tw-cursor"></span></p>
+          <a href="https://www.linkedin.com/in/alexjwilcox/" target="_blank" rel="noopener noreferrer" class="avail-badge"><span class="avail-dot"></span>Available for Opportunities · May 2026</a>
+          <div class="hero-cta">
+            <a href="projects.html" class="cta-btn-primary">View My Work</a>
+            <a href="contact.html" class="cta-btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+      <!-- Game bubbles: visible only on very wide screens -->
+      <a href="/starsinthevoid" class="hero-bubble hero-bubble-left" target="_blank" rel="noopener noreferrer">
+        <span class="hb-title">Stars in the Void</span>
+        <span class="hb-desc">A text-based idle game built from scratch. Slow-burn and story-driven — uncover what lurks in the dark.</span>
+        <span class="hb-cta">Play →</span>
       </a>
+      <a href="/CountriesGame/public" class="hero-bubble hero-bubble-left hero-bubble-left-2" target="_blank" rel="noopener noreferrer">
+        <span class="hb-title">Countries of the World</span>
+        <span class="hb-desc">Name all 197 countries before time runs out. How many can you get?</span>
+        <span class="hb-cta">Play →</span>
+      </a>
+    </section>
+
+    <!-- Right sidebar: featured cards -->
+    <aside class="home-sidebar">
+      <div class="featured-card" style="--feat-color: var(--accent)">
+        <span class="feat-tag">Security</span>
+        <h3>Cybersecurity &amp; Pentesting</h3>
+        <p>Built and operated a full C2 server, conducted external network assessments, and ran phishing campaigns during a systems administration internship at Digital Cloak. Holds CompTIA A+, Network+, Security+, and ISO/IEC 27001 certifications.</p>
+        <a href="experience.html" class="feat-link">View Experience →</a>
+      </div>
+      <div class="featured-card" style="--feat-color: var(--accent-2)">
+        <span class="feat-tag">Development</span>
+        <h3>Software &amp; Web Projects</h3>
+        <p>From command-line games to a full web portfolio, I'm always building something. Check out my full project list including source code, a live phishing project presentation, and more.</p>
+        <a href="projects.html" class="feat-link">View Projects →</a>
+      </div>
+      <div class="featured-card" style="--feat-color: var(--accent-3)">
+        <span class="feat-tag">Game Dev</span>
+        <h3>Independent Games</h3>
+        <p>I build and host games directly on this site. Stars in the Void is a text-based idle game, and Countries of the World challenges you to name all 197 countries.</p>
+        <div class="feat-links">
+          <a href="/starsinthevoid" class="feat-link" target="_blank" rel="noopener noreferrer">Stars in the Void →</a>
+          <a href="/CountriesGame/public" class="feat-link" target="_blank" rel="noopener noreferrer">Countries →</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ── Stats strip pinned to bottom ─────────────────────────────── -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Certifications</span>
     </div>
-    <div class="promo-bubble">
-      <a href="/starsinthevoid" aria-label="Check out Stars in the Void" target="_blank" rel="noopener noreferrer">
-        <small>Game</small>
-        <div class="promo-bubble-header">
-          <span class="icon">🎮</span>
-          <span>Stars in the Void</span>
-        </div>
-        <p>A text based idle game I've been working on for a few weeks. Take a look!</p>
-      </a>
+    <div class="stat-item">
+      <span class="stat-num">2025</span>
+      <span class="stat-label">Internship</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">8+</span>
+      <span class="stat-label">Projects</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">May '26</span>
+      <span class="stat-label">Graduating</span>
     </div>
   </div>
 
-  <main class="welcome-section main-container">
-        <div class="profile-pic">
-          <img src="Images/PFP" alt="Alex J. Wilcox">
-        </div>
-
-    <h1>Alex J. Wilcox</h1>
-    <h2><span id="tw-text"></span><span class="tw-cursor"></span></h2>
-    <div class="avail-badge"><span class="avail-dot"></span>Available for Opportunities · May 2026</div>
-
-    <div class="social-links">
-      <a class="social-pill" href="https://www.linkedin.com/in/alexjwilcox/" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a class="social-pill" href="https://github.com/AlexJohnWilcox" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a class="social-pill" href="Images/Resume-Wilcox,A.pdf" download="Resume-Wilcox,A.pdf">
-        <i class="fas fa-file-pdf"></i> Resume
-      </a>
-    </div>
-
-  </main>
-
   <script>
-    // ── Scroll progress bar ───────────────────────────────────────
-    const bar = document.getElementById('scroll-bar');
-    window.addEventListener('scroll', () => {
-      const max = document.body.scrollHeight - window.innerHeight;
-      bar.style.width = (window.scrollY / max * 100) + '%';
-    }, { passive: true });
-
-    // ── 3D hero tilt on mouse move ────────────────────────────────
-    const hero = document.querySelector('.welcome-section');
+    // ── 3D tilt ───────────────────────────────────────────────────
+    const heroInner = document.querySelector('.hero-inner');
     let ticking = false;
     document.addEventListener('mousemove', e => {
       if (ticking) return;
@@ -198,12 +193,12 @@
       requestAnimationFrame(() => {
         const rx = ((e.clientY / window.innerHeight) - 0.5) * -7;
         const ry = ((e.clientX / window.innerWidth)  - 0.5) *  7;
-        hero.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        heroInner.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
         ticking = false;
       });
     });
     document.addEventListener('mouseleave', () => {
-      hero.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+      heroInner.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
     });
 
     // ── Typewriter ────────────────────────────────────────────────
@@ -216,24 +211,116 @@
     ];
     let rIdx = 0, cIdx = 0, deleting = false;
     const twEl = document.getElementById('tw-text');
-
     function type() {
       const word = roles[rIdx];
       twEl.textContent = deleting ? word.slice(0, cIdx - 1) : word.slice(0, cIdx + 1);
       deleting ? cIdx-- : cIdx++;
-
-      if (!deleting && cIdx === word.length) {
-        deleting = true;
-        setTimeout(type, 1800);
-        return;
-      }
-      if (deleting && cIdx === 0) {
-        deleting = false;
-        rIdx = (rIdx + 1) % roles.length;
-      }
+      if (!deleting && cIdx === word.length) { deleting = true; setTimeout(type, 1800); return; }
+      if (deleting && cIdx === 0) { deleting = false; rIdx = (rIdx + 1) % roles.length; }
       setTimeout(type, deleting ? 55 : 90);
     }
     type();
+
+    // ── Mobile nav toggle ─────────────────────────────────────────
+    (function(){
+      const nav = document.querySelector('nav');
+      const btn = document.querySelector('.nav-toggle');
+      btn.addEventListener('click',()=>{ const open = nav.classList.toggle('nav-open'); btn.setAttribute('aria-expanded', open); });
+      nav.querySelectorAll('a.nav-link').forEach(a=>a.addEventListener('click',()=>{ nav.classList.remove('nav-open'); btn.setAttribute('aria-expanded','false'); }));
+      nav.querySelectorAll('.nav-dropdown-parent').forEach(p=>{
+        p.querySelector('.nav-dropdown-toggle').addEventListener('click',()=>{ if(window.innerWidth<=760) p.classList.toggle('dd-open'); });
+      });
+    })();
+  </script>
+
+  <!-- ── Hex background: depth-perspective ────────────────────────── -->
+  <script>
+  (function(){
+    const cv  = document.getElementById('hex-bg');
+    const ctx = cv.getContext('2d');
+    const R   = 90;
+    const W   = R * Math.sqrt(3);
+    let mouse   = {x: -9999, y: -9999};
+    let centers = [];
+    let raf;
+
+    function buildGrid(){
+      centers = [];
+      const cols = Math.ceil(cv.width  / W) + 2;
+      const rows = Math.ceil(cv.height / (R * 1.5)) + 2;
+      for(let row = -1; row <= rows; row++)
+        for(let col = -1; col <= cols; col++)
+          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5 });
+    }
+
+    function hexPath(cx, cy, r){
+      ctx.beginPath();
+      for(let i = 0; i < 6; i++){
+        const a = Math.PI / 3 * i - Math.PI / 6;
+        i === 0
+          ? ctx.moveTo(cx + r * Math.cos(a), cy + r * Math.sin(a))
+          : ctx.lineTo(cx + r * Math.cos(a), cy + r * Math.sin(a));
+      }
+      ctx.closePath();
+    }
+
+    function getHighlighted(){
+      if(mouse.x < -100) return { active: null, neighbors: null };
+      let minD = Infinity, active = null;
+      for(const c of centers){ const d = Math.hypot(c.x-mouse.x, c.y-mouse.y); if(d < minD){ minD = d; active = c; } }
+      const neighbors = new Set();
+      for(const c of centers){ if(c !== active && Math.hypot(c.x-active.x, c.y-active.y) < W*1.1) neighbors.add(c); }
+      return { active, neighbors };
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      const {active, neighbors} = getHighlighted();
+      // Depth: measure each hex's distance from screen center
+      const cw = cv.width / 2, ch = cv.height / 2;
+      const maxDist = Math.hypot(cw, ch);
+
+      for(const c of centers){
+        const isActive   = c === active;
+        const isNeighbor = neighbors && neighbors.has(c);
+        const t = Math.min(1, Math.hypot(c.x - cw, c.y - ch) / maxDist);
+        // Active/neighbor: pop to full size; rest: shrink toward center
+        const r = (isActive || isNeighbor) ? R : R * (0.45 + 0.55 * t);
+
+        hexPath(c.x, c.y, r);
+        if(isActive){
+          ctx.fillStyle = 'rgba(245,166,35,0.18)';
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(245,166,35,0.55)';
+        } else if(isNeighbor){
+          ctx.fillStyle = 'rgba(245,166,35,0.06)';
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(245,166,35,0.20)';
+        } else {
+          // Dimmer + smaller at center (far), brighter + full at edges (near)
+          ctx.strokeStyle = `rgba(255,255,255,${0.025 + 0.075 * t})`;
+        }
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      raf = undefined;
+    }
+
+    function scheduleDraw(){
+      if(!raf) raf = requestAnimationFrame(draw);
+    }
+
+    function resize(){
+      cv.width  = window.innerWidth;
+      cv.height = window.innerHeight;
+      buildGrid();
+      draw();
+    }
+
+    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; scheduleDraw(); }, {passive: true});
+    window.addEventListener('resize', resize);
+    resize();
+  })();
   </script>
 </body>
 </html>

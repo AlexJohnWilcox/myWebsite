@@ -6,52 +6,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Experience & Timeline — Alex J. Wilcox</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .experience-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 36px;
-    }
-    .exp-col {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-    .exp-entry {
-      background: #0f1724;
-      border-radius: 12px;
-      box-shadow: 0 4px 18px rgba(2,6,23,0.13);
-      padding: 22px 20px;
-      margin: 0;
-    }
-    .exp-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
-    }
-    .exp-year {
-      font-size: 1.02rem;
-      color: var(--accent-4);
-      font-weight: 700;
-      margin-bottom: 2px;
-      letter-spacing: 0.2px;
-    }
-    .exp-desc {
-      color: var(--muted);
-      font-size: 1.01rem;
-      margin-bottom: 0;
-    }
-    @media (max-width:900px){
-      .experience-grid{grid-template-columns:1fr;}
-    }
-  </style>
 </head>
-<body>
+<body class="page-with-sides">
   <header>
     <nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul>
         <li><a href="index.html" class="nav-link">HOME</a></li>
         <li><a href="about.html" class="nav-link">ABOUT</a></li>
@@ -131,5 +90,24 @@
       </div>
     </section>
   </main>
+  <script>
+  (function(){
+    const nav = document.querySelector('nav');
+    const btn = document.querySelector('.nav-toggle');
+    btn.addEventListener('click',()=>{
+      const open = nav.classList.toggle('nav-open');
+      btn.setAttribute('aria-expanded',open);
+    });
+    nav.querySelectorAll('a.nav-link').forEach(a=>a.addEventListener('click',()=>{
+      nav.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded','false');
+    }));
+    nav.querySelectorAll('.nav-dropdown-parent').forEach(p=>{
+      p.querySelector('.nav-dropdown-toggle').addEventListener('click',()=>{
+        if(window.innerWidth<=760) p.classList.toggle('dd-open');
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
