@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BUY THE SEA</title>
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══ TITLE SCREEN ══ -->
+  <div id="screen-title" class="title-screen">
+    <canvas id="title-canvas"></canvas>
+    <div class="title-content">
+      <div class="title-name">BUY THE SEA</div>
+      <div class="title-author">A Game by Alex Wilcox</div>
+      <button id="btn-enter" class="title-enter-btn">Enter the Water?</button>
+    </div>
+    <button id="btn-title-import" class="title-import-btn">IMPORT SAVE</button>
+  </div>
+
+  <!-- ══ SCREEN: ACHIEVEMENTS ══ -->
+  <div id="screen-achievements" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-achievements">← RETURN</button>
+      <span class="screen-title">ACHIEVEMENTS</span>
+      <span class="gold-display">✧ <strong id="gold-achievements">0</strong></span>
+    </div>
+    <div id="achievements-content" class="screen-content">
+      <div id="achievements-list"></div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: FISHING ══ -->
+  <div id="screen-fishing" class="screen">
+    <div id="fishing-hud">
+      <div id="fishing-hud-left">
+        <span id="fishing-title" style="font-size:0.9rem;font-weight:bold;color:var(--green);text-shadow:0 0 12px var(--green);letter-spacing:3px;">BUY THE SEA</span>
+        <span id="fishing-zone-label"></span>
+      </div>
+      <div id="fishing-hud-right">
+        <div id="notif-area"></div>
+        <button class="save-tb-btn" id="btn-achievements-fishing" title="ACHIEVEMENTS">★</button>
+        <button class="save-tb-btn" id="btn-menu" title="MENU">☰</button>
+      </div>
+    </div>
+
+    <div id="canvas-wrap">
+      <canvas id="game-canvas"></canvas>
+      <div id="ability-bar">
+        <div class="ability-wrap">
+          <button id="btn-bait" class="ability-btn" style="display:none" title="BAIT">B</button>
+          <label class="auto-ability-toggle" id="auto-bait-toggle" style="display:none" title="AUTO BAIT">
+            <input type="checkbox" id="auto-bait-checkbox">
+            <span class="auto-ability-indicator">A</span>
+          </label>
+        </div>
+        <div class="ability-wrap">
+          <button id="btn-multicast" class="ability-btn" style="display:none" title="MULTI-CAST">M</button>
+          <label class="auto-ability-toggle" id="auto-multi-toggle" style="display:none" title="AUTO MULTI">
+            <input type="checkbox" id="auto-multi-checkbox">
+            <span class="auto-ability-indicator">A</span>
+          </label>
+        </div>
+      </div>
+      <div id="zone-overlay">
+        <div id="zone-overlay-code">ZONE-01</div>
+        <div id="zone-overlay-name">THE COAST</div>
+      </div>
+    </div>
+
+    <div id="gold-float"><span class="gold-icon">✧</span> <strong id="gold-fishing">0</strong></div>
+    <div id="fishing-nav">
+      <div id="nav-left">
+        <div id="consumables-bar"></div>
+      </div>
+      <div id="nav-center">
+        <div id="auto-hook-bar" style="display:none">
+          <div class="auto-hook-row">
+            <label class="toggle-switch" id="auto-hook-toggle-wrap">
+              <input type="checkbox" id="auto-hook-checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+            <span id="auto-hook-label" class="auto-hook-nav-label">AUTO</span>
+          </div>
+          <span id="auto-hook-timer" class="auto-hook-timer" style="display:none"></span>
+        </div>
+        <div id="weapon-toggle" style="display:none">
+          <button id="btn-weapon-rod" class="weapon-btn weapon-active" title="FISHING ROD">ROD</button>
+          <button id="btn-weapon-harpoon" class="weapon-btn" title="HARPOON">HARPOON</button>
+        </div>
+        <div id="auto-sell-bar" style="display:none">
+          <div class="auto-hook-row">
+            <label class="toggle-switch" id="auto-sell-toggle-wrap">
+              <input type="checkbox" id="auto-sell-checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+            <span id="auto-sell-label" class="auto-hook-nav-label">SELL</span>
+          </div>
+        </div>
+        <div id="sub-toggle" style="display:none">
+          <button id="btn-sub-rod" class="weapon-btn weapon-active" title="FISHING ROD">ROD</button>
+          <button id="btn-sub-mode" class="weapon-btn" title="SUBMARINE">SUB</button>
+        </div>
+        <button id="btn-shop"     class="bubble-btn" style="display:none">FISHMONGER'S REFUGE</button>
+        <button id="btn-upgrades" class="bubble-btn" style="display:none">THE LAB</button>
+        <button id="btn-atlas"    class="bubble-btn" style="display:none">THE ATLAS</button>
+        <button id="btn-boat"     class="bubble-btn" style="display:none">THE BOAT</button>
+        <button id="btn-catalog"  class="bubble-btn" style="display:none">THE CATALOG</button>
+      </div>
+      <div id="nav-right">
+        <button id="btn-prestige" class="prestige-nav-btn" style="display:none" title="PRESTIGE">
+          <div class="prestige-nav-pearl-count" id="prestige-nav-count">0</div>
+          <div class="prestige-nav-bar-wrap">
+            <div class="prestige-nav-bar-fill" id="prestige-nav-bar"></div>
+          </div>
+          <span class="prestige-nav-label">◆</span>
+        </button>
+        <button id="btn-place-net" class="net-nav-btn" style="display:none" title="PLACE NET">NET</button>
+      </div>
+    </div>
+    <div id="black-fish-banner" style="display:none">
+      <div class="bf-banner-title"></div>
+      <div class="bf-banner-sub"></div>
+    </div>
+    <div id="pause-overlay" style="display:none">
+      <div class="pause-text">PAUSED</div>
+      <div class="pause-sub">MAXIMIZE WINDOW TO RESUME</div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: FISHMONGER'S REFUGE ══ -->
+  <div id="screen-shop" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-shop">← RETURN TO WATER</button>
+      <span class="screen-title">FISHMONGER'S REFUGE</span>
+      <span class="gold-display">✧ <strong id="gold-shop">0</strong></span>
+    </div>
+    <div id="shop-content" class="screen-content">
+      <div id="shop-layout">
+        <div id="shop-left">
+          <button id="btn-sell-all" class="sell-all-btn">[ SELL ALL ]</button>
+          <div id="inventory-grid"></div>
+        </div>
+        <div id="shop-right">
+          <div id="fishmonger-art"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: UPGRADES ══ -->
+  <div id="screen-upgrades" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-upgrades">← RETURN TO WATER</button>
+      <span class="screen-title">THE LAB</span>
+      <span class="gold-display">✧ <strong id="gold-upgrades">0</strong></span>
+    </div>
+    <div id="upgrades-tabs"></div>
+    <div id="upgrades-content" class="screen-content">
+      <div id="upgrades-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: THE ATLAS ══ -->
+  <div id="screen-atlas" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-atlas">← RETURN TO WATER</button>
+      <span class="screen-title">THE ATLAS</span>
+      <span class="gold-display">✧ <strong id="gold-atlas">0</strong></span>
+    </div>
+    <div id="atlas-content" class="screen-content">
+      <div id="atlas-chart"></div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: THE BOAT ══ -->
+  <div id="screen-boat" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-boat">← RETURN TO WATER</button>
+      <span class="screen-title">THE BOAT</span>
+      <span class="gold-display">✧ <strong id="gold-boat">0</strong></span>
+    </div>
+    <div id="boat-content" class="screen-content">
+      <div id="boat-settings"></div>
+      <div id="blender-section" class="blender-section" style="display:none">
+        <div class="blender-title">THE BLENDER</div>
+        <div class="blender-status" id="blender-status">EMPTY</div>
+        <div class="blender-bar-wrap">
+          <div class="blender-bar" id="blender-bar" style="width:0%"></div>
+        </div>
+        <button class="blender-btn" id="btn-blend">BLEND 10 FISH → 10 ◆</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: THE CATALOG ══ -->
+  <div id="screen-catalog" class="screen">
+    <div class="screen-topbar">
+      <button class="back-btn" id="btn-back-catalog">← RETURN TO WATER</button>
+      <span class="screen-title">THE CATALOG</span>
+      <span class="gold-display">✧ <strong id="gold-catalog">0</strong></span>
+    </div>
+    <div id="catalog-content" class="screen-content">
+      <div id="catalog-content-inner"></div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: PRESTIGE STORE ══ -->
+  <div id="screen-prestige" class="screen">
+    <div class="screen-topbar prestige-topbar">
+      <span class="screen-title prestige-title-text">THE INFINITE DEPTHS</span>
+      <span class="prestige-pearl-display">◆ <strong id="prestige-pearls">0</strong></span>
+    </div>
+    <div id="prestige-content" class="screen-content">
+      <div id="prestige-tree"></div>
+      <button id="btn-prestige-return" class="prestige-return-btn">RETURN TO THE SEA</button>
+    </div>
+  </div>
+
+  <!-- ══ PRESTIGE CONFIRM MODAL ══ -->
+  <div id="prestige-modal" class="modal" style="display:none">
+    <div class="modal-box prestige-modal-box">
+      <div class="modal-title prestige-modal-title">PRESTIGE</div>
+      <div class="prestige-modal-info">
+        <div class="prestige-stat-row">
+          <span class="prestige-stat-label">GOLD EARNED THIS RUN</span>
+          <span class="prestige-stat-value" id="prestige-fish-count">0</span>
+        </div>
+        <div class="prestige-stat-row prestige-stat-highlight">
+          <span class="prestige-stat-label">PEARLS EARNED</span>
+          <span class="prestige-stat-value" id="prestige-pearl-count">0</span>
+        </div>
+        <div class="prestige-warning">ALL PROGRESS WILL BE RESET.<br>CATALOG AND PRESTIGE UPGRADES ARE KEPT.</div>
+      </div>
+      <div class="modal-btns">
+        <button class="modal-btn prestige-confirm-btn" id="prestige-confirm-yes">ENTER THE DEPTHS</button>
+        <button class="modal-btn" id="prestige-confirm-no">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PRESTIGE ANIMATION OVERLAY ══ -->
+  <div id="prestige-anim-overlay" style="display:none">
+    <canvas id="prestige-anim-canvas"></canvas>
+  </div>
+
+  <!-- ══ TRAVEL OVERLAY ══ -->
+  <div id="travel-overlay">
+    <div id="travel-label">DESCENDING...</div>
+    <div id="travel-depth">0m</div>
+    <div id="travel-sub">PRESSURE RISING</div>
+  </div>
+
+  <div id="transition-overlay"></div>
+
+  <!-- ══ SAVE MODAL ══ -->
+  <div id="save-modal" class="modal" style="display:none">
+    <div class="modal-box">
+      <div class="modal-title">EXPORT SAVE CODE</div>
+      <textarea id="save-textarea" spellcheck="false" readonly></textarea>
+      <div class="modal-btns">
+        <button class="modal-btn" id="modal-copy">COPY TO CLIPBOARD</button>
+        <button class="modal-btn" id="modal-save-close">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ LOAD MODAL ══ -->
+  <div id="load-modal" class="modal" style="display:none">
+    <div class="modal-box">
+      <div class="modal-title">IMPORT SAVE CODE</div>
+      <textarea id="load-textarea" spellcheck="false" placeholder="PASTE SAVE CODE HERE..."></textarea>
+      <div class="modal-btns">
+        <button class="modal-btn" id="modal-import-btn">LOAD SAVE</button>
+        <button class="modal-btn" id="modal-load-close">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MENU MODAL ══ -->
+  <div id="menu-modal" class="modal" style="display:none">
+    <canvas id="menu-canvas"></canvas>
+    <div class="modal-box menu-modal-box">
+      <div class="modal-title">MENU</div>
+      <div class="menu-items">
+        <button class="menu-item-btn" id="menu-save-local">SAVE GAME</button>
+        <button class="menu-item-btn" id="menu-export">EXPORT SAVE</button>
+        <button class="menu-item-btn" id="menu-import">IMPORT SAVE</button>
+        <button class="menu-item-btn menu-danger" id="menu-restart">RESTART</button>
+        <div id="menu-restart-confirm" class="menu-confirm" style="display:none">
+          <span class="menu-confirm-text">ARE YOU SURE? ALL PROGRESS WILL BE LOST.</span>
+          <button class="menu-item-btn menu-danger" id="menu-restart-yes">YES, WIPE SAVE</button>
+        </div>
+      </div>
+      <div class="menu-audio">
+        <div class="menu-audio-row">
+          <span class="menu-audio-label">SFX</span>
+          <input type="range" class="menu-slider" id="menu-sfx-slider" min="0" max="100" value="50">
+          <span class="menu-audio-val" id="menu-sfx-val">50</span>
+        </div>
+        <div class="menu-audio-row">
+          <span class="menu-audio-label">MUSIC</span>
+          <input type="range" class="menu-slider" id="menu-music-slider" min="0" max="100" value="50">
+          <span class="menu-audio-val" id="menu-music-val">50</span>
+        </div>
+      </div>
+      <div class="menu-playtime">
+        <span class="menu-playtime-label">PLAYTIME</span>
+        <span class="menu-playtime-value" id="menu-playtime">0:00:00</span>
+      </div>
+      <div class="menu-credits-section">
+        <button class="menu-credits-toggle" id="menu-credits-toggle">CREDITS</button>
+        <div id="menu-credits-body" class="menu-credits-body" style="display:none">
+          <div id="menu-credits-content"></div>
+        </div>
+      </div>
+      <div class="modal-btns">
+        <button class="modal-btn" id="menu-close">RESUME</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="data.js"></script>
+  <script src="state.js"></script>
+  <script src="audio.js"></script>
+  <script src="canvas.js"></script>
+  <script src="canvas-backgrounds.js"></script>
+  <script src="fish.js"></script>
+  <script src="ui.js"></script>
+  <script src="save.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
