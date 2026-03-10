@@ -228,8 +228,6 @@ section.card h2{ color:var(--text); margin:0 0 10px; font-size:1.15rem; padding-
 
 @media (min-width:900px){
   .projects-grid{ grid-template-columns: repeat(2, 1fr); }
-  .project-card.game-card{ grid-column: 1; }
-  .project-card.first-other{ grid-row-start: 4; }
 }
 
 .contact-card{
