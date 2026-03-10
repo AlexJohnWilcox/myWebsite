@@ -1124,9 +1124,24 @@ section.card .asec-title{
 
 /* ── Main layout container ───────────────────────────────────────── */
 .main-container{
-  max-width: 1400px;
   margin: 0 auto;
   padding: 36px 24px 64px;
+}
+.projects-columns{
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 0 12px;
+}
+.projects-columns > .card{
+  flex: 1;
+  min-width: 0;
+}
+.projects-columns .projects-grid{
+  grid-template-columns: 1fr !important;
+}
+@media(max-width:900px){
+  .projects-columns{ flex-direction: column; margin: 0; }
 }
 @media(max-width:600px){
   .main-container{ padding: 20px 16px 48px; }
@@ -1356,6 +1371,11 @@ body.page-with-sides::after {
   border-top-color: var(--accent-2);
 }
 .hero-bubble-left.hero-bubble-left-2 .hb-cta{ color: var(--accent-2); }
+.hero-bubble-left-3{
+  top: 536px;
+  border-top-color: var(--accent-4);
+}
+.hero-bubble-left.hero-bubble-left-3 .hb-cta{ color: var(--accent-4); }
 .hb-tag{
   font-size: 0.62rem;
   font-weight: 800;
