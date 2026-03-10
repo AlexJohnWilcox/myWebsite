@@ -172,10 +172,6 @@
 
   </div>
 
-  <!-- ── Easter egg hint ───────────────────────────────────────────── -->
-  <div style="position:fixed;bottom:14px;left:18px;z-index:10;font-size:0.78rem;color:rgba(178,212,240,0.55);font-family:'Poppins',sans-serif;pointer-events:none;letter-spacing:0.4px;font-weight:600;display:none;" class="egg-hint">Say 'hi' to the wall!</div>
-  <style>@media(min-width:761px){.egg-hint{display:block!important;}}</style>
-
   <!-- ── Stats strip pinned to bottom ─────────────────────────────── -->
   <div class="stats-strip">
     <div class="stat-item">
@@ -260,13 +256,11 @@
 
     function buildGrid(){
       centers = [];
-      const HEX = '0123456789abcdef';
-      let hi = 0;
       const cols = Math.ceil(cv.width  / W) + 2;
       const rows = Math.ceil(cv.height / (R * 1.5)) + 2;
       for(let row = -1; row <= rows; row++)
         for(let col = -1; col <= cols; col++)
-          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5, bit: HEX[hi++ % 16] });
+          centers.push({ x: col * W + (row & 1 ? W / 2 : 0), y: row * R * 1.5 });
     }
 
     function hexPath(cx, cy, r){
@@ -336,15 +330,6 @@
         }
         ctx.lineWidth = 1;
         ctx.stroke();
-
-        // Draw alternating 0/1 label
-        const textAlpha = isActive ? 0.55 : (0.04 + 0.08 * t + pAlpha * 0.3);
-        const textColor = isActive ? `rgba(245,166,35,${textAlpha})` : `rgba(255,255,255,${textAlpha})`;
-        ctx.fillStyle = textColor;
-        ctx.font = `${Math.round(r * 0.38)}px monospace`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(c.bit, c.x, c.y);
       }
 
       raf = undefined;
@@ -364,9 +349,6 @@
 
     document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; scheduleDraw(); }, {passive: true});
 
-    const EGG_SEQ = ['6','8','6','9'];
-    let eggBuf = [];
-
     document.addEventListener('click', () => {
       if(mouse.x < -100) return;
       const cw = cv.width / 2, ch = cv.height / 2;
@@ -378,11 +360,6 @@
         if(minD <= R * (0.45 + 0.55 * t)){
           pulses.push({ x: nearest.x, y: nearest.y, start: performance.now() });
           scheduleDraw();
-
-          // Easter egg: click hexes spelling 6-8-6-9 in sequence
-          eggBuf.push(nearest.bit);
-          if(eggBuf.length > EGG_SEQ.length) eggBuf.shift();
-          if(eggBuf.join('') === EGG_SEQ.join('')) window.location.href = '/easteregg/';
         }
       }
     });
