@@ -917,7 +917,7 @@ section.card .asec-title{
   padding: 0 40px;
 }
 .hero-photo{ flex-shrink: 0; }
-.hero-photo .profile-pic{ width: 360px; height: 360px; }
+.hero-photo .profile-pic{ width: 420px; height: 420px; }
 .hero-text{
   display: flex;
   flex-direction: column;
@@ -933,7 +933,7 @@ section.card .asec-title{
   .hero-name{ font-size: 2.8rem; }
 }
 .hero-name{
-  font-size: 4.2rem;
+  font-size: 5rem;
   font-weight: 800;
   color: var(--text);
   margin: 0;
@@ -941,7 +941,7 @@ section.card .asec-title{
   line-height: 1.05;
 }
 .hero-sub{
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   color: var(--muted);
   font-weight: 500;
   margin: 0;
@@ -958,11 +958,11 @@ section.card .asec-title{
   display: inline-block;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
   color: white;
-  padding: 13px 30px;
+  padding: 16px 36px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 .cta-btn-primary:hover{ opacity: 0.88; transform: translateY(-2px); }
@@ -970,11 +970,11 @@ section.card .asec-title{
   display: inline-block;
   background: transparent;
   color: var(--muted);
-  padding: 13px 30px;
+  padding: 16px 36px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.15rem;
   border: 1px solid rgba(255,255,255,0.12);
   transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
@@ -1328,79 +1328,6 @@ body.page-with-sides::after {
   border-right: 1px solid rgba(6,200,232,0.22);
 }
 
-/* ── Profile photo: flip on hover ────────────────────────────────── */
-@keyframes photo-flip{
-  from{ transform: rotateY(0deg); }
-  to{   transform: rotateY(360deg); }
-}
-.hero-photo:hover .profile-pic{
-  animation: photo-flip 0.8s ease-in-out;
-}
+/* Profile flip removed */
 
-/* ── Hero game bubbles ───────────────────────────────────────────── */
-.hero-bubble{
-  position: absolute;
-  top: 44px;
-  width: 230px;
-  background: rgba(11,22,40,0.82);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 22px 20px;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
-  border: 1px solid rgba(255,255,255,0.07);
-  z-index: 2;
-}
-.hero-bubble:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
-}
-.hero-bubble-left{
-  left: 28px;
-  border-top: 2px solid var(--accent-3);
-}
-.hero-bubble-right{
-  right: 28px;
-  border-top: 2px solid var(--accent-2);
-}
-.hero-bubble-left-2{
-  top: 290px;
-  border-top-color: var(--accent-2);
-}
-.hero-bubble-left.hero-bubble-left-2 .hb-cta{ color: var(--accent-2); }
-.hero-bubble-left-3{
-  top: 536px;
-  border-top-color: var(--accent-4);
-}
-.hero-bubble-left.hero-bubble-left-3 .hb-cta{ color: var(--accent-4); }
-.hb-tag{
-  font-size: 0.62rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.6px;
-}
-.hero-bubble-left  .hb-tag{ color: var(--accent-3); }
-.hero-bubble-right .hb-tag{ color: var(--accent-2); }
-.hb-title{
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--text);
-  line-height: 1.25;
-}
-.hb-desc{
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.55;
-}
-.hb-cta{
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin-top: 2px;
-}
-.hero-bubble-left  .hb-cta{ color: var(--accent-3); }
-.hero-bubble-right .hb-cta{ color: var(--accent-2); }
-/* Only show bubbles when there's room beside the hero content */
-@media(max-width:1440px){ .hero-bubble{ display: none; } }
+/* Hero bubbles removed */
