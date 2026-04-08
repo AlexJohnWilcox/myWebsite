@@ -1298,35 +1298,6 @@ section.card .asec-title{
   z-index: 1;
 }
 
-/* ── Interior page side vignette ─────────────────────────────────── */
-body.page-with-sides::before,
-body.page-with-sides::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 90px;
-  pointer-events: none;
-  z-index: 2;
-}
-body.page-with-sides::before {
-  left: 0;
-  background: linear-gradient(to right,
-    rgba(245,158,11,0.18) 0%,
-    rgba(245,158,11,0.07) 45%,
-    transparent 100%
-  );
-  border-left: 1px solid rgba(245,158,11,0.22);
-}
-body.page-with-sides::after {
-  right: 0;
-  background: linear-gradient(to left,
-    rgba(34,211,238,0.15) 0%,
-    rgba(34,211,238,0.06) 45%,
-    transparent 100%
-  );
-  border-right: 1px solid rgba(34,211,238,0.22);
-}
 
 /* Profile flip removed */
 
