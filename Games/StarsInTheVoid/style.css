@@ -1,99 +1,364 @@
-body {
-    background: #181818;
-    color: #e0e0e0;
-    font-family: 'Fira Mono', 'Consolas', monospace;
+* {
     margin: 0;
     padding: 0;
-    background: #444 !important;
-    color: #fff !important;
-    font-size: 22px !important;
-    padding: 10px 28px !important;
-    border-radius: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    cursor: pointer;
-    margin-bottom: 8px;
+    box-sizing: border-box;
 }
 
-#lore-bubble {
-    background: #222 !important;
-    color: #fff !important;
-    border-radius: 0;
-    box-shadow: none;
-    font-size: 18px;
-    line-height: 1.5;
-    min-width: 320px;
-    max-width: 1600px;
-    margin-left: auto;
-    margin-right: 48px;
-    margin-top: 32px;
-    margin-bottom: 32px;
-    padding: 24px 18px;
+body {
+    background: #000;
+    color: #e0e0e0;
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ---- Top bar ---- */
+#top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
     display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+#top-left-buttons, #top-right-buttons {
+    display: flex;
+    gap: 0;
+    pointer-events: auto;
+}
+#top-bar button {
+    padding: 6px 14px;
+    font-size: 14px;
+    background: #111;
+    color: #888;
+    border: none;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+    transition: color 0.3s, background 0.3s;
+}
+#top-bar button:hover {
+    background: #1a1a1a;
+    color: #ccc;
+}
+
+#save-msg {
+    position: fixed;
+    top: 36px;
+    left: 0;
+    z-index: 2001;
+    padding: 6px 20px;
+    font-size: 14px;
+    background: #111;
+    color: #4a4;
+    border-bottom-right-radius: 8px;
+    display: none;
+}
+
+/* ---- Void (black screen) ---- */
+#void {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 100;
+    transition: opacity 1.5s ease;
+}
+#void.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---- Terminal (name entry) ---- */
+#terminal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+#terminal.visible {
+    opacity: 1;
+}
+#terminal-art {
+    font-size: 18px;
+    line-height: 1.2;
+    color: #888;
+    text-align: center;
+    margin-bottom: 24px;
+}
+#name-entry {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#name-input {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 12px;
+    background: #111;
+    color: #ccc;
+    border: 1px solid #333;
+    outline: none;
+    width: 220px;
+}
+#name-input:focus {
+    border-color: #555;
+    color: #fff;
+}
+#name-input::placeholder {
+    color: #555;
+}
+#name-submit {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 16px;
+    background: #1a1a1a;
+    color: #888;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+}
+#name-submit:hover {
+    color: #ccc;
+    border-color: #555;
+}
+
+/* ---- Main game layout ---- */
+#game {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    padding: 48px 32px 32px;
+}
+#game.visible {
+    opacity: 1;
+}
+#game-layout {
+    display: flex;
+    gap: 48px;
+    max-width: 1400px;
+    margin: 0 auto;
     align-items: flex-start;
 }
-
-#game-container {
-    max-width: 1400px;
-    min-width: 620px;
-    margin: 32px auto;
-    padding: 28px 16px;
-    background: #222;
-    border-radius: 16px;
-    box-shadow: none;
+#left-col {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-.ascii-art {
+/* ---- Viewport (starfield) ---- */
+#viewport {
+    background: #0a0a0a;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #1a1a1a;
+}
+#ascii {
     white-space: pre;
-    font-size: 18px;
-    line-height: 1.1;
-    text-align: center;
-    margin-bottom: 22px;
-}
-
-#output {
-    min-height: 120px;
-    margin-bottom: 16px;
-    font-size: 24px;
-    white-space: pre-wrap;
-    font-size: 24px;
-}
-
-#input {
-    width: 100%;
     font-size: 16px;
-    padding: 8px;
-    border-radius: 0;
-    border: none;
-    background: #222 !important;
-    color: #fff !important;
-    box-shadow: none;
-    outline: none;
+    line-height: 1.1;
+    color: #666;
 }
 
-#input::placeholder {
-    color: #bbb;
+/* Ship appears dim, then brightens */
+#viewport.lights-on {
+    border-color: #333;
+}
+#viewport.lights-on #ascii {
+    color: #aaa;
+}
+
+/* ---- Console panel ---- */
+#console-panel {
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+    padding: 12px 16px;
+    border: 1px solid #1a1a1a;
+    border-top: none;
+}
+#console-art {
+    white-space: pre;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #666;
+    text-align: center;
+}
+#controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+#engine-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+}
+#engine-toggle input {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---- Materials bar ---- */
+#materials {
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+    padding: 14px 16px;
+    border: 1px solid #1a1a1a;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+#fuel-section, #stardust-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+#fuel-count, #stardust-count {
+    font-size: 14px;
+    color: #888;
+}
+
+/* ---- Generic buttons ---- */
+button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 12px;
+    background: #1a1a1a;
+    color: #888;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+button:hover {
+    color: #ccc;
+    border-color: #555;
+    background: #222;
+}
+button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* ---- Lore text ---- */
+#right-col {
+    flex: 1 1 320px;
+    min-width: 280px;
+    max-width: 420px;
+}
+#lore-text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.lore-entry {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #777;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.lore-entry.visible {
     opacity: 1;
 }
 
-#input:focus {
-    background: #222 !important;
-    color: #fff !important;
-    border-color: #666;
-    outline: none;
+/* ---- Shop / Collapser subview controls ---- */
+.subview-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+}
+.subview-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+.subview-col .section-header {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 2px;
+}
+.subview-col button {
+    font-size: 12px;
+    white-space: nowrap;
+}
+.purchased-label {
+    font-size: 12px;
+    color: #4a4;
 }
 
-button {
-    background: #333;
-    color: #e0e0e0;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 0;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 8px;
+/* ---- Logbook overlay ---- */
+#logbook-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#logbook-overlay .logbook-inner {
+    max-width: 800px;
+    width: 90%;
+    max-height: 70vh;
+    overflow: auto;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+}
+#logbook-overlay .logbook-title {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 16px;
+}
+#logbook-overlay .logbook-entry {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+#logbook-overlay button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
 }
 
-button:hover {
-    background: #444;
+/* ---- Lights-on state brightens everything slightly ---- */
+body.lights-on #viewport {
+    border-color: #333;
+}
+body.lights-on #ascii {
+    color: #aaa;
+}
+body.lights-on #console-art {
+    color: #999;
+}
+body.lights-on #fuel-count,
+body.lights-on #stardust-count {
+    color: #aaa;
+}
+body.lights-on .lore-entry {
+    color: #999;
+}
+body.lights-on #controls span,
+body.lights-on #engine-toggle {
+    color: #aaa;
 }
