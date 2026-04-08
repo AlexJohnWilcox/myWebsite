@@ -14,50 +14,6 @@ body {
 
 .hidden { display: none !important; }
 
-/* ---- Top bar ---- */
-#top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2000;
-    display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-}
-#top-left-buttons, #top-right-buttons {
-    display: flex;
-    gap: 0;
-    pointer-events: auto;
-}
-#top-bar button {
-    padding: 6px 14px;
-    font-size: 14px;
-    background: #111;
-    color: #888;
-    border: none;
-    border-bottom: 1px solid #222;
-    cursor: pointer;
-    transition: color 0.3s, background 0.3s;
-}
-#top-bar button:hover {
-    background: #1a1a1a;
-    color: #ccc;
-}
-
-#save-msg {
-    position: fixed;
-    top: 36px;
-    left: 0;
-    z-index: 2001;
-    padding: 6px 20px;
-    font-size: 14px;
-    background: #111;
-    color: #4a4;
-    border-bottom-right-radius: 8px;
-    display: none;
-}
-
 /* ---- Void (black screen) ---- */
 #void {
     position: fixed;
@@ -79,7 +35,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 50;
+    z-index: 150;
     opacity: 0;
     transition: opacity 1s ease;
 }
@@ -89,7 +45,7 @@ body {
 #terminal-art {
     font-size: 18px;
     line-height: 1.2;
-    color: #888;
+    color: #ccc;
     text-align: center;
     margin-bottom: 24px;
 }
@@ -103,38 +59,38 @@ body {
     font-size: 16px;
     padding: 8px 12px;
     background: #111;
-    color: #ccc;
-    border: 1px solid #333;
+    color: #eee;
+    border: 1px solid #444;
     outline: none;
     width: 220px;
 }
 #name-input:focus {
-    border-color: #555;
+    border-color: #777;
     color: #fff;
 }
 #name-input::placeholder {
-    color: #555;
+    color: #666;
 }
 #name-submit {
     font-family: inherit;
     font-size: 14px;
     padding: 8px 16px;
     background: #1a1a1a;
-    color: #888;
-    border: 1px solid #333;
+    color: #ccc;
+    border: 1px solid #444;
     cursor: pointer;
     transition: color 0.3s, border-color 0.3s;
 }
 #name-submit:hover {
-    color: #ccc;
-    border-color: #555;
+    color: #fff;
+    border-color: #777;
 }
 
 /* ---- Main game layout ---- */
 #game {
     opacity: 0;
     transition: opacity 1.5s ease;
-    padding: 48px 32px 32px;
+    padding: 32px 32px 32px;
 }
 #game.visible {
     opacity: 1;
@@ -158,21 +114,13 @@ body {
     background: #0a0a0a;
     border-radius: 8px;
     padding: 16px;
-    border: 1px solid #1a1a1a;
+    border: 1px solid #2a2a2a;
 }
 #ascii {
     white-space: pre;
     font-size: 16px;
     line-height: 1.1;
-    color: #666;
-}
-
-/* Ship appears dim, then brightens */
-#viewport.lights-on {
-    border-color: #333;
-}
-#viewport.lights-on #ascii {
-    color: #aaa;
+    color: #999;
 }
 
 /* ---- Console panel ---- */
@@ -180,14 +128,14 @@ body {
     background: #0a0a0a;
     border-radius: 0 0 8px 8px;
     padding: 12px 16px;
-    border: 1px solid #1a1a1a;
+    border: 1px solid #2a2a2a;
     border-top: none;
 }
 #console-art {
     white-space: pre;
     font-size: 14px;
     line-height: 1.2;
-    color: #666;
+    color: #aaa;
     text-align: center;
 }
 #controls {
@@ -202,7 +150,7 @@ body {
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: #888;
+    color: #bbb;
     cursor: pointer;
 }
 #engine-toggle input {
@@ -215,7 +163,7 @@ body {
     background: #0a0a0a;
     border-radius: 0 0 8px 8px;
     padding: 14px 16px;
-    border: 1px solid #1a1a1a;
+    border: 1px solid #2a2a2a;
     border-top: none;
     display: flex;
     align-items: center;
@@ -229,7 +177,7 @@ body {
 }
 #fuel-count, #stardust-count {
     font-size: 14px;
-    color: #888;
+    color: #bbb;
 }
 
 /* ---- Generic buttons ---- */
@@ -238,16 +186,16 @@ button {
     font-size: 13px;
     padding: 5px 12px;
     background: #1a1a1a;
-    color: #888;
-    border: 1px solid #333;
+    color: #bbb;
+    border: 1px solid #444;
     border-radius: 4px;
     cursor: pointer;
     transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 button:hover {
-    color: #ccc;
-    border-color: #555;
-    background: #222;
+    color: #fff;
+    border-color: #666;
+    background: #2a2a2a;
 }
 button:disabled {
     opacity: 0.4;
@@ -268,7 +216,7 @@ button:disabled {
 .lore-entry {
     font-size: 15px;
     line-height: 1.6;
-    color: #777;
+    color: #bbb;
     opacity: 0;
     transition: opacity 0.8s ease;
 }
@@ -291,7 +239,7 @@ button:disabled {
 }
 .subview-col .section-header {
     font-size: 12px;
-    color: #555;
+    color: #888;
     margin-bottom: 2px;
 }
 .subview-col button {
@@ -300,65 +248,27 @@ button:disabled {
 }
 .purchased-label {
     font-size: 12px;
-    color: #4a4;
+    color: #6c6;
 }
 
-/* ---- Logbook overlay ---- */
-#logbook-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 5000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#logbook-overlay .logbook-inner {
-    max-width: 800px;
-    width: 90%;
-    max-height: 70vh;
-    overflow: auto;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 8px;
-    padding: 24px;
-    position: relative;
-}
-#logbook-overlay .logbook-title {
-    font-size: 18px;
-    color: #888;
-    margin-bottom: 16px;
-}
-#logbook-overlay .logbook-entry {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-#logbook-overlay button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-}
-
-/* ---- Lights-on state brightens everything slightly ---- */
+/* ---- Lights-on state brightens everything ---- */
 body.lights-on #viewport {
-    border-color: #333;
+    border-color: #444;
 }
 body.lights-on #ascii {
-    color: #aaa;
+    color: #ccc;
 }
 body.lights-on #console-art {
-    color: #999;
+    color: #ccc;
 }
 body.lights-on #fuel-count,
 body.lights-on #stardust-count {
-    color: #aaa;
+    color: #ddd;
 }
 body.lights-on .lore-entry {
-    color: #999;
+    color: #ddd;
 }
 body.lights-on #controls span,
 body.lights-on #engine-toggle {
-    color: #aaa;
+    color: #ccc;
 }

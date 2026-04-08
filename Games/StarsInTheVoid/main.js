@@ -164,12 +164,8 @@ function getCollapserBayAscii(w) {
 
 // ── Helpers ──
 function currentClickGain() {
-    const base = developerMode ? 100 : 2;
+    const base = developerMode ? 100 : 1;
     return base + (dumpUpgradeLevel - 1);
-}
-
-function escapeHtml(s) {
-    return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 }
 
 // ── DOM helpers ──
@@ -186,7 +182,6 @@ function addLoreMessage(msg) {
     div.className = 'lore-entry';
     div.textContent = msg;
     container.insertBefore(div, container.firstChild);
-    appendToShipLog(msg);
     // Cap to 6
     while (container.children.length > 6) {
         container.lastElementChild?.remove();
@@ -194,125 +189,6 @@ function addLoreMessage(msg) {
     requestAnimationFrame(() => {
         requestAnimationFrame(() => div.classList.add('visible'));
     });
-}
-
-function appendToShipLog(msg) {
-    try {
-        const raw = localStorage.getItem('sivLogBook');
-        const log = raw ? JSON.parse(raw) : [];
-        if (log.length === 0 || log[log.length - 1].m !== msg) {
-            log.push({ t: Date.now(), m: msg });
-        }
-        localStorage.setItem('sivLogBook', JSON.stringify(log));
-    } catch(e) {}
-}
-
-// ── Save / Load ──
-function saveGame() {
-    const data = {
-        playerName, fuel, lyGauge, currentScene, currentView, lyConversionOn,
-        developerMode, fuelLoreShown, lookAroundLoreShown,
-        milestone50Fired, milestone50LoreShown, milestone100Fired, milestone100LoreShown,
-        coPilotPurchased, coPilotActive, coPilotOnlineLoreShown,
-        starCollapserOnline, starCollapserBayOnline, stardust, collapseCooldownUntil,
-        dumpUpgradeLevel, dumpUpgradeCost,
-        coPilotLevel, coPilotUpgradeCost,
-        capacityLevel, capacityUpgradeCost,
-        efficiencyLevel, efficiencyUpgradeCost,
-        collapserYieldBase, collapserCooldownUpgrades, collapserEfficiencyLevel
-    };
-    localStorage.setItem('sivSave', JSON.stringify(data));
-    // Save lore HTML
-    const lore = $('lore-text');
-    if (lore) localStorage.setItem('sivLore', lore.innerHTML);
-    const msg = $('save-msg');
-    if (msg) {
-        msg.style.display = 'block';
-        setTimeout(() => msg.style.display = 'none', 1200);
-    }
-}
-
-function loadSave() {
-    const raw = localStorage.getItem('sivSave');
-    if (!raw) return null;
-    try { return JSON.parse(raw); } catch(e) {
-        localStorage.removeItem('sivSave');
-        return null;
-    }
-}
-
-function wipeSave() {
-    localStorage.removeItem('sivSave');
-    localStorage.removeItem('sivLore');
-    localStorage.removeItem('sivLogBook');
-    location.reload();
-}
-
-function restoreState(d) {
-    playerName = d.playerName || '';
-    fuel = d.fuel || 0;
-    lyGauge = d.lyGauge || 0;
-    currentScene = d.currentScene || 'void';
-    currentView = d.currentView || 'main';
-    lyConversionOn = d.lyConversionOn !== false;
-    developerMode = !!d.developerMode;
-    fuelLoreShown = !!d.fuelLoreShown;
-    lookAroundLoreShown = !!d.lookAroundLoreShown;
-    milestone50Fired = !!d.milestone50Fired || lyGauge >= 50;
-    milestone50LoreShown = !!d.milestone50LoreShown;
-    milestone100Fired = !!d.milestone100Fired || lyGauge >= 100;
-    milestone100LoreShown = !!d.milestone100LoreShown;
-    coPilotPurchased = !!d.coPilotPurchased;
-    coPilotActive = !!d.coPilotActive;
-    coPilotOnlineLoreShown = !!d.coPilotOnlineLoreShown;
-    starCollapserOnline = !!d.starCollapserOnline;
-    starCollapserBayOnline = !!d.starCollapserBayOnline;
-    stardust = d.stardust || 0;
-    collapseCooldownUntil = d.collapseCooldownUntil || 0;
-    dumpUpgradeLevel = d.dumpUpgradeLevel || 1;
-    dumpUpgradeCost = d.dumpUpgradeCost || 100;
-    coPilotLevel = d.coPilotLevel || 1;
-    coPilotUpgradeCost = d.coPilotUpgradeCost || 150;
-    capacityLevel = d.capacityLevel || 1;
-    capacityUpgradeCost = d.capacityUpgradeCost || 200;
-    efficiencyLevel = d.efficiencyLevel || 1;
-    efficiencyUpgradeCost = d.efficiencyUpgradeCost || 500;
-    collapserYieldBase = d.collapserYieldBase || 1;
-    collapserCooldownUpgrades = d.collapserCooldownUpgrades || 0;
-    collapserEfficiencyLevel = d.collapserEfficiencyLevel || 1;
-}
-
-// ── Logbook ──
-function showLogbook() {
-    if ($('logbook-overlay')) return;
-    const overlay = document.createElement('div');
-    overlay.id = 'logbook-overlay';
-    const inner = document.createElement('div');
-    inner.className = 'logbook-inner';
-    const title = document.createElement('div');
-    title.className = 'logbook-title';
-    title.textContent = 'Ship Logbook';
-    inner.appendChild(title);
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Close';
-    closeBtn.onclick = () => overlay.remove();
-    inner.appendChild(closeBtn);
-    try {
-        const raw = localStorage.getItem('sivLogBook');
-        let log = raw ? JSON.parse(raw) : [];
-        log = log.slice().reverse();
-        let last = null;
-        for (const entry of log) {
-            if (last && last.m === entry.m) continue;
-            const row = document.createElement('div');
-            row.className = 'logbook-entry';
-            row.textContent = new Date(entry.t).toLocaleString() + ' — ' + entry.m;
-            inner.appendChild(row);
-            last = entry;
-        }
-    } catch(e) {}
-    overlay.appendChild(inner);
-    document.body.appendChild(overlay);
 }
 
 // ── Intro sequence ──
@@ -349,14 +225,13 @@ function handleNameSubmit() {
     setTimeout(() => {
         hide('terminal');
         $('void').classList.add('fade-out');
-        enterStarfield(false);
+        enterStarfield();
     }, 800);
 }
 
 // ── Enter starfield (main game) ──
-function enterStarfield(fromSave) {
+function enterStarfield() {
     currentScene = 'starfield';
-    show('top-bar');
     show('game');
     requestAnimationFrame(() => {
         requestAnimationFrame(() => $('game').classList.add('visible'));
@@ -403,48 +278,23 @@ function enterStarfield(fromSave) {
     if (sw) sw.checked = lyConversionOn;
     updateEngineLabel();
 
-    if (fromSave) {
-        // Immediate: show everything
-        $('void').classList.add('fade-out');
-        show('controls');
+    // Cinematic reveal
+    addLoreMessage(LORE_MESSAGES[0]);
+    if (developerMode) {
+        addLoreMessage('[DEV MODE ENABLED: +100 FUEL PER CLICK]');
+    }
+
+    // After 4s: look around lore + fuel button appears
+    setTimeout(() => {
+        if (!lookAroundLoreShown) {
+            addLoreMessage(LORE_MESSAGES[1]);
+            lookAroundLoreShown = true;
+        }
         show('materials');
+        show('controls');
         updateFuelDisplay();
         updateFuelBtnLabel();
-        restoreLoreText();
-        if (milestone100Fired) document.body.classList.add('lights-on');
-        if (coPilotPurchased) setupCoPilotSwitch();
-        if (coPilotPurchased) show('systems-btn');
-        if (starCollapserBayOnline) show('collapserbay-nav-btn');
-        updateStardustUI();
-        if (coPilotActive) startAutoDM();
-        // Restore subview
-        if (currentView === 'shop') {
-            $('systems-btn').textContent = 'Main Console';
-            renderShopControls();
-        } else if (currentView === 'collapser' && starCollapserBayOnline) {
-            $('collapserbay-nav-btn').textContent = 'Main Console';
-            renderCollapserBayControls();
-        }
-    } else {
-        // Fresh start: cinematic reveal
-        // Lore message #0 immediately
-        addLoreMessage(LORE_MESSAGES[0]);
-        if (developerMode) {
-            addLoreMessage('[DEV MODE ENABLED: +100 FUEL PER CLICK]');
-        }
-
-        // After 4s: look around lore + fuel button appears
-        setTimeout(() => {
-            if (!lookAroundLoreShown) {
-                addLoreMessage(LORE_MESSAGES[1]);
-                lookAroundLoreShown = true;
-            }
-            show('materials');
-            show('controls');
-            updateFuelDisplay();
-            updateFuelBtnLabel();
-        }, 4000);
-    }
+    }, 4000);
 }
 
 function drawScene() {
@@ -497,17 +347,6 @@ function updateCollapseCooldown() {
     const secs = Math.ceil((collapseCooldownUntil - now) / 1000);
     btn.textContent = `Collapse (${secs}s)`;
     setTimeout(updateCollapseCooldown, 250);
-}
-
-function restoreLoreText() {
-    const lore = $('lore-text');
-    const saved = localStorage.getItem('sivLore');
-    if (lore && saved) {
-        lore.innerHTML = saved;
-        while (lore.children.length > 6) {
-            lore.lastElementChild?.remove();
-        }
-    }
 }
 
 // ── Milestones ──
@@ -802,26 +641,13 @@ function showEngineToggle() {
 
 // ── Init ──
 document.addEventListener('DOMContentLoaded', () => {
-    const saved = loadSave();
-
-    if (saved && saved.currentScene === 'starfield') {
-        restoreState(saved);
-        hide('void');
-        hide('terminal');
-        enterStarfield(true);
-    } else {
-        startIntroSequence();
-    }
+    startIntroSequence();
 
     // Wire up buttons
     $('name-submit').onclick = handleNameSubmit;
     $('name-input').addEventListener('keydown', e => {
         if (e.key === 'Enter') handleNameSubmit();
     });
-
-    $('save-btn').onclick = saveGame;
-    $('wipe-btn').onclick = wipeSave;
-    $('logbook-btn').onclick = showLogbook;
 
     $('fuel-btn').onclick = () => {
         fuel += currentClickGain();
