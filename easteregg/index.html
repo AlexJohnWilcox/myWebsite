@@ -10,8 +10,8 @@
     *{ box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
-      background: #0b1628;
-      color: #eaf6ff;
+      background: #0d0d0d;
+      color: #f4f4f5;
       font-family: 'Poppins', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
@@ -37,11 +37,11 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #10e09e;
-      border: 1px solid rgba(16,224,158,0.35);
+      color: #34d399;
+      border: 1px solid rgba(52,211,153,0.35);
       padding: 6px 18px;
       border-radius: 999px;
-      background: rgba(16,224,158,0.07);
+      background: rgba(52,211,153,0.07);
       animation: fadein 0.6s ease both;
     }
     h1 {
@@ -50,7 +50,7 @@
       line-height: 1.15;
       animation: fadein 0.7s 0.1s ease both;
     }
-    h1 .accent { color: #f5a623; }
+    h1 .accent { color: #f59e0b; }
     .hex-label {
       font-size: clamp(1rem, 2.5vw, 1.4rem);
       color: rgba(178,212,240,0.7);
@@ -70,20 +70,20 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #f5a623;
+      color: #f59e0b;
       font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
-      border: 1.5px solid rgba(245,166,35,0.4);
+      border: 1.5px solid rgba(245,158,11,0.4);
       padding: 10px 24px;
       border-radius: 10px;
-      background: rgba(245,166,35,0.07);
+      background: rgba(245,158,11,0.07);
       transition: background 0.2s, box-shadow 0.2s;
       animation: fadein 0.7s 0.45s ease both;
     }
     .back-link:hover {
-      background: rgba(245,166,35,0.16);
-      box-shadow: 0 0 24px rgba(245,166,35,0.25);
+      background: rgba(245,158,11,0.16);
+      box-shadow: 0 0 24px rgba(245,158,11,0.25);
     }
     @keyframes fadein {
       from { opacity: 0; transform: translateY(14px); }
@@ -128,7 +128,7 @@
     }
 
     function draw(){
-      ctx.fillStyle = 'rgba(11,22,40,0.22)';
+      ctx.fillStyle = 'rgba(13,13,13,0.22)';
       ctx.fillRect(0, 0, cv.width, cv.height);
 
       for(const d of drops){
@@ -143,9 +143,9 @@
           if(cy < -18 || cy > cv.height + 18) continue;
           const fade = 1 - j / d.len;
           if(j === 0){
-            ctx.fillStyle = `rgba(245,166,35,${fade * 0.9})`;
+            ctx.fillStyle = `rgba(245,158,11,${fade * 0.9})`;
           } else {
-            ctx.fillStyle = `rgba(16,224,158,${fade * 0.35})`;
+            ctx.fillStyle = `rgba(52,211,153,${fade * 0.35})`;
           }
           ctx.font = '13px monospace';
           ctx.fillText(d.chars[j % d.chars.length], d.x, cy);

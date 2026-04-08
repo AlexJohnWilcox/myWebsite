@@ -31,10 +31,10 @@
       align-items: center;
       gap: 10px;
       padding: 12px 26px;
-      background: linear-gradient(135deg, rgba(245,166,35,0.18) 0%, rgba(245,166,35,0.08) 100%);
-      border: 1px solid rgba(245,166,35,0.5);
+      background: linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0.08) 100%);
+      border: 1px solid rgba(245,158,11,0.5);
       border-radius: 10px;
-      color: #f5a623;
+      color: #f59e0b;
       font-family: inherit;
       font-size: 0.95rem;
       font-weight: 700;
@@ -44,7 +44,7 @@
       transition: background 0.2s ease, transform 0.15s ease;
     }
     .resume-download:hover {
-      background: linear-gradient(135deg, rgba(245,166,35,0.3) 0%, rgba(245,166,35,0.15) 100%);
+      background: linear-gradient(135deg, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.15) 100%);
       transform: translateY(-2px);
     }
     .resume-download svg {
@@ -192,11 +192,11 @@
         const r = R * (0.45 + 0.55 * t);
         hexPath(c.x, c.y, r);
         if(isActive){
-          ctx.fillStyle = 'rgba(245,166,35,0.18)'; ctx.fill();
-          ctx.strokeStyle = 'rgba(245,166,35,0.55)';
+          ctx.fillStyle = 'rgba(245,158,11,0.18)'; ctx.fill();
+          ctx.strokeStyle = 'rgba(245,158,11,0.55)';
         } else if(isNeighbor){
-          ctx.fillStyle = 'rgba(245,166,35,0.06)'; ctx.fill();
-          ctx.strokeStyle = 'rgba(245,166,35,0.20)';
+          ctx.fillStyle = 'rgba(245,158,11,0.06)'; ctx.fill();
+          ctx.strokeStyle = 'rgba(245,158,11,0.20)';
         } else {
           ctx.strokeStyle = `rgba(255,255,255,${0.025 + 0.075 * t})`;
         }

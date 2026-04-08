@@ -13,38 +13,27 @@
       width:100%;height:100%;
       z-index:0;pointer-events:none;
     }
-    /* No-scroll full-viewport layout */
     body{
-      overflow:hidden;
       display:flex;
       flex-direction:column;
-      height:100vh;
+      min-height:100vh;
     }
-    header{ position:relative; z-index:1; }
+    header{ position:sticky; top:0; z-index:50; background:rgba(13,13,13,0.97); }
     .home-layout{
       flex:1;
       display:flex;
-      min-height:0;
-      overflow:hidden;
+      flex-direction:column;
       position:relative;
       z-index:1;
     }
-    /* Hero fills full space */
+    /* Hero fills viewport */
     .hero{
-      min-height:0;
-      flex:1;
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       position:relative;
       padding:24px;
-    }
-    /* Mobile overrides */
-    @media(max-width:760px){
-      body{ overflow:auto; height:auto; }
-      header{ position:sticky !important; top:0; z-index:50 !important; background:rgba(11,22,40,0.97) !important; }
-      #hex-bg{ display:none; }
-      .home-layout{ overflow:visible; }
     }
     /* 3D tilt */
     .hero-inner{
@@ -58,10 +47,112 @@
     /* Profile pic glow ring */
     .hero-photo .profile-pic{
       box-shadow:
-        0 0 0 3px rgba(107,92,242,0.5),
-        0 0 32px rgba(107,92,242,0.25),
-        0 0 70px rgba(6,200,232,0.12),
-        0 14px 50px rgba(2,6,23,0.65) !important;
+        0 0 0 3px rgba(245,158,11,0.5),
+        0 0 32px rgba(245,158,11,0.25),
+        0 0 70px rgba(34,211,238,0.12),
+        0 14px 50px rgba(0,0,0,0.65) !important;
+    }
+    /* Scroll indicator */
+    .scroll-down{
+      position:absolute;
+      bottom:80px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:0.78rem;
+      font-weight:600;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      opacity:0.6;
+      animation:float 2s ease-in-out infinite;
+    }
+    .scroll-down svg{ opacity:0.7; }
+    @keyframes float{
+      0%,100%{ transform:translateX(-50%) translateY(0); }
+      50%{ transform:translateX(-50%) translateY(8px); }
+    }
+
+    /* ── What I Do section ─────────────────────────────────────────── */
+    .wid-section{
+      position:relative;
+      z-index:1;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:80px 24px 96px;
+    }
+    .wid-heading{
+      font-size:1.75rem;
+      font-weight:800;
+      color:var(--text);
+      text-align:center;
+      margin:0 0 52px;
+      letter-spacing:-0.5px;
+    }
+    .wid-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+    @media(max-width:900px){ .wid-grid{ grid-template-columns:1fr; } }
+    .wid-card{
+      background:#1c1c1c;
+      border-radius:14px;
+      padding:30px 28px;
+      border:1px solid rgba(255,255,255,0.05);
+      border-top:3px solid var(--wid-color, var(--accent));
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wid-card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 24px rgba(0,0,0,0.25), 0 16px 40px rgba(0,0,0,0.55);
+    }
+    .wid-icon{
+      font-size:2rem;
+      width:48px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:rgba(255,255,255,0.04);
+    }
+    .wid-tag{
+      font-size:0.68rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.8px;
+      color:var(--wid-color, var(--accent));
+    }
+    .wid-card h3{
+      font-size:1.22rem;
+      font-weight:800;
+      color:var(--text);
+      margin:0;
+    }
+    .wid-card p{
+      font-size:0.93rem;
+      color:var(--muted);
+      line-height:1.65;
+      margin:0;
+      flex:1;
+    }
+
+    /* ── Mobile overrides ──────────────────────────────────────────── */
+    @media(max-width:760px){
+      header{ position:sticky !important; top:0; z-index:50 !important; background:rgba(13,13,13,0.97) !important; }
+      #hex-bg{ display:none; }
+    }
+    @media(max-width:480px){
+      .wid-section{ padding:40px 16px 56px; }
+      .wid-heading{ font-size:1.4rem; margin-bottom:28px; }
+      .wid-card{ padding:22px 18px; }
     }
   </style>
 </head>
@@ -88,9 +179,9 @@
     </nav>
   </header>
 
-  <!-- ── No-scroll layout: hero left, cards right ─────────────────── -->
   <div class="home-layout">
 
+    <!-- ── Hero ──────────────────────────────────────────────────────── -->
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-photo">
@@ -122,11 +213,48 @@
           </div>
         </div>
       </div>
+      <div class="scroll-down">
+        <span>Scroll</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
     </section>
 
+    <!-- ── What I Do ─────────────────────────────────────────────────── -->
+    <section class="wid-section">
+      <h2 class="wid-heading">What I Do</h2>
+      <div class="wid-grid">
+
+        <div class="wid-card" style="--wid-color: #f59e0b">
+          <div class="wid-icon">
+            <i class="fas fa-shield-alt" style="color:#f59e0b"></i>
+          </div>
+          <span class="wid-tag">Security</span>
+          <h3>Cybersecurity & Pentesting</h3>
+          <p>From phishing simulations and reverse proxies to full external network assessments, I specialize in identifying vulnerabilities and strengthening defenses. Hands-on experience with tools like Evilginx2, Gophish, Metasploit, Nmap, and more.</p>
+        </div>
+
+        <div class="wid-card" style="--wid-color: #22d3ee">
+          <div class="wid-icon">
+            <i class="fas fa-gamepad" style="color:#22d3ee"></i>
+          </div>
+          <span class="wid-tag">Development</span>
+          <h3>Game Design & Development</h3>
+          <p>I build games from scratch as a creative outlet, from idle fishing sims and text-based adventures to interactive geography quizzes. Currently working with HTML/CSS/JS and exploring Unity for my next project.</p>
+        </div>
+
+        <div class="wid-card" style="--wid-color: #34d399">
+          <div class="wid-icon">
+            <i class="fas fa-server" style="color:#34d399"></i>
+          </div>
+          <span class="wid-tag">Infrastructure</span>
+          <h3>IT & Systems Administration</h3>
+          <p>I run a home server with Pi-hole DNS blocking and WireGuard VPN, manage Docker deployments, and have hands-on experience with Linux system administration, networking, and cloud infrastructure.</p>
+        </div>
+
+      </div>
+    </section>
 
   </div>
-
 
   <script>
     // ── 3D tilt ───────────────────────────────────────────────────
@@ -192,7 +320,7 @@
     }
     #chat-input-row:focus-within{
       border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(107,92,242,0.18), 0 8px 32px rgba(107,92,242,0.12);
+      box-shadow:0 0 0 3px rgba(245,158,11,0.18), 0 8px 32px rgba(245,158,11,0.12);
     }
     .chat-icon{ color:var(--muted); flex-shrink:0; opacity:0.5; }
     #chat-input{
@@ -275,7 +403,6 @@
     const remEl  = document.getElementById('chat-remaining');
     let busy = false;
 
-    // --- Client-side rate limiting with localStorage ---
     function getState(){
       try {
         const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -316,7 +443,6 @@
       const state = getState();
       if(busy || state.count >= DAILY_LIMIT) return;
 
-      // Silent cooldown
       if(Date.now() - state.lastMsg < COOLDOWN_MS){
         addMsg('Please wait a moment before asking another question.', 'error');
         return;
@@ -336,7 +462,6 @@
       msgs.scrollTop = msgs.scrollHeight;
 
       try {
-        // Use Netlify function in production, local Express in dev
         const endpoint = location.hostname === 'localhost'
           ? 'http://localhost:3001/api/chat'
           : '/.netlify/functions/chat';
@@ -351,7 +476,6 @@
           addMsg(data.error || 'Something went wrong.', 'error');
         } else {
           addMsg(data.reply, 'bot');
-          // Record usage
           const s = getState();
           s.count++;
           s.lastMsg = Date.now();
@@ -367,7 +491,7 @@
   })();
   </script>
 
-  <!-- ── Hex background: depth-perspective ────────────────────────── -->
+  <!-- ── Hex background ──────────────────────────────────────────────── -->
   <script>
   (function(){
     const cv  = document.getElementById('hex-bg');
@@ -426,7 +550,6 @@
         const t = Math.min(1, Math.hypot(c.x - cw, c.y - ch) / maxDist);
         const r = R * (0.45 + 0.55 * t);
 
-        // Pulse ring contribution for this hex
         let pAlpha = 0;
         for(const p of pulses){
           const elapsed = now - p.start;
@@ -443,13 +566,13 @@
 
         hexPath(c.x, c.y, r);
         if(isActive){
-          ctx.fillStyle = 'rgba(245,166,35,0.18)';
+          ctx.fillStyle = 'rgba(245,158,11,0.18)';
           ctx.fill();
-          ctx.strokeStyle = 'rgba(245,166,35,0.55)';
+          ctx.strokeStyle = 'rgba(245,158,11,0.55)';
         } else if(pAlpha > 0.01){
-          ctx.fillStyle = `rgba(245,166,35,${pAlpha * 0.15})`;
+          ctx.fillStyle = `rgba(245,158,11,${pAlpha * 0.15})`;
           ctx.fill();
-          ctx.strokeStyle = `rgba(245,166,35,${0.1 + pAlpha * 0.55})`;
+          ctx.strokeStyle = `rgba(245,158,11,${0.1 + pAlpha * 0.55})`;
         } else {
           ctx.strokeStyle = `rgba(255,255,255,${0.025 + 0.075 * t})`;
         }
