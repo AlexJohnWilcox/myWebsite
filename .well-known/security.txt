@@ -1,0 +1,4 @@
+Contact: mailto:alexjwilcox@proton.me
+Preferred-Languages: en
+Canonical: https://alexjwilcox.com/.well-known/security.txt
+Expires: 2027-04-09T00:00:00.000Z

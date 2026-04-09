@@ -50,6 +50,43 @@ INVOLVEMENT:
 
 INTERESTS: Cybersecurity, game development, bodybuilding & nutrition, philosophy & psychology.`;
 
+// --- Server-side rate limiting (IP-based, in-memory) ---
+// Persists across warm invocations of the same Lambda instance.
+// Not shared across instances, but sufficient to block scripted abuse.
+const rateMap = new Map();
+const RATE_WINDOW_MS = 60 * 1000; // 1 minute
+const MAX_PER_WINDOW = 5;         // max requests per IP per window
+const DAILY_WINDOW_MS = 24 * 60 * 60 * 1000;
+const MAX_PER_DAY = 30;
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  let entry = rateMap.get(ip);
+  if (!entry) {
+    entry = { hits: [], dailyHits: [], blocked: false };
+    rateMap.set(ip, entry);
+  }
+
+  // Prune old entries
+  entry.hits = entry.hits.filter(t => now - t < RATE_WINDOW_MS);
+  entry.dailyHits = entry.dailyHits.filter(t => now - t < DAILY_WINDOW_MS);
+
+  if (entry.hits.length >= MAX_PER_WINDOW || entry.dailyHits.length >= MAX_PER_DAY) {
+    return true;
+  }
+
+  entry.hits.push(now);
+  entry.dailyHits.push(now);
+
+  // Prevent memory leak: evict oldest IPs if map grows too large
+  if (rateMap.size > 10000) {
+    const oldest = rateMap.keys().next().value;
+    rateMap.delete(oldest);
+  }
+
+  return false;
+}
+
 // --- Input sanitization ---
 function sanitizeInput(input) {
   if (typeof input !== 'string') return '';
@@ -76,13 +113,42 @@ function sanitizeInput(input) {
   return clean;
 }
 
+const ALLOWED_ORIGIN = 'https://alexjwilcox.com';
+
 exports.handler = async (event) => {
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+
   // Only allow POST
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' }, body: '' };
+    return { statusCode: 204, headers: corsHeaders, body: '' };
   }
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+
+  // Rate limit by IP
+  const ip = event.headers['x-forwarded-for']?.split(',')[0]?.trim()
+    || event.headers['client-ip']
+    || 'unknown';
+  if (isRateLimited(ip)) {
+    return {
+      statusCode: 429,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json', 'Retry-After': '60' },
+      body: JSON.stringify({ error: "Too many requests. Please try again later." })
+    };
+  }
+
+  // Reject oversized payloads before parsing
+  if (event.body && event.body.length > 2000) {
+    return {
+      statusCode: 413,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: "Message too long. Please keep it under 500 characters." })
+    };
   }
 
   let body;
@@ -112,14 +178,14 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       body: JSON.stringify({ reply })
     };
   } catch (err) {
     console.error('Claude API error:', err.message);
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: "Something went wrong. Try again later." })
     };
   }
