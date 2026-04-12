@@ -6,4 +6,5 @@ node_modules/
 .superpowers/
 .playwright-mcp/
 .claude/
+docs/superpowers/
 /*.png
