@@ -8,3 +8,9 @@ node_modules/
 .claude/
 docs/superpowers/
 /*.png
+CLAUDE.md
+__pycache__/
+*.pyc
+sessions.db
+.DS_Store
+Thumbs.db
