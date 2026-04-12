@@ -6,6 +6,7 @@ node_modules/
 .superpowers/
 .playwright-mcp/
 .claude/
+.serena/
 docs/superpowers/
 /*.png
 CLAUDE.md
