@@ -3,3 +3,4 @@ chatbot/.env
 chatbot/node_modules/
 netlify/functions/node_modules/
 node_modules/
+.superpowers/
