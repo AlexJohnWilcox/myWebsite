@@ -1301,4 +1301,221 @@ section.card .asec-title{
 
 /* Profile flip removed */
 
+/* ─────────────────────────────────────────────────────────────── */
+/*   About page redesign (2026-04-12)                               */
+/* ─────────────────────────────────────────────────────────────── */
+
+/* Grid wrapper — 3 rows */
+.about-grid-v2{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+/* Row 1: Bio (2fr) + Interests (1fr) */
+.about-row-bio{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Row 2: Skills (1fr) + Coursework (1fr) */
+.about-row-split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Keep cards in split rows from doubling up on bottom-margin */
+.about-row-bio > section.card,
+.about-row-split > section.card{ margin-bottom: 0; }
+
+/* Bio card typography */
+.about-row-bio h1{
+  margin: 0 0 6px;
+  font-size: 2.2rem;
+  color: var(--text);
+}
+.about-row-bio .tagline-v2{
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.about-row-bio p{
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* Interests — amber-left-border chips */
+.interests-list{
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.interests-list li{
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid var(--accent-4);
+  border-radius: 6px;
+  font-size: 0.92rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.interests-list li:last-child{ margin-bottom: 0; }
+
+/* Skills — proficiency legend */
+.skill-legend{
+  display: flex;
+  gap: 14px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 10px 0 14px;
+  letter-spacing: 0.5px;
+}
+.skill-legend .lg{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.skill-legend .dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-g{ background: #22c55e; }
+.dot-y{ background: #eab308; }
+.dot-r{ background: #ef4444; }
+
+/* Skills — groups and pills */
+.skill-group{ margin-bottom: 14px; }
+.skill-group:last-child{ margin-bottom: 0; }
+.skill-label{
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent-4);
+  margin: 0 0 8px;
+}
+.pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pill{
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.82rem;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.pill::before{
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.pill-g::before{ background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.5); }
+.pill-y::before{ background: #eab308; box-shadow: 0 0 6px rgba(234,179,8,0.5); }
+.pill-r::before{ background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.5); }
+.pill-g{ border-color: rgba(34,197,94,0.35); }
+.pill-y{ border-color: rgba(234,179,8,0.35); }
+.pill-r{ border-color: rgba(239,68,68,0.35); }
+
+/* Coursework list — amber arrow bullets */
+.course-list-v2{
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.course-list-v2 li{
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.course-list-v2 li::before{
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-4);
+  font-size: 0.85rem;
+}
+
+/* Certifications — tile grid */
+.cert-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+.cert-tile{
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 18px 12px;
+  text-align: center;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.cert-tile:hover{
+  transform: translateY(-3px);
+  border-color: rgba(245,158,11,0.45);
+  box-shadow: 0 0 18px rgba(245,158,11,0.16), 0 8px 22px rgba(0,0,0,0.4);
+}
+.cert-shield{
+  font-size: 1.6rem;
+  color: var(--accent-4);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.cert-name-v2{
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.cert-year{
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.cert-link-v2{
+  font-size: 0.72rem;
+  color: var(--accent-4);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.cert-link-v2:hover{ text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .about-row-bio{ grid-template-columns: 1fr; }
+}
+@media (max-width: 760px){
+  .about-row-split{ grid-template-columns: 1fr; }
+  .cert-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px){
+  .cert-grid{ grid-template-columns: 1fr; }
+}
+
 /* Hero bubbles removed */
