@@ -1,0 +1,45 @@
+:root {
+  /* colour */
+  --bg:        #0a0a0a;
+  --bg-card:   #0f0f0f;
+  --ink:       #f3f1ea;
+  --ink-dim:   rgba(243, 241, 234, 0.55);
+  --ink-mute:  rgba(243, 241, 234, 0.32);
+  --rule:      rgba(243, 241, 234, 0.14);
+  --accent:    #ff5a36;
+  --glitch-r:  #ff5a36;
+  --glitch-b:  #6ee7ff;
+  --sel:       rgba(255, 90, 54, 0.35);
+
+  /* type */
+  --serif: 'Fraunces Variable', 'Fraunces', Georgia, serif;
+  --sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   20px;
+  --fs-lg:   28px;
+  --fs-xl:   44px;
+  --fs-2xl:  72px;
+  --fs-3xl:  120px;
+
+  /* rhythm */
+  --unit: 8px;
+
+  /* layout */
+  --max:    1280px;
+  --gutter: 32px;
+  --nav-h:  72px;
+
+  /* motion */
+  --ease:      cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-strong: cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 16px;
+  }
+}
