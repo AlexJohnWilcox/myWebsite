@@ -1,6 +1,13 @@
 [build]
-  publish = "."
+  publish = "dist"
+  command = "npm run build"
   functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
+
+# SPA fallback. Static files (including /Games/**/index.html) resolve first.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
