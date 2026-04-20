@@ -1,0 +1,30 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.4;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 200ms var(--ease), height 200ms var(--ease), opacity 200ms var(--ease);
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor.hover {
+  width: 32px;
+  height: 32px;
+  opacity: 0.2;
+}
+
+@media (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { display: none; }
+}
