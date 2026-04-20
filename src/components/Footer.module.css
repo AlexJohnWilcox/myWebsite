@@ -1,0 +1,18 @@
+.foot {
+  border-top: 1px solid var(--rule);
+  padding: 64px var(--gutter) 40px;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  max-width: var(--max);
+  margin: 120px auto 0;
+}
+
+.foot a { color: var(--ink-dim); }
+.foot a:hover { color: var(--accent); }
+
+.left { display: flex; gap: 18px; flex-wrap: wrap; }
