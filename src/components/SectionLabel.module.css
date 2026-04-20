@@ -1,0 +1,13 @@
+.label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.label::before { content: '['; opacity: 0.8; }
+.label::after  { content: ']'; opacity: 0.8; }

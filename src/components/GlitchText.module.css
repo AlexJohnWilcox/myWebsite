@@ -1,0 +1,21 @@
+.glitch {
+  display: inline-block;
+  position: relative;
+  transition: transform 120ms var(--ease);
+}
+
+.glitch:hover {
+  text-shadow: 1px 0 var(--glitch-r), -1px 0 var(--glitch-b);
+  animation: shudder 120ms steps(3);
+}
+
+@keyframes shudder {
+  0%   { transform: translateX(0); }
+  33%  { transform: translateX(1px); }
+  66%  { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch:hover { text-shadow: none; animation: none; }
+}
