@@ -38,6 +38,10 @@ export function useTypewriter(text, { speed = 'fast', trigger = true } = {}) {
       return
     }
 
+    indexRef.current = 0
+    setDisplayed('')
+    setIsDone(false)
+
     const tick = () => {
       indexRef.current += 1
       setDisplayed(text.slice(0, indexRef.current))

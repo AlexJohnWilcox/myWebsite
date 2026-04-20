@@ -41,4 +41,22 @@ describe('useTypewriter', () => {
     act(() => { vi.advanceTimersByTime(200) })
     expect(result.current.isDone).toBe(true)
   })
+
+  it('resets from zero when text changes mid-animation', () => {
+    const { result, rerender } = renderHook(
+      ({ t }) => useTypewriter(t, { speed: 'fast', trigger: true }),
+      { initialProps: { t: 'hello' } }
+    )
+    act(() => { vi.advanceTimersByTime(1000) })
+    expect(result.current.displayed).toBe('hello')
+    expect(result.current.isDone).toBe(true)
+
+    rerender({ t: 'hi' })
+    // brand new animation: displayed resets to empty immediately
+    expect(result.current.displayed).toBe('')
+    expect(result.current.isDone).toBe(false)
+    act(() => { vi.advanceTimersByTime(1000) })
+    expect(result.current.displayed).toBe('hi')
+    expect(result.current.isDone).toBe(true)
+  })
 })

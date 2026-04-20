@@ -1,17 +1,23 @@
-import { describe, it, expect, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useScrollState } from '../useScrollState'
+
+beforeEach(() => {
+  vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+    cb(0)
+    return null
+  })
+  vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {})
+})
 
 afterEach(() => {
   window.scrollY = 0
   vi.restoreAllMocks()
 })
 
-async function fireScroll(y) {
+function fireScroll(y) {
   window.scrollY = y
   window.dispatchEvent(new Event('scroll'))
-  // let rAF callback flush
-  await new Promise((r) => setTimeout(r, 20))
 }
 
 describe('useScrollState', () => {
@@ -20,16 +26,16 @@ describe('useScrollState', () => {
     expect(result.current).toBe(false)
   })
 
-  it('returns true when scroll crosses threshold', async () => {
+  it('returns true when scroll crosses threshold', () => {
     const { result } = renderHook(() => useScrollState(48))
-    await act(async () => { await fireScroll(100) })
+    act(() => { fireScroll(100) })
     expect(result.current).toBe(true)
   })
 
-  it('returns false again after scrolling back above threshold', async () => {
+  it('returns false again after scrolling back above threshold', () => {
     const { result } = renderHook(() => useScrollState(48))
-    await act(async () => { await fireScroll(200) })
-    await act(async () => { await fireScroll(10) })
+    act(() => { fireScroll(200) })
+    act(() => { fireScroll(10) })
     expect(result.current).toBe(false)
   })
 })
