@@ -1,5 +1,16 @@
 export const projects = [
   {
+    slug: 'kline-ai-siem',
+    title: 'Kline — AI SIEM',
+    category: 'cybersecurity',
+    year: 2026,
+    tags: ['Python', 'FastAPI', 'Elasticsearch', 'Ollama', 'Docker'],
+    summary: 'Local SIEM with AI powered log analysis, anomaly detection, and a real time web dashboard.',
+    body: 'Kline is a Security Information and Event Management tool I built from scratch to monitor and analyze system logs locally. It collects logs from syslog, file watchers, Docker containers, and network sources, then runs them through a YAML based detection engine with anomaly detection. The AI layer uses Ollama for event correlation, natural language queries, and alert explanations — so instead of sifting through raw logs, I can ask plain English questions about what happened on my network. The web dashboard provides real time alerts, event search, and rule management all in one place.',
+    links: { writeup: null, demo: null, github: 'https://github.com/AlexJohnWilcox/Kline' },
+    images: [],
+  },
+  {
     slug: 'pi-hole-proxy',
     title: 'Pi-hole + Forward Proxy Home Server',
     category: 'cybersecurity',
