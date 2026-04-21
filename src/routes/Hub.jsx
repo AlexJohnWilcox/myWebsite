@@ -23,7 +23,7 @@ export function Hub() {
       </section>
 
       <section className={styles.grid}>
-        <Tile index={1} title="Digital Cloak · C2 Server" subtitle="Summer 2025 — Covenant · Sliver · Red ELK" to="/projects?category=cybersecurity" featured />
+        <Tile index={1} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=other" featured />
         <Tile index={2} title="About" subtitle="Who I am" to="/about" />
         <Tile index={3} title="Academics" subtitle="HPU · CS · Cyber spec" to="/academics" />
         <Tile index={4} title="Experience" subtitle="Roles + timeline" to="/experience" />
