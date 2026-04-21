@@ -11,6 +11,7 @@
   font-style: italic;
   font-size: clamp(36px, 7vw, 72px);
   letter-spacing: -1.5px;
+  text-transform: capitalize;
 }
 
 .hero {
@@ -48,11 +49,37 @@
 
 .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
 .cert {
+  position: relative;
   border: 1px solid var(--rule);
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+.certDownload {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+  transition: background 180ms var(--ease), color 180ms var(--ease);
+}
+.certDownload:hover { background: var(--accent); color: var(--bg); }
+.certDownload svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .cert .meta {
   font-family: var(--mono);

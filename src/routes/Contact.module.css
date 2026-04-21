@@ -11,6 +11,7 @@
   font-style: italic;
   font-size: clamp(48px, 12vw, 160px);
   letter-spacing: -3px;
+  text-transform: capitalize;
 }
 
 .layout {

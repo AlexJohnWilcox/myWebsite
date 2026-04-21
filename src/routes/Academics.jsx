@@ -12,7 +12,7 @@ export function Academics() {
       </header>
 
       <Typewriter as="div" speed="fast" className={styles.hero}>
-        {academics.school} · {academics.grad}
+        {`${academics.school} · ${academics.grad}`}
       </Typewriter>
 
       <section className={styles.section}>
@@ -27,22 +27,22 @@ export function Academics() {
         <div className={styles.certs}>
           {academics.certifications.map(c => (
             <div key={c.title} className={styles.cert}>
+              {c.pdf && (
+                <a
+                  className={styles.certDownload}
+                  href={c.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Download ${c.title} PDF`}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v13m0 0-4-4m4 4 4-4M3 21h18" /></svg>
+                  <span>PDF</span>
+                </a>
+              )}
               <span className={styles.meta}>{c.year}</span>
               <h3>{c.title}</h3>
               <div style={{ color: 'var(--ink-dim)' }}>{c.issuer}</div>
               {c.valid && <div className={styles.valid}>VALID THROUGH {c.valid.toUpperCase()}</div>}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionHead}>Involvement</h2>
-        <div className={styles.invList}>
-          {academics.involvement.map(i => (
-            <div key={i.name} className={styles.invItem}>
-              <span>{i.name}</span>
-              <span className={styles.meta}>SINCE {i.since}</span>
             </div>
           ))}
         </div>

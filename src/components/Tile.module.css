@@ -34,13 +34,25 @@
 }
 
 .tile.featured {
-  background: var(--ink);
+  background: #d4cfc0;
   color: var(--bg);
+  --accent: #0a0a0a;
   border: none;
   min-height: 460px;
 }
 .tile.featured .title { font-size: var(--fs-xl); }
 .tile.featured .sub { color: rgba(10, 10, 10, 0.7); }
+
+.featuredContent {
+  font-family: var(--mono);
+  font-size: clamp(8px, 0.85vw, 12px);
+  line-height: 1.45;
+  color: rgba(10, 10, 10, 0.82);
+  white-space: pre;
+  overflow-x: auto;
+  margin: 0;
+  padding: 8px 0;
+}
 
 .tile:hover .title {
   text-shadow: 1px 0 var(--glitch-r), -1px 0 var(--glitch-b);

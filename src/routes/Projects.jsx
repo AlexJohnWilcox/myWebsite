@@ -8,16 +8,18 @@ import styles from './Projects.module.css'
 const FILTERS = [
   { key: 'all',           label: 'All' },
   { key: 'cybersecurity', label: 'Cybersecurity' },
+  { key: 'web-design',    label: 'Web Design' },
+  { key: 'internship',    label: 'Internship' },
   { key: 'games',         label: 'Games' },
-  { key: 'other',         label: 'Other' },
 ]
 
 export function Projects() {
   const [params, setParams] = useSearchParams()
   const active = params.get('category') || 'all'
 
+  const yearEnd = (y) => typeof y === 'string' ? parseInt(y.split('-').pop(), 10) : y
   const visible = active === 'all'
-    ? projects
+    ? [...projects].sort((a, b) => yearEnd(b.year) - yearEnd(a.year))
     : projects.filter(p => p.category === active)
 
   const setActive = (key) => {
@@ -29,7 +31,7 @@ export function Projects() {
     <div className={styles.page}>
       <header className={styles.header}>
         <SectionLabel index={5}>PROJECTS</SectionLabel>
-        <Typewriter as="h1" speed="slow">Selected work.</Typewriter>
+        <Typewriter as="h1" speed="slow">The Fun Work</Typewriter>
       </header>
 
       <div className={styles.filter}>

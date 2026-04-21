@@ -74,6 +74,14 @@
 .spacer { flex: 1; }
 
 .dropdownWrap { position: relative; }
+.dropdownWrap::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
 .caret { margin-left: 4px; opacity: 0.6; font-size: 10px; }
 
 .dropdown {
@@ -134,4 +142,5 @@
     align-items: flex-start;
   }
   .nav.open .dropdown { position: static; opacity: 1; pointer-events: auto; transform: none; border: none; padding: 6px 0 0 14px; background: none; }
+  .dropdownWrap::after { display: none; }
 }

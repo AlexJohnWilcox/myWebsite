@@ -12,6 +12,7 @@
   font-style: italic;
   font-size: clamp(40px, 8vw, 88px);
   letter-spacing: -2px;
+  text-transform: capitalize;
 }
 
 .layout { display: grid; grid-template-columns: 320px 1fr; gap: 64px; }
@@ -46,6 +47,7 @@
   line-height: 1.7;
   color: var(--ink);
 }
+.para + .para { margin-top: 16px; }
 
 .pull {
   font-family: var(--serif);
@@ -57,3 +59,88 @@
   margin: 72px 0;
   max-width: 720px;
 }
+
+.interests {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 24px;
+  font-size: var(--fs-md);
+  color: var(--ink);
+}
+.interests li {
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+.interests li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+}
+@media (max-width: 560px) { .interests { grid-template-columns: 1fr; } }
+
+.skillLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-dim);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.skillLegend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.strong { background: #5fc368; }
+.intermediate { background: #d4a84b; }
+.learning { background: rgba(243, 241, 234, 0.35); }
+
+.skillGroup + .skillGroup { margin-top: 18px; }
+.skillGroupName {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.5px;
+  padding: 5px 10px;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  position: relative;
+  padding-left: 20px;
+}
+.pill::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.pill.strong::before { background: #5fc368; }
+.pill.intermediate::before { background: #d4a84b; }
+.pill.learning::before { background: rgba(243, 241, 234, 0.35); }

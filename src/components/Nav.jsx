@@ -30,11 +30,11 @@ export function Nav() {
             <NavLink to="/projects" className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}>Projects <span className={styles.caret}>▾</span></NavLink>
             <div className={styles.dropdown}>
               <Link to="/projects?category=cybersecurity">Cybersecurity</Link>
+              <Link to="/projects?category=web-design">Web Design</Link>
+              <Link to="/projects?category=internship">Internship</Link>
               <Link to="/projects?category=games">Games</Link>
-              <Link to="/projects?category=other">Other</Link>
             </div>
           </div>
-          <a className={styles.link} href="/Images/Resume-Wilcox,A.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
           <NavLink to="/contact" className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}>Contact</NavLink>
           <div className={styles.socials}>
             <a href="https://github.com/AlexJohnWilcox" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>

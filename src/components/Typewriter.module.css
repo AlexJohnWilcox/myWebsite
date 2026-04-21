@@ -8,6 +8,11 @@
   visibility: hidden;
   white-space: pre-wrap;
 }
+.ghost::after {
+  content: '';
+  display: inline-block;
+  width: 0.75em;
+}
 
 .live {
   position: absolute;

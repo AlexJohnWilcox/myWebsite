@@ -8,7 +8,7 @@ export function Experience() {
     <div className={styles.page}>
       <header className={styles.header}>
         <SectionLabel index={4}>EXPERIENCE</SectionLabel>
-        <Typewriter as="h1" speed="slow">the work.</Typewriter>
+        <Typewriter as="h1" speed="slow">The Real Work</Typewriter>
       </header>
 
       <div className={styles.timeline}>

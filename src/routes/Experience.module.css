@@ -11,6 +11,7 @@
   font-style: italic;
   font-size: clamp(40px, 8vw, 88px);
   letter-spacing: -2px;
+  text-transform: capitalize;
 }
 
 .timeline {
@@ -22,8 +23,8 @@
 
 .node {
   position: absolute;
-  left: -6px;
-  top: 8px;
+  left: -39px;
+  top: 2px;
   width: 10px;
   height: 10px;
   border-radius: 50%;

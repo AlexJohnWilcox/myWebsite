@@ -14,7 +14,7 @@ export function Hub() {
         </div>
         <Typewriter as="h1" speed="slow" className={styles.name}>Alex Wilcox</Typewriter>
         <Typewriter as="div" speed="flash" className={styles.role}>
-          CYBERSECURITY · GAME DEV · HPU 2026
+          CYBERSECURITY · WEB DESIGN · GAME DEVELOPMENT
         </Typewriter>
         <div className={styles.scrollHint}>
           <div className={styles.bars}><span /><span /><span /><span /></div>
@@ -23,12 +23,28 @@ export function Hub() {
       </section>
 
       <section className={styles.grid}>
-        <Tile index={1} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=other" featured />
-        <Tile index={2} title="About" subtitle="Who I am" to="/about" />
-        <Tile index={3} title="Academics" subtitle="HPU · CS · Cyber spec" to="/academics" />
-        <Tile index={4} title="Experience" subtitle="Roles + timeline" to="/experience" />
-        <Tile index={5} title="Projects" subtitle="Security · Games · Other" to="/projects" />
-        <Tile index={6} title="Contact" subtitle="Say hi" to="/contact" />
+        <Tile index={1} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=cybersecurity" featured>
+{`┌─ clients ─────┐       ┌──── ThinkPad · Arch Linux ────┐       ┌─ upstream ──┐
+│               │       │                                │       │             │
+│  phone        │◀═WG══▶│   WireGuard   :51820/udp      │       │   1.1.1.1   │
+│  laptop       │       │          │                     │       │   9.9.9.9   │
+│  desktop      │       │          ▼                     │       │   (DoT/DoH) │
+│               │◀─DNS─▶│   Pi-hole · 1M+ blocklist     │──────▶│             │
+└───────────────┘  :53  │          │                     │ allow └─────────────┘
+                        │     ┌────┴────┐                │
+                        │   match?    clean              │
+                        │     │          \\              │
+                        │  NXDOMAIN    forward           │
+                        │     ▼            │             │
+                        │   client   ◀─────┘             │
+                        │                                │
+                        └────────────────────────────────┘`}
+        </Tile>
+        <Tile index={2} title="About" subtitle="Me" to="/about" />
+        <Tile index={3} title="Academics" subtitle="CS · Cyber" to="/academics" />
+        <Tile index={4} title="Experience" subtitle="Roles · Timeline" to="/experience" />
+        <Tile index={5} title="Projects" subtitle="Security · Game Dev · Web Design" to="/projects" />
+        <Tile index={6} title="Contact" subtitle="Hello" to="/contact" />
       </section>
     </div>
   )

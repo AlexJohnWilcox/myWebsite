@@ -18,20 +18,38 @@ export function About() {
 
         <div>
           <div className={styles.block}>
-            <span className={styles.subLabel}>// origin</span>
-            <Typewriter as="p" speed="fast">{about.origin}</Typewriter>
+            <span className={styles.subLabel}>// overview</span>
+            {about.overview.map((para, i) => (
+              <Typewriter key={i} as="p" speed="fast" className={styles.para}>{para}</Typewriter>
+            ))}
           </div>
 
           <blockquote className={styles.pull}>{about.pullQuote}</blockquote>
 
           <div className={styles.block}>
-            <span className={styles.subLabel}>// field</span>
-            <Typewriter as="p" speed="fast">{about.field}</Typewriter>
+            <span className={styles.subLabel}>// interests</span>
+            <ul className={styles.interests}>
+              {about.interests.map(item => <li key={item}>{item}</li>)}
+            </ul>
           </div>
 
           <div className={styles.block}>
-            <span className={styles.subLabel}>// off-hours</span>
-            <Typewriter as="p" speed="fast">{about.offHours}</Typewriter>
+            <span className={styles.subLabel}>// skills</span>
+            <div className={styles.skillLegend}>
+              <span><span className={`${styles.dot} ${styles.strong}`} />Strong</span>
+              <span><span className={`${styles.dot} ${styles.intermediate}`} />Intermediate</span>
+              <span><span className={`${styles.dot} ${styles.learning}`} />Learning</span>
+            </div>
+            {about.skills.map(g => (
+              <div key={g.group} className={styles.skillGroup}>
+                <div className={styles.skillGroupName}>{g.group}</div>
+                <div className={styles.pills}>
+                  {g.items.map(it => (
+                    <span key={it.name} className={`${styles.pill} ${styles[it.level]}`}>{it.name}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

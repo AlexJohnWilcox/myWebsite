@@ -11,6 +11,7 @@
   font-style: italic;
   font-size: clamp(40px, 8vw, 88px);
   letter-spacing: -2px;
+  text-transform: capitalize;
 }
 
 .filter {
