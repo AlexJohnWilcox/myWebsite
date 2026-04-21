@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import Lenis from '@studio-freight/lenis'
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
 import { Cursor } from './components/Cursor'
@@ -40,6 +42,21 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const lenis = new Lenis({ lerp: 0.08 })
+    let rafId
+    const raf = (t) => {
+      lenis.raf(t)
+      rafId = requestAnimationFrame(raf)
+    }
+    rafId = requestAnimationFrame(raf)
+    return () => {
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+    }
+  }, [])
+
   return (
     <BrowserRouter>
       <ErrorBoundary>
