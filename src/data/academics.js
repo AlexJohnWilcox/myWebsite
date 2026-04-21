@@ -4,14 +4,18 @@ export const academics = {
   grad: 'May 2026',
 
   coursework: [
-    'Systems Security',
-    'Information Security',
-    'Operating Systems',
-    'Database Systems',
-    'Computer Systems',
-    'Web Development',
-    'Advanced Data Structures & Algorithms',
     'Software Engineering',
+    'Operating Systems',
+    'Systems Security',
+    'Database Systems',
+    'Programming Language Design & Translation',
+    'Computer Systems',
+    'Information Security',
+    'Web Development',
+    'Discrete Structures',
+    'Advanced Data Structures & Algorithms',
+    'Mobile App Technologies',
+    'Intro to Programming & Data Structures',
   ],
 
   certifications: [

@@ -114,7 +114,8 @@
 }
 .dropdown a:hover { color: var(--ink); background: rgba(255, 90, 54, 0.08); }
 
-.socials { display: flex; gap: 14px; color: var(--ink-dim); }
+.socials { display: flex; align-items: center; gap: 14px; color: var(--ink-dim); }
+.socials a { display: flex; transition: color 180ms var(--ease); }
 .socials a:hover { color: var(--accent); }
 
 .toggle { display: none; }

@@ -2,7 +2,7 @@ import { Tile } from '@/components/Tile'
 import { Typewriter } from '@/components/Typewriter'
 import styles from './Hub.module.css'
 
-const BUILD = `MMXXVI · v1.0 · BUILD ${new Date().toISOString().slice(5, 10).replace('-', '')}`
+const BUILD = `MMXXVI · v2.2 · BUILD ${new Date().toISOString().slice(5, 10).replace('-', '')}`
 
 export function Hub() {
   return (

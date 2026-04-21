@@ -20,7 +20,7 @@ export const about = {
       items: [
         { name: 'OSINT', level: 'strong' },
         { name: 'Compliance (ISO 27001, NIST)', level: 'strong' },
-        { name: 'SIEM', level: 'strong' },
+        { name: 'SIEM', level: 'intermediate' },
         { name: 'Vulnerability Assessment', level: 'intermediate' },
         { name: 'Penetration Testing', level: 'learning' },
       ],
@@ -55,7 +55,7 @@ export const about = {
         { name: 'Copilots', level: 'strong' },
         { name: 'GitHub', level: 'strong' },
         { name: 'Git', level: 'strong' },
-        { name: 'Nmap', level: 'strong' },
+        { name: 'Nmap', level: 'intermediate' },
         { name: 'Vim', level: 'intermediate' },
         { name: 'Wireshark', level: 'learning' },
       ],
