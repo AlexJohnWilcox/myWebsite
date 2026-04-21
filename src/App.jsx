@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from '@studio-freight/lenis'
@@ -8,13 +8,14 @@ import { Cursor } from './components/Cursor'
 import { ChatBubble } from './components/ChatBubble'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { ScrollToTop } from './components/ScrollToTop'
-import { Hub } from './routes/Hub'
-import { About } from './routes/About'
-import { Academics } from './routes/Academics'
-import { Experience } from './routes/Experience'
-import { Projects } from './routes/Projects'
-import { Contact } from './routes/Contact'
-import { NotFound } from './routes/NotFound'
+
+const Hub = lazy(() => import('./routes/Hub').then(m => ({ default: m.Hub })))
+const About = lazy(() => import('./routes/About').then(m => ({ default: m.About })))
+const Academics = lazy(() => import('./routes/Academics').then(m => ({ default: m.Academics })))
+const Experience = lazy(() => import('./routes/Experience').then(m => ({ default: m.Experience })))
+const Projects = lazy(() => import('./routes/Projects').then(m => ({ default: m.Projects })))
+const Contact = lazy(() => import('./routes/Contact').then(m => ({ default: m.Contact })))
+const NotFound = lazy(() => import('./routes/NotFound').then(m => ({ default: m.NotFound })))
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -27,15 +28,17 @@ function AnimatedRoutes() {
         exit={{ opacity: 0, y: -4 }}
         transition={{ duration: 0.28, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <Routes location={location}>
-          <Route path="/" element={<Hub />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/academics" element={<Academics />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+          <Routes location={location}>
+            <Route path="/" element={<Hub />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/academics" element={<Academics />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </motion.div>
     </AnimatePresence>
   )
