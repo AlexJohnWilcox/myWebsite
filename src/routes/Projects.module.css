@@ -1,11 +1,16 @@
 .page { padding: calc(var(--nav-h) + 80px) var(--gutter) 80px; max-width: var(--max); margin: 0 auto; }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
 .header h1 {
   font-family: var(--serif);
   font-style: italic;
   font-size: clamp(40px, 8vw, 88px);
   letter-spacing: -2px;
-  margin-top: 16px;
 }
 
 .filter {
