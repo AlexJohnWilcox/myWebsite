@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stars In The Void</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Black void - initial state -->
+	<div id="void"></div>
+
+	<!-- Terminal (name entry) - fades in after 2s -->
+	<div id="terminal" class="hidden">
+		<pre id="terminal-art"></pre>
+		<div id="name-entry">
+			<input id="name-input" type="text" autocomplete="off" placeholder="Enter your name..." maxlength="16" />
+			<button id="name-submit">Submit</button>
+		</div>
+	</div>
+
+	<!-- Main game area - hidden until name entered -->
+	<div id="game" class="hidden">
+		<div id="game-layout">
+			<div id="left-col">
+				<div id="viewport">
+					<pre id="ascii"></pre>
+				</div>
+				<div id="console-panel">
+					<pre id="console-art"></pre>
+					<div id="controls" class="hidden">
+						<label id="engine-toggle">
+							<input type="checkbox" id="engine-switch" checked>
+							<span>Engine On</span>
+						</label>
+						<button id="systems-btn" class="hidden">Systems</button>
+						<button id="copilot-action-btn" class="hidden">Ship Co-Pilot: 100 DM</button>
+						<button id="collapserbay-nav-btn" class="hidden">Collapser Bay</button>
+					</div>
+				</div>
+				<div id="materials" class="hidden">
+					<div id="fuel-section">
+						<span id="fuel-count">Dark-Matter: 0</span>
+						<button id="fuel-btn">Dump Fuel (+2)</button>
+					</div>
+					<div id="stardust-section" class="hidden">
+						<span id="stardust-count">Stardust: 0</span>
+						<button id="collapse-btn">Collapse (+1)</button>
+					</div>
+				</div>
+			</div>
+			<div id="right-col">
+				<div id="lore-text"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="lore.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

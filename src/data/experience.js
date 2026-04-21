@@ -19,7 +19,7 @@ export const experience = [
     org: 'High Point University',
     start: 'Aug 2024',
     end: 'Jan 2025',
-    lede: 'Front-line technical support for students, faculty, and staff across hardware, software, and networking.',
+    lede: 'Front line technical support for students, faculty, and staff across hardware, software, and networking.',
     bullets: [
       'Diagnosed and resolved hardware, software, and network tickets',
       'Managed tickets and escalation through ServiceNow',

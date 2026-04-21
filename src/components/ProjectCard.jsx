@@ -5,7 +5,7 @@ import styles from './ProjectCard.module.css'
 export function ProjectCard({ project }) {
   const [open, setOpen] = useState(false)
   return (
-    <motion.div layout className={styles.card} onClick={() => setOpen(o => !o)} data-interactive>
+    <motion.div className={styles.card} onClick={() => setOpen(o => !o)} data-interactive>
       <div className={styles.meta}>
         <span>{project.category.toUpperCase()}</span>
         <span>{project.year}</span>
@@ -28,7 +28,7 @@ export function ProjectCard({ project }) {
             <p>{project.body}</p>
             {(project.links?.github || project.links?.demo || project.links?.writeup) && (
               <div className={styles.links}>
-                {project.links.demo && <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ DEMO ]</a>}
+                {project.links.demo && <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ {project.category === 'games' ? 'PLAY' : 'DEMO'} ]</a>}
                 {project.links.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ GITHUB ]</a>}
                 {project.links.writeup && <a href={project.links.writeup} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ WRITEUP ]</a>}
               </div>

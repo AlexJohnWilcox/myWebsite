@@ -1,10 +1,15 @@
+import { useState } from 'react'
 import { Tile } from '@/components/Tile'
 import { Typewriter } from '@/components/Typewriter'
+import { projects } from '@/data/projects'
 import styles from './Hub.module.css'
+
+const games = projects.filter(p => p.category === 'games' && p.links.demo)
 
 const BUILD = `MMXXVI · v2.2 · BUILD ${new Date().toISOString().slice(5, 10).replace('-', '')}`
 
 export function Hub() {
+  const [gamesOpen, setGamesOpen] = useState(false)
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
@@ -16,6 +21,21 @@ export function Hub() {
         <Typewriter as="div" speed="flash" className={styles.role}>
           CYBERSECURITY · WEB DESIGN · GAME DEVELOPMENT
         </Typewriter>
+        <div className={styles.gamesBlurb}>
+          <button className={styles.gamesToggle} onClick={() => setGamesOpen(o => !o)} data-interactive>
+            Just here for the games? {gamesOpen ? '▴' : '▾'}
+          </button>
+          {gamesOpen && (
+            <div className={styles.gamesDropdown}>
+              {games.map(g => (
+                <div key={g.slug} className={styles.gameRow}>
+                  <span>{g.title}</span>
+                  <a href={g.links.demo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ PLAY ]</a>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <div className={styles.scrollHint}>
           <div className={styles.bars}><span /><span /><span /><span /></div>
           <span>SCROLL</span>

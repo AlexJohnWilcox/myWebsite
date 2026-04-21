@@ -2,7 +2,7 @@ export const about = {
   overview: [
     `Hi! My name's Alex, and I'm a C.S. graduate with a love for cybersecurity, making video games, and lifting weights. Computers have been my lifeblood ever since I was seven years old when I first booted up a Macbook with Minecraft installed on it. In my freshman year of high school, I built my own PC, with a Ryzen 9 CPU and Nvidia 2040 Super GPU, and I still use it today! In college I added four certifications: CompTIA's A+, Network+, and Security+ aswell as an ISO/IEC 27001:2022 Lead Auditor Certification from Mastermind. I've taken high level courses such as Software Engineering and Systems Security, and I had the incredible opportunity to work as a Systems Administration Intern at Digital Cloak LLC over the summer of 2025.`,
     `As of May 2026 I'm working on three areas related to my field: Cyber, Video Games, and Web Design. I've spent the past two months going crazy over online privacy, so much so that I've ditched my iPhone for a Google Pixel with GrapheneOS on it, installed Linux on all my computers, and even set up a Pi-Hole and Forward proxy on my router just to see if I could do it.`,
-    `I'm currently seeking a full-time position as a Security Analyst or Frontend Web Designer, I'm keeping the game design work as a hobby!`,
+    `I'm currently seeking a full time position as a Security Analyst or Frontend Web Designer, I'm keeping the game design work as a hobby!`,
   ],
 
   pullQuote: 'Cybersecurity and video games are the same thing: code.',

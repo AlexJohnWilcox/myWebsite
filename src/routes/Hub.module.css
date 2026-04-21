@@ -36,6 +36,58 @@
 }
 @keyframes pulse { 50% { opacity: 0.4; } }
 
+.gamesBlurb {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+}
+.gamesToggle {
+  background: none;
+  border: none;
+  color: var(--ink-dim);
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s var(--ease);
+}
+.gamesToggle:hover {
+  color: var(--accent);
+}
+.gamesDropdown {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 12px 16px;
+  min-width: 220px;
+}
+.gameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-dim);
+  letter-spacing: 0.5px;
+}
+.gameRow a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  transition: opacity 0.2s var(--ease);
+}
+.gameRow a:hover {
+  opacity: 0.7;
+}
+
 .name {
   font-family: var(--serif);
   font-style: italic;

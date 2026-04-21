@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #e0e0e0;
+    font-family: 'Fira Mono', 'Consolas', 'Courier New', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ---- Void (black screen) ---- */
+#void {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 100;
+    transition: opacity 1.5s ease;
+}
+#void.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ---- Terminal (name entry) ---- */
+#terminal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+#terminal.visible {
+    opacity: 1;
+}
+#terminal-art {
+    font-size: 18px;
+    line-height: 1.2;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 24px;
+}
+#name-entry {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#name-input {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 8px 12px;
+    background: #111;
+    color: #eee;
+    border: 1px solid #444;
+    outline: none;
+    width: 220px;
+}
+#name-input:focus {
+    border-color: #777;
+    color: #fff;
+}
+#name-input::placeholder {
+    color: #666;
+}
+#name-submit {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 16px;
+    background: #1a1a1a;
+    color: #ccc;
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+}
+#name-submit:hover {
+    color: #fff;
+    border-color: #777;
+}
+
+/* ---- Main game layout ---- */
+#game {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    padding: 32px 32px 32px;
+}
+#game.visible {
+    opacity: 1;
+}
+#game-layout {
+    display: flex;
+    gap: 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+#left-col {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ---- Viewport (starfield) ---- */
+#viewport {
+    background: #0a0a0a;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #2a2a2a;
+}
+#ascii {
+    white-space: pre;
+    font-size: 16px;
+    line-height: 1.1;
+    color: #999;
+}
+
+/* ---- Console panel ---- */
+#console-panel {
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+    padding: 12px 16px;
+    border: 1px solid #2a2a2a;
+    border-top: none;
+}
+#console-art {
+    white-space: pre;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #aaa;
+    text-align: center;
+}
+#controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+#engine-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #bbb;
+    cursor: pointer;
+}
+#engine-toggle input {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---- Materials bar ---- */
+#materials {
+    background: #0a0a0a;
+    border-radius: 0 0 8px 8px;
+    padding: 14px 16px;
+    border: 1px solid #2a2a2a;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+#fuel-section, #stardust-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+#fuel-count, #stardust-count {
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* ---- Generic buttons ---- */
+button {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 12px;
+    background: #1a1a1a;
+    color: #bbb;
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+button:hover {
+    color: #fff;
+    border-color: #666;
+    background: #2a2a2a;
+}
+button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* ---- Lore text ---- */
+#right-col {
+    flex: 1 1 320px;
+    min-width: 280px;
+    max-width: 420px;
+}
+#lore-text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.lore-entry {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #bbb;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.lore-entry.visible {
+    opacity: 1;
+}
+
+/* ---- Shop / Collapser subview controls ---- */
+.subview-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+}
+.subview-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+.subview-col .section-header {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 2px;
+}
+.subview-col button {
+    font-size: 12px;
+    white-space: nowrap;
+}
+.purchased-label {
+    font-size: 12px;
+    color: #6c6;
+}
+
+/* ---- Lights-on state brightens everything ---- */
+body.lights-on #viewport {
+    border-color: #444;
+}
+body.lights-on #ascii {
+    color: #ccc;
+}
+body.lights-on #console-art {
+    color: #ccc;
+}
+body.lights-on #fuel-count,
+body.lights-on #stardust-count {
+    color: #ddd;
+}
+body.lights-on .lore-entry {
+    color: #ddd;
+}
+body.lights-on #controls span,
+body.lights-on #engine-toggle {
+    color: #ccc;
+}
