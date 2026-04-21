@@ -12,7 +12,7 @@ export function Academics() {
       </header>
 
       <Typewriter as="div" speed="fast" className={styles.hero}>
-        {`${academics.school} · ${academics.grad}`}
+        {`${academics.school} · ${academics.grad} · GPA: ${academics.gpa}`}
       </Typewriter>
 
       <section className={styles.section}>

@@ -19,9 +19,7 @@ export function Experience() {
             <h2>{e.role}</h2>
             <div className={styles.org}>{e.org}</div>
             <Typewriter as="p" speed="fast" className={styles.lede}>{e.lede}</Typewriter>
-            <ul>
-              {e.bullets.map(b => <li key={b}>{b}</li>)}
-            </ul>
+            <p className={styles.summary}>{e.summary}</p>
             <div className={styles.tools}>
               {e.tools.map(t => <span key={t} className={styles.tool}>{t}</span>)}
             </div>

@@ -57,19 +57,12 @@
 
 .role .lede { margin-top: 24px; font-size: var(--fs-md); line-height: 1.7; max-width: 720px; }
 
-.role ul { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
-.role li {
-  padding-left: 22px;
-  position: relative;
+.summary {
+  margin-top: 16px;
+  font-size: var(--fs-md);
+  line-height: 1.7;
   color: var(--ink-dim);
-  line-height: 1.6;
-}
-.role li::before {
-  content: '>';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-family: var(--mono);
+  max-width: 720px;
 }
 
 .tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }

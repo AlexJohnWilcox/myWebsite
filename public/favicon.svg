@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" fill="#0a0a0a"/>
-  <text x="3" y="22"
+  <text x="16" y="23"
+        text-anchor="middle"
         font-family="'Fraunces', 'Times New Roman', serif"
         font-style="italic"
-        font-weight="500"
+        font-weight="700"
         font-size="16"
         letter-spacing="-0.8"
-        fill="#f3f1ea">AW</text>
-  <text x="22" y="22"
-        font-family="'JetBrains Mono', monospace"
-        font-weight="500"
-        font-size="16"
-        fill="#4ade80">_</text>
+        fill="#f3f1ea">AJW</text>
 </svg>

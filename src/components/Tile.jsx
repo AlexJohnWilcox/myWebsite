@@ -7,7 +7,7 @@ export function Tile({ index, title, subtitle, to, featured = false, children })
   return (
     <motion.div layoutId={`tile-${index}`} className={`${styles.tile} ${featured ? styles.featured : ''}`}>
       <Link to={to} style={{ display: 'contents' }}>
-        <SectionLabel index={index}>{featured ? 'FEATURED' : title}</SectionLabel>
+        <SectionLabel index={index}>{featured ? 'FEATURED PROJECT' : title}</SectionLabel>
         {children && <div className={styles.featuredContent}>{children}</div>}
         <div>
           <div className={styles.title}>{title}</div>

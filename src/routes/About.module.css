@@ -49,15 +49,18 @@
 }
 .para + .para { margin-top: 16px; }
 
+.pullWrap {
+  border-left: 3px solid var(--accent);
+  padding-left: 18px;
+  margin: 72px 0;
+  max-width: 720px;
+}
+
 .pull {
   font-family: var(--serif);
   font-style: italic;
   font-size: var(--fs-xl);
   line-height: 1.15;
-  border-left: 3px solid var(--accent);
-  padding-left: 24px;
-  margin: 72px 0;
-  max-width: 720px;
 }
 
 .interests {
@@ -65,26 +68,30 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px 24px;
   font-size: var(--fs-md);
   color: var(--ink);
+  counter-reset: rank;
 }
+@media (max-width: 860px) { .interests { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .interests { grid-template-columns: 1fr; } }
 .interests li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 32px;
   line-height: 1.5;
+  counter-increment: rank;
 }
 .interests li::before {
-  content: '>';
+  content: counter(rank) '.';
   position: absolute;
   left: 0;
   top: 0;
   color: var(--accent);
   font-family: var(--mono);
   font-size: var(--fs-sm);
+  min-width: 24px;
 }
-@media (max-width: 560px) { .interests { grid-template-columns: 1fr; } }
 
 .skillLegend {
   display: flex;

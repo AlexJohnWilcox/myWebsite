@@ -36,6 +36,14 @@
   text-decoration: none;
 }
 
+.slashes {
+  font-family: var(--mono);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--accent);
+  font-size: var(--fs-md);
+}
+
 .wordmark {
   font-family: var(--serif);
   font-style: italic;

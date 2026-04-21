@@ -24,13 +24,8 @@ export function About() {
             ))}
           </div>
 
-          <blockquote className={styles.pull}>{about.pullQuote}</blockquote>
-
-          <div className={styles.block}>
-            <span className={styles.subLabel}>// interests</span>
-            <ul className={styles.interests}>
-              {about.interests.map(item => <li key={item}>{item}</li>)}
-            </ul>
+          <div className={styles.pullWrap}>
+            <Typewriter as="blockquote" speed="slow" className={styles.pull}>{about.pullQuote}</Typewriter>
           </div>
 
           <div className={styles.block}>
@@ -50,6 +45,13 @@ export function About() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className={styles.block}>
+            <span className={styles.subLabel}>// interests & hobbies ranked</span>
+            <ol className={styles.interests}>
+              {about.interests.map((item, i) => <li key={item}>{item}</li>)}
+            </ol>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ export function Contact() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <SectionLabel index={6}>CONTACT</SectionLabel>
+        <SectionLabel index={7}>CONTACT</SectionLabel>
         <Typewriter as="h1" speed="slow">Let's talk.</Typewriter>
       </header>
 

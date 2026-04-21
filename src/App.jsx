@@ -13,6 +13,8 @@ import { About } from './routes/About'
 import { Academics } from './routes/Academics'
 import { Experience } from './routes/Experience'
 import { Projects } from './routes/Projects'
+import { Security } from './routes/Security'
+import { SecurityPost } from './routes/SecurityPost'
 import { Contact } from './routes/Contact'
 import { NotFound } from './routes/NotFound'
 
@@ -33,6 +35,8 @@ function AnimatedRoutes() {
           <Route path="/academics" element={<Academics />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/security" element={<Security />} />
+          <Route path="/security/:slug" element={<SecurityPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

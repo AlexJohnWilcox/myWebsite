@@ -8,10 +8,14 @@ export const about = {
   pullQuote: 'Cybersecurity and video games are the same thing: code.',
 
   interests: [
-    'Cybersecurity & Penetration Testing',
-    'Game Development & Programming',
-    'Bodybuilding & Nutrition',
-    'Philosophy & Psychology',
+    'Cybersecurity',
+    'Bodybuilding',
+    'Game Development',
+    'Penetration Testing',
+    'Nutrition & Wellness',
+    'Cooking',
+    'Philosophy & Reading',
+    'Basketball',
   ],
 
   skills: [

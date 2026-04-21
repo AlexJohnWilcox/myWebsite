@@ -2,6 +2,7 @@ export const academics = {
   degree: 'B.S. Computer Science — Cybersecurity Specialization',
   school: 'High Point University',
   grad: 'May 2026',
+  gpa: '3.39',
 
   coursework: [
     'Software Engineering',
