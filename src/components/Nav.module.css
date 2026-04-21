@@ -29,6 +29,14 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wordmark {
   font-family: var(--serif);
   font-style: italic;
   font-size: var(--fs-md);

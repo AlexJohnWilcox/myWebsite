@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { useScrollState } from '@/hooks/useScrollState'
+import { AWMark } from './AWMark'
 import styles from './Nav.module.css'
 
 export function Nav() {
@@ -12,7 +13,10 @@ export function Nav() {
   return (
     <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${open ? styles.open : ''}`}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.brand} onClick={close}>alex.wilcox</Link>
+        <Link to="/" className={styles.brand} onClick={close}>
+          <AWMark size={20} />
+          <span className={styles.wordmark}>alex.wilcox</span>
+        </Link>
         <div className={styles.spacer} />
         <button className={styles.toggle} onClick={() => setOpen(o => !o)} aria-expanded={open} aria-label="Toggle navigation">
           {open ? '[ ✕ ]' : '[ ≡ ]'}
