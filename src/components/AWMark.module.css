@@ -1,0 +1,21 @@
+.mark {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.aw {
+  font-family: 'Fraunces Variable', 'Fraunces', 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+
+.us {
+  font-family: 'JetBrains Mono', monospace;
+  font-style: normal;
+  font-weight: 500;
+  color: #4ade80;
+  margin-left: 0.1em;
+}
