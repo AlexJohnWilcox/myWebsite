@@ -1,0 +1,79 @@
+.page { padding: calc(var(--nav-h) + 80px) var(--gutter) 80px; max-width: var(--max); margin: 0 auto; }
+
+.header h1 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(36px, 7vw, 72px);
+  letter-spacing: -1.5px;
+  margin-top: 16px;
+}
+
+.hero {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: var(--fs-md);
+  color: var(--ink-dim);
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section { margin: 72px 0; }
+.sectionHead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-xl);
+  letter-spacing: -1px;
+  margin-bottom: 32px;
+}
+
+.courseGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.courseChip {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1px;
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  color: var(--ink-dim);
+}
+
+.certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.cert {
+  border: 1px solid var(--rule);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cert .meta {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  letter-spacing: 1.5px;
+}
+.cert h3 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.5px;
+}
+.cert .valid {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  margin-top: 4px;
+}
+
+.invList { display: flex; flex-direction: column; gap: 12px; }
+.invItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+}
+.invItem .meta { font-family: var(--mono); font-size: var(--fs-xs); color: var(--ink-mute); letter-spacing: 1.5px; }
