@@ -1,0 +1,47 @@
+@import '@fontsource-variable/fraunces/index.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import './tokens.css';
+@import './reset.css';
+
+body {
+  font-family: var(--sans);
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--sel); color: var(--ink); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--rule); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+html { scrollbar-color: var(--accent) var(--rule); scrollbar-width: thin; }
+
+/* Scanline overlay (toggleable by media query) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 3px,
+    rgba(255, 255, 255, 0.03) 3px 4px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

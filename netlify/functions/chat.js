@@ -15,7 +15,7 @@ RULES:
 ABOUT ALEX:
 - Full name: Alex J. Wilcox
 - Senior at High Point University, B.S. Computer Science with Cybersecurity Specialization, graduating May 2026.
-- Email: alex@alexwilcox.net | GitHub: AlexJohnWilcox | LinkedIn: alexjwilcox
+- Email: alexwilcox3@icloud.com | GitHub: AlexJohnWilcox | LinkedIn: alexjwilcox
 - Available for full-time opportunities in IT, Cybersecurity, or Penetration Testing starting May 2026.
 
 CERTIFICATIONS:

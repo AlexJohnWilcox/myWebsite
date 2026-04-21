@@ -1,0 +1,33 @@
+.wrap {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.ghost {
+  visibility: hidden;
+  white-space: pre-wrap;
+}
+
+.live {
+  position: absolute;
+  inset: 0;
+  white-space: pre-wrap;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--accent);
+  vertical-align: -0.15em;
+  margin-left: 0.1em;
+}
+
+.caretBlink {
+  animation: blink 0.8s steps(2) 1;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

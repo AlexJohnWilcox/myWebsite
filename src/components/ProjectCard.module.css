@@ -1,0 +1,66 @@
+.card {
+  border: 1px solid var(--rule);
+  padding: 28px;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card:hover { border-color: rgba(243, 241, 234, 0.4); }
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  letter-spacing: 1.5px;
+}
+
+.title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.5px;
+  color: var(--ink);
+}
+
+.summary { color: var(--ink-dim); line-height: 1.6; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border: 1px solid var(--rule);
+  color: var(--ink-dim);
+}
+
+.body {
+  font-size: var(--fs-sm);
+  color: var(--ink-dim);
+  line-height: 1.7;
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  margin-top: 8px;
+}
+
+.links {
+  display: flex;
+  gap: 14px;
+  margin-top: 14px;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 1.5px;
+}
+.links a { color: var(--accent); }
+.links a:hover { text-decoration: underline; }
