@@ -364,6 +364,7 @@ body::after {
   text-shadow: 0 0 8px #ffcc4444;
 }
 .ability-btn.active { border-color: var(--green-bright); background: rgba(0,40,20,0.9); box-shadow: 0 0 16px #00ff8844; }
+.ability-btn.ability-active { border-color: var(--gold); background: rgba(40,30,0,0.9); box-shadow: 0 0 16px #ffcc4444; color: var(--gold); }
 .ability-btn.pulse-new { animation: ability-pulse 1.5s ease-in-out infinite; }
 @keyframes ability-pulse {
   0%, 100% { border-color: var(--green-mid); box-shadow: none; transform: scale(1); }
@@ -2393,6 +2394,28 @@ body::after {
   color: rgba(68,255,170,0.5);
   font-size: 0.7rem;
   margin-bottom: 6px;
+}
+.achievement-progress {
+  position: relative;
+  height: 14px;
+  background: rgba(0,20,10,0.8);
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+.achievement-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-dark), var(--green));
+  transition: width 0.3s;
+}
+.achievement-progress-text {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  line-height: 14px;
+  color: var(--text);
+  text-shadow: 0 0 4px #000;
 }
 .achievement-reward {
   color: var(--gold);

@@ -14,6 +14,8 @@ function exportSave() {
     stats: state.stats,
     baitCooldown: state.baitCooldown,
     multiCastCooldown: state.multiCastCooldown,
+    bossBombCooldown: state.bossBombCooldown,
+    harpoonHammerCooldown: state.harpoonHammerCooldown,
     boatSettings: state.boatSettings,
     flags: state.flags,
     catalogCaught: state.catalogCaught,
@@ -62,6 +64,8 @@ function importSave(code) {
     migrateTier('fish_density', ['fish_density_2', 'fish_density_3']);
     migrateTier('gold_boost', ['gold_boost_2']);
     migrateTier('luck_boost', ['luck_boost_2']);
+    migrateTier('harpoon_damage', ['harpoon_damage_2', 'harpoon_damage_3']);
+    migrateTier('harpoon_speed', ['harpoon_speed_2', 'harpoon_speed_3']);
     // Cap net upgrades to new max
     if (state.upgrades.net_slots > 3) state.upgrades.net_slots = 3;
     if (state.upgrades.net_size > 3) state.upgrades.net_size = 3;
@@ -70,6 +74,8 @@ function importSave(code) {
     state.stats           = { ...state.stats, ...d.stats };
     state.baitCooldown    = d.baitCooldown || 0;
     state.multiCastCooldown = d.multiCastCooldown || 0;
+    state.bossBombCooldown = d.bossBombCooldown || 0;
+    state.harpoonHammerCooldown = d.harpoonHammerCooldown || 0;
     state.boatSettings    = { ...state.boatSettings, ...(d.boatSettings || {}) };
     state.flags           = { ...state.flags, ...d.flags };
     state.catalogCaught   = { ...state.catalogCaught, ...(d.catalogCaught || {}) };
@@ -152,6 +158,12 @@ function applyFlagsToDOM() {
   if (f.multiCastVisible) {
     const mc = document.getElementById('btn-multicast');
     mc.style.display = 'flex';
+  }
+  if (f.bossBombVisible) {
+    document.getElementById('btn-boss-bomb').style.display = 'flex';
+  }
+  if (f.harpoonHammerVisible) {
+    document.getElementById('btn-harpoon-hammer').style.display = 'flex';
   }
   if (f.prestigeUnlocked) {
     document.getElementById('btn-prestige').style.display = 'flex';

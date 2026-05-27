@@ -176,6 +176,18 @@ function update(dt, t) {
     state.multiCastCooldown = Math.max(0, state.multiCastCooldown - dt);
     updateMultiCastBtn();
   }
+  if (state.bossBombCooldown > 0) {
+    state.bossBombCooldown = Math.max(0, state.bossBombCooldown - dt);
+    updateBossBombBtn();
+  }
+  if (state.harpoonHammerTimer > 0) {
+    state.harpoonHammerTimer = Math.max(0, state.harpoonHammerTimer - dt);
+    updateHarpoonHammerBtn();
+  }
+  if (state.harpoonHammerCooldown > 0) {
+    state.harpoonHammerCooldown = Math.max(0, state.harpoonHammerCooldown - dt);
+    updateHarpoonHammerBtn();
+  }
 
   // ── Auto abilities: fire bait/multi-cast when off cooldown ──
   if (state.flags.autoBaitEnabled && state.upgrades.auto_bait > 0 && state.baitCooldown <= 0 && state.baitTimer <= 0) {
@@ -675,6 +687,8 @@ document.getElementById('btn-prestige-return').addEventListener('click', () => {
 
 document.getElementById('btn-bait').addEventListener('click', () => { document.getElementById('btn-bait').classList.remove('pulse-new'); useBait(); });
 document.getElementById('btn-multicast').addEventListener('click', () => { document.getElementById('btn-multicast').classList.remove('pulse-new'); useMultiCast(); });
+document.getElementById('btn-boss-bomb').addEventListener('click', () => { document.getElementById('btn-boss-bomb').classList.remove('pulse-new'); useBossBomb(); });
+document.getElementById('btn-harpoon-hammer').addEventListener('click', () => { document.getElementById('btn-harpoon-hammer').classList.remove('pulse-new'); useHarpoonHammer(); });
 document.getElementById('btn-place-net').addEventListener('click', () => {
   const btn = document.getElementById('btn-place-net');
   if (state.netCooldown > 0) return;

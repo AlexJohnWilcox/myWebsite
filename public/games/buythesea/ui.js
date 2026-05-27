@@ -108,6 +108,29 @@ function useMultiCast() {
   updateMultiCastBtn();
 }
 
+function useBossBomb() {
+  if (state.bossBombCooldown > 0 || state.upgrades.boss_bomb < 1) return;
+  if (!state.bossFight) return;
+  const dmg = Math.ceil(state.bossFight.maxHp * 0.3);
+  state.bossFight.hp -= dmg;
+  state.bossFight.hitFlash = 1;
+  cv.bossHitFlashes.push({
+    x: state.bossFight.x + (Math.random() - 0.5) * 30,
+    y: state.bossFight.y - 10,
+    text: `-${dmg}`, alpha: 1, vy: -60,
+  });
+  state.bossBombCooldown = 120 - state.upgrades.boss_bomb_cooldown * 20;
+  updateBossBombBtn();
+}
+
+function useHarpoonHammer() {
+  if (state.harpoonHammerCooldown > 0 || state.upgrades.harpoon_hammer < 1) return;
+  const duration = 10 + state.upgrades.hammer_duration * 3;
+  state.harpoonHammerTimer = duration;
+  state.harpoonHammerCooldown = 90 - state.upgrades.hammer_cooldown * 15;
+  updateHarpoonHammerBtn();
+}
+
 function sellFish(typeId) {
   const count = state.inventory[typeId] || 0;
   if (!count) return;
@@ -239,6 +262,21 @@ function checkMilestones() {
     mc.offsetHeight;
   }
 
+  if (!f.bossBombVisible && state.upgrades.boss_bomb >= 1) {
+    f.bossBombVisible = true;
+    const bb = document.getElementById('btn-boss-bomb');
+    bb.style.display = 'flex';
+    bb.classList.add('pulse-new');
+    bb.offsetHeight;
+  }
+  if (!f.harpoonHammerVisible && state.upgrades.harpoon_hammer >= 1) {
+    f.harpoonHammerVisible = true;
+    const hh = document.getElementById('btn-harpoon-hammer');
+    hh.style.display = 'flex';
+    hh.classList.add('pulse-new');
+    hh.offsetHeight;
+  }
+
   // Weapon toggle: show once harpoon is bought
   if (state.upgrades.harpoon >= 1) {
     document.getElementById('weapon-toggle').style.display = 'flex';
@@ -313,10 +351,22 @@ function renderAchievements() {
   let html = '';
   for (const ach of ACHIEVEMENTS) {
     const done = state.achievementsCompleted[ach.id];
+    let progressHtml = '';
+    if (ach.progress && !done) {
+      const p = ach.progress();
+      const clamped = Math.min(p.current, p.target);
+      const pct = Math.min(100, (clamped / p.target) * 100);
+      progressHtml = `
+        <div class="achievement-progress">
+          <div class="achievement-progress-bar" style="width:${pct}%"></div>
+          <span class="achievement-progress-text">${clamped.toLocaleString()} / ${p.target.toLocaleString()}</span>
+        </div>`;
+    }
     html += `
       <div class="achievement-item ${done ? 'achieved' : ''}">
         <div class="achievement-name">${done ? '✓ ' : ''}${ach.name}</div>
         <div class="achievement-desc">${ach.desc}</div>
+        ${progressHtml}
         <div class="achievement-reward">REWARD: ${ach.rewardDesc}</div>
       </div>
     `;
@@ -355,6 +405,40 @@ function updateMultiCastBtn() {
     btn.classList.remove('cooldown');
     btn.textContent = 'M';
     btn.title = 'MULTI-CAST';
+  }
+}
+
+function updateBossBombBtn() {
+  const btn = document.getElementById('btn-boss-bomb');
+  if (state.upgrades.boss_bomb < 1) return;
+  if (state.bossBombCooldown > 0) {
+    btn.classList.add('cooldown');
+    btn.textContent = Math.ceil(state.bossBombCooldown);
+    btn.title = `BOSS BOMB (${Math.ceil(state.bossBombCooldown)}s)`;
+  } else {
+    btn.classList.remove('cooldown');
+    btn.textContent = 'X';
+    btn.title = 'BOSS BOMB';
+  }
+}
+
+function updateHarpoonHammerBtn() {
+  const btn = document.getElementById('btn-harpoon-hammer');
+  if (state.upgrades.harpoon_hammer < 1) return;
+  if (state.harpoonHammerCooldown > 0) {
+    btn.classList.add('cooldown');
+    btn.textContent = Math.ceil(state.harpoonHammerCooldown);
+    btn.title = `HARPOON HAMMER (${Math.ceil(state.harpoonHammerCooldown)}s)`;
+  } else if (state.harpoonHammerTimer > 0) {
+    btn.classList.remove('cooldown');
+    btn.classList.add('ability-active');
+    btn.textContent = Math.ceil(state.harpoonHammerTimer);
+    btn.title = `HARPOON HAMMER ACTIVE (${Math.ceil(state.harpoonHammerTimer)}s)`;
+  } else {
+    btn.classList.remove('cooldown');
+    btn.classList.remove('ability-active');
+    btn.textContent = 'H';
+    btn.title = 'HARPOON HAMMER';
   }
 }
 
@@ -1614,9 +1698,11 @@ function performPrestige() {
       gold_boost: 0, gold_boost_2: 0,
       luck_boost: 0, luck_boost_2: 0, legendary_slow: 0,
       auto_sell: 0,
-      harpoon: 0, harpoon_damage: 0, harpoon_damage_2: 0, harpoon_speed: 0, harpoon_speed_2: 0,
+      harpoon: 0, harpoon_damage: 0, harpoon_damage_2: 0, harpoon_damage_3: 0, harpoon_speed: 0, harpoon_speed_2: 0, harpoon_speed_3: 0,
       bait_bomb: 0, bait_cooldown: 0, bait_strength: 0, auto_bait: 0,
       multi_cast: 0, multi_cooldown: 0, multi_duration: 0, multi_rods: 0, auto_multi: 0,
+      boss_bomb: 0, boss_bomb_cooldown: 0,
+      harpoon_hammer: 0, hammer_cooldown: 0, hammer_duration: 0,
       bf_spawn_rate: 0, bf_spawn_rate_2: 0, bf_effect_duration: 0, bf_sell_multiplier: 0, bf_frenzy_count: 0,
       atlas_access: 0, boat_access: 0, catalog_access: 0,
       submarine: 0,
@@ -1628,6 +1714,7 @@ function performPrestige() {
     subMode: false, subX: 0.5, subY: 0.5,
     baitTimer: 0, baitCooldown: 0,
     multiCastTimer: 0, multiCastCooldown: 0,
+    bossBombCooldown: 0, harpoonHammerTimer: 0, harpoonHammerCooldown: 0,
     autoHookTimer: 0, autoHookTarget: null, netZoneCooldown: 0, netCooldown: 0,
     boatSettings: { rodSpeedFactor: 1.0 },
     flags: {
@@ -1636,7 +1723,8 @@ function performPrestige() {
       upgradesVisited: false, atlasVisited: false,
       shopVisited: false, boatVisited: false,
       saveUnlocked: false, baitVisible: false,
-      multiCastVisible: false, consumablesSidebar: false,
+      multiCastVisible: false, bossBombVisible: false,
+      harpoonHammerVisible: false, consumablesSidebar: false,
       consumableBought: false, firstUpgradeHinted: false,
       catalogUnlocked: false, autoHookEnabled: false,
       autoSellEnabled: false, autoBaitEnabled: false,
@@ -1682,6 +1770,8 @@ function performPrestige() {
   document.getElementById('btn-catalog').style.display = 'none';
   document.getElementById('btn-bait').style.display = 'none';
   document.getElementById('btn-multicast').style.display = 'none';
+  document.getElementById('btn-boss-bomb').style.display = 'none';
+  document.getElementById('btn-harpoon-hammer').style.display = 'none';
   document.getElementById('btn-place-net').style.display = 'none';
   document.getElementById('btn-prestige').style.display = 'none';
   document.getElementById('weapon-toggle').style.display = 'none';
