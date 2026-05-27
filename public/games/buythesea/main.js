@@ -1087,8 +1087,6 @@ document.addEventListener('mousedown', (e) => {
   }
 }, true);
 
-// ─── Dev mode ───
-let _devBuffer = '';
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     if (menuOpen) { closeMenu(); return; }
@@ -1107,67 +1105,6 @@ document.addEventListener('keydown', (e) => {
       openMenu();
     }
     return;
-  }
-  if (e.key.length === 1) {
-    _devBuffer = (_devBuffer + e.key.toLowerCase()).slice(-8);
-    if (_devBuffer.endsWith('lol')) {
-      state.gold += 1000000;
-      updateAllGoldDisplays();
-      checkMilestones();
-      _devBuffer = '';
-    }
-    if (_devBuffer.endsWith('gold')) {
-      // Force spawn a golden fish
-      const pool = getSpawnPool(state.currentZone);
-      const weights = pool.weights;
-      const total = weights.reduce((a, b) => a + b, 0);
-      let r = Math.random() * total, typeId = pool.fish[0];
-      for (let i = 0; i < pool.fish.length; i++) { r -= weights[i]; if (r <= 0) { typeId = pool.fish[i]; break; } }
-      const dir = Math.random() < 0.5 ? 1 : -1;
-      const baseY = canvasH * 0.1 + Math.random() * canvasH * 0.76;
-      const sizeScale = 0.7 + Math.random() * 0.6;
-      cv.fish.push({
-        id: cv.fishIdCounter++, type: typeId,
-        x: dir === 1 ? -80 : canvasW + 80,
-        baseY, currentY: baseY, dir,
-        waveOffset: Math.random() * Math.PI * 2,
-        caught: false, catchAnim: 0, sizeScale, speedScale: 0.8 + Math.random() * 0.4,
-        golden: true,
-      });
-      _devBuffer = '';
-    }
-    if (_devBuffer.endsWith('frenzy')) {
-      const count = 8 + getUpgradeLevel('bf_frenzy_count') * 2;
-      for (let i = 0; i < count; i++) spawnFish(true);
-      showBlackFishBanner('⚡ FEEDING FRENZY!', `${count} fish spawned!`, '#00ffaa');
-      _devBuffer = '';
-    }
-    if (_devBuffer.endsWith('boon')) {
-      state.fishmongerBoonTimer = 10;
-      state.sellMultiplier = 3;
-      showBlackFishBanner('✧ FISHMONGER\'S BOON!', '3x sell price for 10s', '#ffcc44');
-      _devBuffer = '';
-    }
-    if (_devBuffer.endsWith('chest')) {
-      state.treasureChestTimer = 10;
-      showBlackFishBanner('★ TREASURE CHEST!', 'All fish spawn golden for 10s', '#ffee44');
-      _devBuffer = '';
-    }
-    if (_devBuffer.endsWith('upgrades')) {
-      for (const def of UPGRADES_DEF) {
-        state.upgrades[def.id] = def.max;
-      }
-      for (const def of CONSUMABLES_DEF) {
-        state.consumables[def.id] = 10;
-      }
-      state.stats.totalUpgradesBought = 999;
-      state.stats.totalCaught = 5000;
-      state.prestige.pearls += 50;
-      state.unlockedZones = ZONES.map((_, i) => i);
-      state.bossesDefeated = ZONES.map((_, i) => i).filter(i => i > 0);
-      updateAllGoldDisplays();
-      _devBuffer = '';
-    }
   }
 });
 
