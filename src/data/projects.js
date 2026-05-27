@@ -62,7 +62,7 @@ export const projects = [
     tags: ['HTML', 'Canvas', 'Vanilla JS'],
     summary: 'Fishing idle game built from scratch and hosted right here on the portfolio.',
     body: "Buy the Sea is a fishing idle game I've been building in my spare time. Cast your line, catch fish, sell your haul, and work your way up from humble shores to the infinite depths. Built entirely from scratch and hosted directly on my portfolio site.",
-    links: { demo: '/Games/BuytheSea/index.html', github: 'https://github.com/AlexJohnWilcox/BuytheSea', writeup: null },
+    links: { demo: '/games/buythesea/', github: 'https://github.com/AlexJohnWilcox/BuytheSea', writeup: null },
     images: [],
   },
   {
@@ -73,7 +73,7 @@ export const projects = [
     tags: ['HTML', 'Vanilla JS', 'Narrative'],
     summary: 'Slow burn text based idle game, inspired by A Dark Room and Candybox 2.',
     body: "Stars in the Void is a personal text based incremental game I've been developing in my spare time, drawing heavy inspiration from games like A Dark Room and Candybox 2. It's a slow burn, story driven idle experience where the narrative gradually unfolds as you play. I built it from scratch and host it directly on my portfolio site.",
-    links: { demo: '/Games/StarsInTheVoid/index.html', github: 'https://github.com/AlexJohnWilcox/starsinthevoid', writeup: null },
+    links: { demo: '/games/starsinthevoid/', github: 'https://github.com/AlexJohnWilcox/starsinthevoid', writeup: null },
     images: [],
   },
   {
@@ -84,7 +84,7 @@ export const projects = [
     tags: ['HTML', 'Vanilla JS', 'Geography'],
     summary: 'Interactive geography quiz, name all 197 countries before time runs out.',
     body: 'Countries of the World is an interactive geography quiz game I built where players attempt to correctly name all 197 countries. It was a fun project that combines my interests in web development and world geography into something genuinely challenging. Give it a shot and see how many you can get!',
-    links: { demo: '/Games/CountriesGame/public/index.html', github: 'https://github.com/AlexJohnWilcox/CountriesGame', writeup: null },
+    links: { demo: '/games/countriesgame/', github: 'https://github.com/AlexJohnWilcox/CountriesGame', writeup: null },
     images: [],
   },
   {
@@ -95,7 +95,7 @@ export const projects = [
     tags: ['Terminal', 'First game'],
     summary: 'The first video game I ever made, a room based text adventure from my intro programming class.',
     body: "My first ever video game I made in my intro to programming class. Creating this game was what led me to my love of game design and therefore deserved a spot in my projects section. It's a simple choose a direction, fight enemies, collect gold, and escape type of game that I created for my intro programming class.",
-    links: { demo: '/Games/firstGame/index.html', github: 'https://github.com/AlexJohnWilcox/commandLineGame', writeup: null },
+    links: { demo: '/games/firstgame/', github: 'https://github.com/AlexJohnWilcox/commandLineGame', writeup: null },
     images: [],
   },
   {

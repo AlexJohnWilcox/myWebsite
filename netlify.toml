@@ -6,7 +6,28 @@
 [functions]
   node_bundler = "esbuild"
 
-# SPA fallback. Static files (including /Games/**/index.html) resolve first.
+# Legacy game URLs → new lowercase paths
+[[redirects]]
+  from = "/Games/BuytheSea/*"
+  to = "/games/buythesea/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/Games/StarsInTheVoid/*"
+  to = "/games/starsinthevoid/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/Games/CountriesGame/public/*"
+  to = "/games/countriesgame/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/Games/firstGame/*"
+  to = "/games/firstgame/:splat"
+  status = 301
+
+# SPA fallback. Static files (including /games/**/index.html) resolve first.
 [[redirects]]
   from = "/*"
   to = "/index.html"
