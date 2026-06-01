@@ -2,10 +2,14 @@ const dt = require('./datetime')
 
 const MAX_OCCURRENCES = 1000
 
-function stepper(freq, interval) {
-  if (freq === 'daily') return (s) => dt.addDays(s, interval)
-  if (freq === 'weekly') return (s) => dt.addWeeks(s, interval)
-  if (freq === 'monthly') return (s) => dt.addMonths(s, interval)
+// The k-th occurrence start, always measured from the original anchor (ev.start)
+// so monthly clamping does not compound (Jan 31 -> Feb 28 -> Mar 31, not -> Mar 28).
+function nthStart(ev, k) {
+  const { freq, interval } = ev.recurrence
+  const step = Math.max(1, interval || 1) * k
+  if (freq === 'daily') return dt.addDays(ev.start, step)
+  if (freq === 'weekly') return dt.addWeeks(ev.start, step)
+  if (freq === 'monthly') return dt.addMonths(ev.start, step)
   throw new Error(`unknown freq: ${freq}`)
 }
 
@@ -15,27 +19,29 @@ function occurrence(ev, start) {
   return { ...ev, start, end, occurrenceId: `${ev.id}@${start}` }
 }
 
+// An occurrence overlaps the window when it starts on/before `to` and ends on/after `from`.
+// Same test for one-off and recurring occurrences.
+function overlaps(occ, fromNaive, toNaive) {
+  return dt.cmp(occ.start, toNaive) <= 0 && dt.cmp(occ.end, fromNaive) >= 0
+}
+
 function expandEvents(events, fromNaive, toNaive) {
   const out = []
   for (const ev of events) {
     if (!ev.recurrence) {
-      if (dt.cmp(ev.start, toNaive) <= 0 && dt.cmp(ev.end, fromNaive) >= 0) {
-        out.push(occurrence(ev, ev.start))
-      }
+      const occ = occurrence(ev, ev.start)
+      if (overlaps(occ, fromNaive, toNaive)) out.push(occ)
       continue
     }
-    const { freq, interval, until } = ev.recurrence
-    const next = stepper(freq, Math.max(1, interval || 1))
-    let cur = ev.start
-    let count = 0
-    while (count < MAX_OCCURRENCES) {
-      if (dt.cmp(cur, toNaive) > 0) break
+    const { until } = ev.recurrence
+    for (let k = 0; k < MAX_OCCURRENCES; k++) {
+      const start = nthStart(ev, k)
+      if (dt.cmp(start, toNaive) > 0) break
       // A date-only `until` is inclusive through the end of that day, so compare
-      // only the date portion of the current occurrence against it.
-      if (until && dt.cmp(dt.isDateOnly(until) ? cur.slice(0, 10) : cur, until) > 0) break
-      if (dt.cmp(cur, fromNaive) >= 0) out.push(occurrence(ev, cur))
-      cur = next(cur)
-      count++
+      // only the date portion of the occurrence start against it.
+      if (until && dt.cmp(dt.isDateOnly(until) ? start.slice(0, 10) : start, until) > 0) break
+      const occ = occurrence(ev, start)
+      if (overlaps(occ, fromNaive, toNaive)) out.push(occ)
     }
   }
   out.sort((a, b) => dt.cmp(a.start, b.start))

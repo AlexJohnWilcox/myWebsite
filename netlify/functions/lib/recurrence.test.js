@@ -37,4 +37,18 @@ describe('expandEvents', () => {
     expect(out.every(o => o.id === 'b')).toBe(true)
     expect(new Set(out.map(o => o.occurrenceId)).size).toBe(out.length)
   })
+
+  it('anchors monthly recurrence to the original day, not the clamped one', () => {
+    const m = { id: 'm', title: 'Rent', start: '2026-01-31T09:00', end: '2026-01-31T09:30', recurrence: { freq: 'monthly', interval: 1, until: null } }
+    const out = expandEvents([m], '2026-01-01T00:00', '2026-05-31T23:59')
+    expect(out.map(o => o.start)).toEqual([
+      '2026-01-31T09:00', '2026-02-28T09:00', '2026-03-31T09:00', '2026-04-30T09:00', '2026-05-31T09:00',
+    ])
+  })
+
+  it('includes a recurring occurrence that starts before the range but overlaps it', () => {
+    const overnight = { id: 'n', title: 'Night', start: '2026-06-01T23:00', end: '2026-06-02T01:00', recurrence: { freq: 'weekly', interval: 1, until: null } }
+    const out = expandEvents([overnight], '2026-06-02T00:00', '2026-06-02T12:00')
+    expect(out.map(o => o.start)).toEqual(['2026-06-01T23:00'])
+  })
 })
