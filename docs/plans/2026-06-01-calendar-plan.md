@@ -344,7 +344,9 @@ function expandEvents(events, fromNaive, toNaive) {
     let count = 0
     while (count < MAX_OCCURRENCES) {
       if (dt.cmp(cur, toNaive) > 0) break
-      if (until && dt.cmp(cur, until) > 0) break
+      // A date-only `until` is inclusive through the end of that day, so compare
+      // only the date portion of the current occurrence against it.
+      if (until && dt.cmp(dt.isDateOnly(until) ? cur.slice(0, 10) : cur, until) > 0) break
       if (dt.cmp(cur, fromNaive) >= 0) out.push(occurrence(ev, cur))
       cur = next(cur)
       count++
