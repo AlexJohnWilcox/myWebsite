@@ -1,16 +1,16 @@
 import { vi } from 'vitest'
 
-vi.mock('./lib/auth.js', () => ({ requireAuth: vi.fn(() => ({ sub: 'alex' })) }))
+vi.mock('./auth.js', () => ({ requireAuth: vi.fn(() => ({ sub: 'alex' })) }))
 
 const store = vi.hoisted(() => [])
-vi.mock('./lib/blobs.js', () => ({
+vi.mock('./blobs.js', () => ({
   listEvents: vi.fn(async () => store.slice()),
   putEvent: vi.fn(async (ev) => { const r = { ...ev, id: ev.id || 'new-id' }; store.push(r); return r }),
   deleteEvent: vi.fn(async (id) => { const i = store.findIndex(e => e.id === id); if (i >= 0) store.splice(i, 1) }),
 }))
 
-import { handler } from './events.js'
-import { requireAuth } from './lib/auth.js'
+import { handler } from '../events.js'
+import { requireAuth } from './auth.js'
 
 const call = (over) => handler({ httpMethod: 'GET', headers: {}, queryStringParameters: {}, body: null, ...over })
 

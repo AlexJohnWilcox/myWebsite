@@ -13,5 +13,8 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test-setup.js'],
+    // .netlify holds esbuild-bundled copies of functions during `netlify dev`;
+    // never collect those as test files.
+    exclude: ['**/node_modules/**', '**/dist/**', '**/.netlify/**'],
   },
 })
