@@ -17,6 +17,7 @@ export function EventEditor({ initial, onSave, onCancel, onDelete }) {
     reminders: initial.reminders || [],
   })
   const [picking, setPicking] = useState(null) // 'start' | 'end' | null
+  const [saving, setSaving] = useState(false)
   const set = (patch) => setF((prev) => ({ ...prev, ...patch }))
   const freq = f.recurrence ? f.recurrence.freq : 'none'
 
@@ -34,13 +35,21 @@ export function EventEditor({ initial, onSave, onCancel, onDelete }) {
     set({ reminders: has ? f.reminders.filter((r) => r !== min) : [...f.reminders, min].sort((a, b) => a - b) })
   }
 
-  function save() {
-    onSave({
-      ...(f.id ? { id: f.id } : {}),
-      title: f.title, location: f.location || null, allDay: f.allDay,
-      start: f.start, end: f.end, notes: f.notes || null,
-      recurrence: f.recurrence, reminders: f.reminders,
-    })
+  async function save() {
+    if (saving) return // guard against double-submit creating duplicate events
+    setSaving(true)
+    try {
+      await onSave({
+        ...(f.id ? { id: f.id } : {}),
+        title: f.title, location: f.location || null, allDay: f.allDay,
+        start: f.start, end: f.end, notes: f.notes || null,
+        recurrence: f.recurrence, reminders: f.reminders,
+      })
+    } catch {
+      // onSave surfaces the error; keep the editor open with the user's input
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -107,7 +116,7 @@ export function EventEditor({ initial, onSave, onCancel, onDelete }) {
         <div className={styles.buttons}>
           {(f.id ?? initial.id) && <button className={styles.delBtn} onClick={() => onDelete(f.id ?? initial.id)}>Delete</button>}
           <button className={styles.cancelBtn} onClick={onCancel}>Cancel</button>
-          <button className={styles.saveBtn} onClick={save}>Save</button>
+          <button className={styles.saveBtn} onClick={save} disabled={saving}>{saving ? '…' : 'Save'}</button>
         </div>
       </div>
     </div>

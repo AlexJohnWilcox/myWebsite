@@ -12,5 +12,5 @@ export function Calendar() {
 
   if (status === 'loading') return <div style={{ minHeight: '60vh' }} />
   if (status === 'out') return <Login login={api.login} onAuthed={() => setStatus('in')} />
-  return <CalendarApp />
+  return <CalendarApp onAuthExpired={() => setStatus('out')} />
 }
