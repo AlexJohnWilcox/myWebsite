@@ -16,6 +16,7 @@ import { Projects } from './routes/Projects'
 import { Security } from './routes/Security'
 import { SecurityPost } from './routes/SecurityPost'
 import { Contact } from './routes/Contact'
+import { Calendar } from './routes/Calendar'
 import { NotFound } from './routes/NotFound'
 
 function AnimatedRoutes() {
@@ -38,6 +39,7 @@ function AnimatedRoutes() {
           <Route path="/security" element={<Security />} />
           <Route path="/security/:slug" element={<SecurityPost />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
