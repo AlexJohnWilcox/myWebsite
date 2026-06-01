@@ -1064,8 +1064,9 @@ export function occurrenceMs(naive) {
 
 export function reminderKey(occurrenceId, offset) { return `${occurrenceId}|${offset}` }
 
-// Returns reminders whose fire-time (start - offset) has arrived, the start has
-// not yet passed, and which have not already fired.
+// Fires a reminder only within its 1-minute polling window so a late app-open
+// doesn't replay stale reminders (e.g. a "60 min before" when 9 min remain).
+// Window: start - offset*60s <= now <= start - (offset-1)*60s; start not passed; not already fired.
 export function computeDue(occurrences, nowMs, firedSet) {
   const due = []
   for (const occ of occurrences) {
@@ -1073,8 +1074,10 @@ export function computeDue(occurrences, nowMs, firedSet) {
     if (nowMs >= startMs) continue
     for (const offset of occ.reminders || []) {
       const fireAt = startMs - offset * 60000
+      const windowEnd = startMs - (offset - 1) * 60000
       const key = reminderKey(occ.occurrenceId, offset)
-      if (nowMs >= fireAt && !firedSet.has(key)) due.push({ occurrenceId: occ.occurrenceId, offset, event: occ, key })
+      if (nowMs >= fireAt && nowMs <= windowEnd && !firedSet.has(key))
+        due.push({ occurrenceId: occ.occurrenceId, offset, event: occ, key })
     }
   }
   return due
