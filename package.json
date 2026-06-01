@@ -15,8 +15,11 @@
     "@fontsource-variable/fraunces": "^5.0.0",
     "@fontsource/inter": "^5.0.0",
     "@fontsource/jetbrains-mono": "^5.0.0",
+    "@netlify/blobs": "^10.7.9",
     "@studio-freight/lenis": "^1.0.42",
+    "bcryptjs": "^3.0.3",
     "framer-motion": "^11.3.0",
+    "jsonwebtoken": "^9.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0"
