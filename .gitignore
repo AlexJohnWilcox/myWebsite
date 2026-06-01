@@ -15,3 +15,6 @@ __pycache__/
 sessions.db
 .DS_Store
 Thumbs.db
+
+# Local Netlify folder
+.netlify
