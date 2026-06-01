@@ -16,7 +16,9 @@ function nthStart(ev, k) {
 function occurrence(ev, start) {
   const duration = dt.toMs(ev.end) - dt.toMs(ev.start)
   const end = dt.fromMs(dt.toMs(start) + duration, dt.isDateOnly(ev.start))
-  return { ...ev, start, end, occurrenceId: `${ev.id}@${start}` }
+  // Carry the original series anchor so a whole-series edit can preserve it
+  // instead of shifting the series to the edited occurrence's date.
+  return { ...ev, start, end, occurrenceId: `${ev.id}@${start}`, seriesStart: ev.start, seriesEnd: ev.end }
 }
 
 // An occurrence overlaps the window when it starts on/before `to` and ends on/after `from`.

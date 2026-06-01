@@ -20,15 +20,30 @@ function nowNaiveMs() {
   return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes())
 }
 
-export function CalendarApp() {
+// A grid click hands back an expanded occurrence whose `start` is the occurrence's
+// date. Editing is whole-series, so edit from the series anchor (seriesStart/End) —
+// otherwise saving a recurring event would shift the whole series to that date.
+export function toEditable(occ) {
+  return occ.recurrence && occ.seriesStart
+    ? { ...occ, start: occ.seriesStart, end: occ.seriesEnd }
+    : occ
+}
+
+export function CalendarApp({ onAuthExpired }) {
   const [view, setView] = useState('month')
   const [cursor, setCursor] = useState(todayStr()) // anchor date
   const [events, setEvents] = useState([])
   const [editing, setEditing] = useState(null) // event object or null
+  const [error, setError] = useState('')
   const today = todayStr()
   const fired = useRef(new Set())
 
   const [year, month] = [Number(cursor.slice(0, 4)), Number(cursor.slice(5, 7))]
+
+  const onError = useCallback((err) => {
+    if (err && err.status === 401) onAuthExpired?.()
+    else setError(err?.message || 'Something went wrong')
+  }, [onAuthExpired])
 
   const rangeFor = useCallback(() => {
     if (view === 'month') {
@@ -44,9 +59,13 @@ export function CalendarApp() {
 
   const reload = useCallback(async () => {
     const [from, to] = rangeFor()
-    const { events } = await api.list(from, to)
-    setEvents(events)
-  }, [rangeFor])
+    try {
+      const { events } = await api.list(from, to)
+      setEvents(events)
+    } catch (err) {
+      onError(err)
+    }
+  }, [rangeFor, onError])
 
   useEffect(() => { reload() }, [reload])
 
@@ -82,12 +101,30 @@ export function CalendarApp() {
 
   const heading = view === 'month' ? fmtMonthYear(year, month) : cursor
 
+  // Throws on failure so the editor can keep its input and surface the error.
   async function handleSave(ev) {
-    if (ev.id) await api.update(ev); else await api.create(ev)
-    setEditing(null)
-    reload()
+    setError('')
+    try {
+      if (ev.id) await api.update(ev); else await api.create(ev)
+      setEditing(null)
+      reload()
+    } catch (err) {
+      onError(err)
+      throw err
+    }
   }
-  async function handleDelete(id) { await api.remove(id); setEditing(null); reload() }
+  async function handleDelete(id) {
+    setError('')
+    try {
+      await api.remove(id)
+      setEditing(null)
+      reload()
+    } catch (err) {
+      onError(err)
+    }
+  }
+
+  function openEvent(occ) { setEditing(toEditable(occ)) }
 
   function newOn(date) {
     setEditing({ title: '', location: '', allDay: false, start: `${date}T09:00`, end: `${date}T10:00`, notes: '', recurrence: null, reminders: [] })
@@ -99,9 +136,11 @@ export function CalendarApp() {
         onPrev={() => shift(-1)} onNext={() => shift(1)} onToday={() => setCursor(today)}
         onNew={() => newOn(today)} />
 
-      {view === 'month' && <MonthView year={year} month={month} today={today} events={events} onOpenEvent={setEditing} onNewOn={newOn} />}
-      {view === 'week' && <WeekView anchorDate={cursor} events={events} onOpenEvent={setEditing} />}
-      {view === 'day' && <DayView date={cursor} events={events} onOpenEvent={setEditing} />}
+      {error && <p className={styles.errorBanner} role="alert">{error}</p>}
+
+      {view === 'month' && <MonthView year={year} month={month} today={today} events={events} onOpenEvent={openEvent} onNewOn={newOn} />}
+      {view === 'week' && <WeekView anchorDate={cursor} events={events} onOpenEvent={openEvent} />}
+      {view === 'day' && <DayView date={cursor} events={events} onOpenEvent={openEvent} />}
 
       {editing && (
         <EventEditor

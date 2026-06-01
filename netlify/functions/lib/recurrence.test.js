@@ -51,4 +51,12 @@ describe('expandEvents', () => {
     const out = expandEvents([overnight], '2026-06-02T00:00', '2026-06-02T12:00')
     expect(out.map(o => o.start)).toEqual(['2026-06-01T23:00'])
   })
+
+  it('carries the original series anchor on every occurrence', () => {
+    const out = expandEvents([weekly], '2026-06-01T00:00', '2026-06-30T23:59')
+    expect(out.every(o => o.seriesStart === '2026-06-01T09:00' && o.seriesEnd === '2026-06-01T09:15')).toBe(true)
+    // a later occurrence has a shifted start but the same anchor
+    const third = out.find(o => o.start === '2026-06-15T09:00')
+    expect(third.seriesStart).toBe('2026-06-01T09:00')
+  })
 })
