@@ -1,0 +1,43 @@
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+.modal { width: 100%; max-width: 380px; max-height: 90vh; overflow-y: auto; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 12px; padding: 20px; }
+.title { font-family: var(--serif); font-size: var(--fs-md); margin: 0 0 14px; }
+.label { display: block; font-family: var(--mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); margin: 12px 0 5px; }
+.input { width: 100%; box-sizing: border-box; text-align: left; background: var(--bg); border: 1px solid var(--rule); border-radius: 7px; padding: 9px 11px; color: var(--ink); font-size: var(--fs-sm); }
+.input:focus { outline: none; border-color: var(--accent); }
+.titleInput { font-size: var(--fs-base); border-color: rgba(255,90,54,0.5); }
+.toggleRow { display: flex; align-items: center; justify-content: space-between; margin: 14px 0; font-size: var(--fs-sm); }
+.two { display: flex; gap: 10px; }
+.two > div { flex: 1; }
+.seg { display: flex; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; }
+.segItem, .segOn { flex: 1; padding: 7px 0; font-size: var(--fs-xs); color: var(--ink-dim); }
+.segOn { background: var(--accent); color: var(--bg); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip, .chipOn { padding: 4px 10px; border-radius: 14px; font-size: var(--fs-xs); border: 1px solid var(--rule); color: var(--ink-dim); }
+.chipOn { background: rgba(110,231,255,0.12); border-color: var(--glitch-b); color: var(--glitch-b); }
+.textarea { width: 100%; box-sizing: border-box; min-height: 60px; background: var(--bg); border: 1px solid var(--rule); border-radius: 7px; padding: 9px 11px; color: var(--ink); font-size: var(--fs-sm); resize: vertical; }
+.buttons { display: flex; gap: 8px; margin-top: 18px; }
+.delBtn { padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,90,54,0.4); color: var(--accent); }
+.cancelBtn { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--rule); color: var(--ink-dim); }
+.saveBtn { flex: 1; padding: 10px; border-radius: 8px; background: var(--accent); color: var(--bg); font-weight: 600; }
+
+/* Popover (DateTimePicker) */
+.popover { margin-top: 8px; background: var(--bg); border: 1px solid var(--rule); border-radius: 10px; padding: 12px; }
+.stepDots { display: flex; gap: 6px; justify-content: center; margin-bottom: 10px; }
+.dot, .dotOn { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-mute); }
+.dotOn { background: var(--accent); }
+.pickerHead { display: flex; align-items: center; justify-content: space-between; font-family: var(--serif); margin-bottom: 8px; }
+.iconBtn { width: 28px; height: 28px; border: 1px solid var(--rule); border-radius: 6px; color: var(--ink); }
+.dayGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.dayCell { padding: 7px 0; border-radius: 6px; font-size: var(--fs-sm); color: var(--ink); }
+.daySel { background: var(--accent); color: var(--bg); font-weight: 700; }
+.dayMut { opacity: 0.25; }
+.backLink { font-size: var(--fs-xs); color: var(--ink-dim); margin-bottom: 8px; }
+.timeBig { text-align: center; font-family: var(--mono); font-size: 34px; color: var(--accent); margin: 8px 0; }
+.wheels { display: flex; gap: 8px; justify-content: center; }
+.wheel { height: 132px; overflow-y: auto; border: 1px solid var(--rule); border-radius: 8px; width: 60px; }
+.wheelItem, .wheelOn { display: block; width: 100%; padding: 6px 0; font-family: var(--mono); font-size: var(--fs-sm); color: var(--ink-dim); }
+.wheelOn { background: rgba(255,90,54,0.18); color: var(--accent); }
+
+@media (max-width: 640px) {
+  .modal { max-width: 100%; height: 100%; max-height: 100vh; border-radius: 0; }
+}
