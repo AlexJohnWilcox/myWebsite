@@ -30,4 +30,16 @@ describe('auth', () => {
     expect(auth.requireAuth({ headers: { cookie: `cal_session=${token}` } })).toBeTruthy()
     expect(auth.requireAuth({ headers: {} })).toBeNull()
   })
+
+  it('parses a bearer token from the Authorization header', () => {
+    expect(auth.bearerFromEvent({ headers: { authorization: 'Bearer tok456' } })).toBe('tok456')
+    expect(auth.bearerFromEvent({ headers: { Authorization: 'Bearer tok789' } })).toBe('tok789')
+    expect(auth.bearerFromEvent({ headers: {} })).toBeNull()
+  })
+
+  it('requireAuth accepts a valid bearer token', () => {
+    const token = auth.signSession()
+    expect(auth.requireAuth({ headers: { authorization: `Bearer ${token}` } })).toBeTruthy()
+    expect(auth.requireAuth({ headers: { authorization: 'Bearer not.a.jwt' } })).toBeNull()
+  })
 })

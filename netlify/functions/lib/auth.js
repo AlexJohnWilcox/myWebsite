@@ -34,9 +34,15 @@ function tokenFromEvent(event) {
   return null
 }
 
+function bearerFromEvent(event) {
+  const raw = (event.headers && (event.headers.authorization || event.headers.Authorization)) || ''
+  const m = raw.match(/^Bearer\s+(.+)$/i)
+  return m ? m[1].trim() : null
+}
+
 function requireAuth(event) {
-  const token = tokenFromEvent(event)
+  const token = tokenFromEvent(event) || bearerFromEvent(event)
   return token ? verifySession(token) : null
 }
 
-module.exports = { COOKIE, signSession, verifySession, serializeCookie, clearCookie, tokenFromEvent, requireAuth }
+module.exports = { COOKIE, signSession, verifySession, serializeCookie, clearCookie, tokenFromEvent, bearerFromEvent, requireAuth }
