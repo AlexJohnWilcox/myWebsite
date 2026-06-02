@@ -1,0 +1,9 @@
+.wrap { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.card { width: 100%; max-width: 340px; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 12px; padding: 28px; }
+.title { font-family: var(--serif); font-size: var(--fs-lg); margin: 0 0 20px; }
+.label { display: block; font-family: var(--mono); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); margin-bottom: 8px; }
+.input { width: 100%; box-sizing: border-box; background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; padding: 11px 13px; color: var(--ink); font-size: var(--fs-base); }
+.input:focus { outline: none; border-color: var(--accent); }
+.error { color: var(--accent); font-size: var(--fs-sm); margin: 10px 0 0; }
+.button { margin-top: 18px; width: 100%; padding: 12px; border-radius: 8px; background: var(--accent); color: var(--bg); font-weight: 600; }
+.button:disabled { opacity: 0.6; }

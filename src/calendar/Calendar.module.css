@@ -1,0 +1,33 @@
+.page { max-width: var(--max); margin: 0 auto; padding: calc(var(--nav-h) + 16px) var(--gutter) 48px; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.navGroup, .rightGroup { display: flex; align-items: center; gap: 8px; }
+.heading { font-family: var(--serif); font-size: var(--fs-lg); margin: 0 0 0 6px; }
+.iconBtn { width: 34px; height: 34px; border: 1px solid var(--rule); border-radius: 8px; color: var(--ink); font-size: 18px; }
+.todayBtn { padding: 7px 12px; border: 1px solid var(--rule); border-radius: 8px; color: var(--ink-dim); font-size: var(--fs-sm); }
+.switcher { display: flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.seg, .segOn { padding: 7px 14px; font-size: var(--fs-sm); color: var(--ink-dim); }
+.segOn { background: var(--accent); color: var(--bg); font-weight: 600; }
+.newBtn { padding: 8px 14px; border-radius: 8px; background: var(--accent); color: var(--bg); font-weight: 600; font-size: var(--fs-sm); }
+.errorBanner { margin: 0 0 12px; padding: 9px 12px; border-radius: 8px; border: 1px solid rgba(255,90,54,0.4); background: rgba(255,90,54,0.1); color: var(--accent); font-size: var(--fs-sm); }
+
+/* Month grid */
+.monthGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.dowHead { text-align: center; font-family: var(--mono); font-size: var(--fs-xs); color: var(--ink-mute); text-transform: uppercase; padding: 6px 0; }
+.cell { min-height: 92px; background: var(--bg-card); border: 1px solid var(--rule); border-radius: 6px; padding: 5px 6px; cursor: pointer; }
+.cellOut { opacity: 0.4; }
+.cellToday { border-color: var(--accent); }
+.cellNum { font-size: var(--fs-sm); color: var(--ink-dim); }
+.chip { display: block; width: 100%; text-align: left; margin-top: 3px; font-size: 11px; padding: 2px 5px; border-radius: 4px; background: rgba(255,90,54,0.18); color: var(--ink); border-left: 2px solid var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Week / day time-grid */
+.timeGrid { display: grid; grid-template-columns: 56px 1fr; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.timeCol { border-right: 1px solid var(--rule); }
+.hourRow { height: 44px; border-bottom: 1px solid var(--rule); font-family: var(--mono); font-size: 10px; color: var(--ink-mute); padding: 2px 5px; }
+.dayCols { display: grid; }
+.dayColHead { text-align: center; font-size: var(--fs-sm); padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.tEvent { margin: 2px 4px; padding: 3px 6px; border-radius: 5px; background: rgba(255,90,54,0.2); border-left: 3px solid var(--accent); font-size: 11px; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .heading { font-size: var(--fs-md); }
+  .cell { min-height: 64px; }
+}
