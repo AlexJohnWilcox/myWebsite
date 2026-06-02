@@ -4,6 +4,7 @@ vi.mock('./auth.js', () => ({ requireAuth: vi.fn(() => ({ sub: 'alex' })) }))
 
 const store = vi.hoisted(() => [])
 vi.mock('./blobs.js', () => ({
+  connect: vi.fn(),
   listEvents: vi.fn(async () => store.slice()),
   putEvent: vi.fn(async (ev) => { const r = { ...ev, id: ev.id || 'new-id' }; store.push(r); return r }),
   deleteEvent: vi.fn(async (id) => { const i = store.findIndex(e => e.id === id); if (i >= 0) store.splice(i, 1) }),
@@ -11,16 +12,22 @@ vi.mock('./blobs.js', () => ({
 
 import { handler } from '../events.js'
 import { requireAuth } from './auth.js'
+import { connect } from './blobs.js'
 
 const call = (over) => handler({ httpMethod: 'GET', headers: {}, queryStringParameters: {}, body: null, ...over })
 
-beforeEach(() => { store.length = 0; requireAuth.mockReturnValue({ sub: 'alex' }) })
+beforeEach(() => { store.length = 0; requireAuth.mockReturnValue({ sub: 'alex' }); connect.mockClear() })
 
 describe('events handler', () => {
   it('401s when unauthenticated', async () => {
     requireAuth.mockReturnValueOnce(null)
     const res = await call({})
     expect(res.statusCode).toBe(401)
+  })
+
+  it('connects the Blobs environment from the Lambda event before serving', async () => {
+    await call({ blobs: 'b64-context' })
+    expect(connect).toHaveBeenCalledWith(expect.objectContaining({ blobs: 'b64-context' }))
   })
 
   it('creates an event on POST and returns it with an id', async () => {

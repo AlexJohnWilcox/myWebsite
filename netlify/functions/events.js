@@ -1,5 +1,5 @@
 import { requireAuth } from './lib/auth.js'
-import { listEvents, putEvent, deleteEvent } from './lib/blobs.js'
+import { connect, listEvents, putEvent, deleteEvent } from './lib/blobs.js'
 import { validateEvent } from './lib/validate.js'
 import { expandEvents } from './lib/recurrence.js'
 
@@ -11,6 +11,7 @@ const json = (statusCode, body) => ({
 
 export const handler = async (event) => {
   if (!requireAuth(event)) return json(401, { error: 'unauthorized' })
+  connect(event)
 
   const method = event.httpMethod
   const q = event.queryStringParameters || {}
