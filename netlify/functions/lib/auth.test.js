@@ -35,6 +35,7 @@ describe('auth', () => {
     expect(auth.bearerFromEvent({ headers: { authorization: 'Bearer tok456' } })).toBe('tok456')
     expect(auth.bearerFromEvent({ headers: { Authorization: 'Bearer tok789' } })).toBe('tok789')
     expect(auth.bearerFromEvent({ headers: {} })).toBeNull()
+    expect(auth.bearerFromEvent({ headers: { authorization: 'Bearer ' } })).toBeNull()
   })
 
   it('requireAuth accepts a valid bearer token', () => {
