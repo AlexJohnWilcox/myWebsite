@@ -544,31 +544,6 @@ body::after {
   100% { opacity: 0; transform: scale(1.05); }
 }
 
-/* Pause overlay */
-#pause-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.92);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  z-index: 1500;
-}
-.pause-text {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 12px;
-  color: var(--green-mid);
-  text-shadow: 0 0 30px rgba(0,255,136,0.3);
-}
-.pause-sub {
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  color: var(--green-dark);
-}
-
 .bubble-btn {
   opacity: 0;
   transform: translateY(12px) scale(0.92);

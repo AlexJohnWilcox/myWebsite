@@ -1297,24 +1297,6 @@ function init() {
   // Auto-save every minute
   startAutoSave();
 
-  // Pause when window is not maximized/focused
-  function checkPause() {
-    const isMax = document.visibilityState === 'visible' &&
-      window.innerWidth >= screen.availWidth * 0.8 &&
-      window.innerHeight >= screen.availHeight * 0.8;
-    const pauseEl = document.getElementById('pause-overlay');
-    if (!isMax && !gamePaused) {
-      gamePaused = true;
-      pauseEl.style.display = 'flex';
-    } else if (isMax && gamePaused && !menuOpen) {
-      gamePaused = false;
-      pauseEl.style.display = 'none';
-      currentT = performance.now() / 1000;
-    }
-  }
-  window.addEventListener('resize', checkPause);
-  document.addEventListener('visibilitychange', checkPause);
-  setInterval(checkPause, 1000);
 }
 
 initTitleScreen();
