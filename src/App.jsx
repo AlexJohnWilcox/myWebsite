@@ -50,9 +50,13 @@ function AnimatedRoutes() {
   )
 }
 
-function Layout() {
+export function Layout() {
   const { pathname } = useLocation()
   const bare = isBareRoute(pathname)
+  useEffect(() => {
+    document.body.classList.toggle('bare', bare)
+    return () => document.body.classList.remove('bare')
+  }, [bare])
   return (
     <>
       {!bare && <Cursor />}

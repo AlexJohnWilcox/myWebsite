@@ -36,6 +36,8 @@ body::after {
   );
 }
 
+body.bare::after { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   body::after { display: none; }
   *, *::before, *::after {
