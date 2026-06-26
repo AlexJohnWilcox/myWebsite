@@ -8,6 +8,7 @@ import { Cursor } from './components/Cursor'
 import { ChatBubble } from './components/ChatBubble'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { ScrollToTop } from './components/ScrollToTop'
+import { isBareRoute } from './lib/chrome'
 import { Hub } from './routes/Hub'
 import { About } from './routes/About'
 import { Academics } from './routes/Academics'
@@ -17,6 +18,7 @@ import { Security } from './routes/Security'
 import { SecurityPost } from './routes/SecurityPost'
 import { Contact } from './routes/Contact'
 import { Calendar } from './routes/Calendar'
+import { Rapids } from './routes/Rapids'
 import { NotFound } from './routes/NotFound'
 
 function AnimatedRoutes() {
@@ -40,10 +42,29 @@ function AnimatedRoutes() {
           <Route path="/security/:slug" element={<SecurityPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/calendar" element={<Calendar />} />
+          <Route path="/rapids" element={<Rapids />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
+  )
+}
+
+export function Layout() {
+  const { pathname } = useLocation()
+  const bare = isBareRoute(pathname)
+  useEffect(() => {
+    document.body.classList.toggle('bare', bare)
+    return () => document.body.classList.remove('bare')
+  }, [bare])
+  return (
+    <>
+      {!bare && <Cursor />}
+      {!bare && <Nav />}
+      <AnimatedRoutes />
+      {!bare && <Footer />}
+      {!bare && <ChatBubble />}
+    </>
   )
 }
 
@@ -67,11 +88,7 @@ export default function App() {
     <BrowserRouter>
       <ErrorBoundary>
         <ScrollToTop />
-        <Cursor />
-        <Nav />
-        <AnimatedRoutes />
-        <Footer />
-        <ChatBubble />
+        <Layout />
       </ErrorBoundary>
     </BrowserRouter>
   )
