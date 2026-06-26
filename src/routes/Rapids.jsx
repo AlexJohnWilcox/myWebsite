@@ -3,6 +3,48 @@ import { motion } from 'framer-motion'
 import { Media } from '@/components/rapids/Media'
 import styles from './Rapids.module.css'
 
+const reveal = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
+}
+
+function Reveal({ children, className = '' }) {
+  return (
+    <motion.div
+      className={className}
+      variants={reveal}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+const MECHANICS = [
+  {
+    title: 'Two-Hand Grab',
+    body: "Two independent hands. Hold the cargo or hold the raft — you can't do both.",
+    media: { type: 'video', src: '/rapids/grab.mp4', label: 'grab.mp4' },
+  },
+  {
+    title: 'No Steering, Only Chaos',
+    body: "The current decides where you go. Spot hazards, brace, and clean up the mess.",
+    media: { type: 'video', src: '/rapids/collision.mp4', label: 'collision.mp4' },
+  },
+  {
+    title: 'The Wave',
+    body: "A wall of water chases you the whole way down — and it never gets tired.",
+    media: { type: 'video', src: '/rapids/wave.mp4', label: 'wave.mp4' },
+  },
+  {
+    title: 'Quotas That Only Get Harder',
+    body: "Hit the quota, ship more cargo, do it again. There is no winning — only further.",
+    media: { type: 'image', src: '/rapids/quota.jpg', label: 'quota.jpg' },
+  },
+]
+
 function Hero() {
   return (
     <section className={styles.hero}>
@@ -22,10 +64,44 @@ function Hero() {
   )
 }
 
+function Pitch() {
+  return (
+    <section className={styles.pitch}>
+      <Reveal>
+        <p className={styles.pitchText}>
+          Haul cargo down a <em>river you can't steer</em>, with a wall of water
+          closing in behind you. Your crew of critters is barely holding on.
+          How far will you make it?
+        </p>
+      </Reveal>
+    </section>
+  )
+}
+
+function Mechanics() {
+  return (
+    <section className={styles.mechanics}>
+      {MECHANICS.map((m, i) => (
+        <Reveal key={m.title} className={`${styles.mechCard} ${i % 2 === 1 ? styles.mechReverse : ''}`}>
+          <div className={styles.mechMedia}>
+            <Media {...m.media} className={styles.mechMediaInner} />
+          </div>
+          <div className={styles.mechText}>
+            <h2 className={styles.mechTitle}>{m.title}</h2>
+            <p className={styles.mechBody}>{m.body}</p>
+          </div>
+        </Reveal>
+      ))}
+    </section>
+  )
+}
+
 export function Rapids() {
   return (
     <main className={styles.page}>
       <Hero />
+      <Pitch />
+      <Mechanics />
     </main>
   )
 }
