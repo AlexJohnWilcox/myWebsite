@@ -26,4 +26,11 @@ describe('Rapids landing page', () => {
     render(<Rapids />)
     expect(screen.getByRole('heading', { name: /1–4 player|co-op chaos/i })).toBeInTheDocument()
   })
+
+  it('renders a non-functional Coming to Steam CTA', () => {
+    render(<Rapids />)
+    const cta = screen.getByRole('button', { name: /coming to steam/i })
+    expect(cta).toBeInTheDocument()
+    expect(cta).toBeDisabled()
+  })
 })

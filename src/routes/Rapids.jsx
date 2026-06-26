@@ -132,6 +132,29 @@ function CoOp() {
   )
 }
 
+function CallToAction() {
+  return (
+    <section className={styles.cta}>
+      <Reveal className={styles.ctaInner}>
+        <h2 className={styles.ctaTitle}>How far will you make it?</h2>
+        <button className={styles.steamBtn} type="button" disabled aria-disabled="true">
+          Coming to Steam
+        </button>
+        <p className={styles.ctaNote}>Wishlist coming soon · PC · 1–4 player online co-op</p>
+      </Reveal>
+    </section>
+  )
+}
+
+function RapidsFooter() {
+  return (
+    <footer className={styles.footer}>
+      <span className={styles.footerMark}>RAPIDS</span>
+      <span className={styles.footerMeta}>© 2026 · Made with Unity</span>
+    </footer>
+  )
+}
+
 export function Rapids() {
   return (
     <main className={styles.page}>
@@ -140,6 +163,8 @@ export function Rapids() {
       <Mechanics />
       <Showcase />
       <CoOp />
+      <CallToAction />
+      <RapidsFooter />
     </main>
   )
 }
