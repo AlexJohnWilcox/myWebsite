@@ -45,6 +45,12 @@ const MECHANICS = [
   },
 ]
 
+const SHOTS = [
+  { src: '/rapids/shot-01.jpg', label: 'shot-01.jpg' },
+  { src: '/rapids/shot-02.jpg', label: 'shot-02.jpg' },
+  { src: '/rapids/shot-03.jpg', label: 'shot-03.jpg' },
+]
+
 function Hero() {
   return (
     <section className={styles.hero}>
@@ -96,12 +102,44 @@ function Mechanics() {
   )
 }
 
+function Showcase() {
+  return (
+    <section className={styles.showcase}>
+      {SHOTS.map((s) => (
+        <Reveal key={s.label} className={styles.shot}>
+          <Media type="image" src={s.src} label={s.label} className={styles.shotImg} />
+        </Reveal>
+      ))}
+    </section>
+  )
+}
+
+function CoOp() {
+  return (
+    <section className={styles.coop}>
+      <div className={styles.coopMedia}>
+        <Media type="video" src="/rapids/coop.mp4" label="coop.mp4" className={styles.coopVideo} />
+        <div className={styles.coopScrim} />
+      </div>
+      <Reveal className={styles.coopText}>
+        <h2 className={styles.coopTitle}>1–4 Player Co-Op Chaos</h2>
+        <p className={styles.coopBody}>
+          Online co-op for one to four critters. Losing cargo is funny. Getting
+          washed overboard is funnier. Built for the clip.
+        </p>
+      </Reveal>
+    </section>
+  )
+}
+
 export function Rapids() {
   return (
     <main className={styles.page}>
       <Hero />
       <Pitch />
       <Mechanics />
+      <Showcase />
+      <CoOp />
     </main>
   )
 }

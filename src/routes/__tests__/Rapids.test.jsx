@@ -21,4 +21,9 @@ describe('Rapids landing page', () => {
     expect(screen.getByRole('heading', { name: /the wave/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /quotas/i })).toBeInTheDocument()
   })
+
+  it('renders the co-op section', () => {
+    render(<Rapids />)
+    expect(screen.getByRole('heading', { name: /1–4 player|co-op chaos/i })).toBeInTheDocument()
+  })
 })
