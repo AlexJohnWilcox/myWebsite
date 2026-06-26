@@ -43,7 +43,24 @@ export function Hub() {
       </section>
 
       <section className={styles.grid}>
-        <Tile index={1} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=cybersecurity" featured>
+        <Tile index={1} title="Reddit × DataDome" subtitle="Mobile RE · DataDome anti-bot teardown · GrapheneOS" to="/projects?category=cybersecurity" featured>
+{`   Reddit Android app · com.reddit.frontpage
+              │
+              ▼
+   ┌─────────────────────────┐
+   │   Cronet net stack      │ ═══▶  api-sdk.datadome.co
+   │   libcronet.143.so      │       · device challenge ◆
+   │                         │ ◀═══  · datadome= clearance
+   │   replays clearance     │       · all server-side
+   │   cookie on every req   │
+   └────────────┬────────────┘
+                ▼
+   reddit API / CDN  (behind DataDome's edge)
+
+   teardown ▸ 12 dex + native libs = 0 datadome SDKs
+   ✕ DNS-block datadome.co ▸ feed stops loading`}
+        </Tile>
+        <Tile index={2} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=cybersecurity" featured>
 {`┌─ clients ─────┐       ┌──── ThinkPad · Arch Linux ────┐       ┌─ upstream ──┐
 │               │       │                                │       │             │
 │  phone        │◀═WG══▶│   WireGuard   :51820/udp      │       │   1.1.1.1   │
@@ -60,11 +77,11 @@ export function Hub() {
                         │                                │
                         └────────────────────────────────┘`}
         </Tile>
-        <Tile index={2} title="About" subtitle="Me" to="/about" />
-        <Tile index={3} title="Academics" subtitle="CS · Cyber" to="/academics" />
-        <Tile index={4} title="Experience" subtitle="Roles · Timeline" to="/experience" />
-        <Tile index={5} title="Projects" subtitle="Security · Game Dev · Web Design" to="/projects" />
-        <Tile index={6} title="Contact" subtitle="Hello" to="/contact" />
+        <Tile index={3} title="About" subtitle="Me" to="/about" />
+        <Tile index={4} title="Academics" subtitle="CS · Cyber" to="/academics" />
+        <Tile index={5} title="Experience" subtitle="Roles · Timeline" to="/experience" />
+        <Tile index={6} title="Projects" subtitle="Security · Game Dev · Web Design" to="/projects" />
+        <Tile index={7} title="Contact" subtitle="Hello" to="/contact" />
       </section>
     </div>
   )

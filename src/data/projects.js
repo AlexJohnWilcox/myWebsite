@@ -1,5 +1,16 @@
 export const projects = [
   {
+    slug: 'reddit-datadome-re',
+    title: 'Reddit × DataDome',
+    category: 'cybersecurity',
+    year: 2026,
+    tags: ['Android', 'jadx', 'apktool', 'mitmproxy', 'Frida', 'GrapheneOS'],
+    summary: 'Mobile reverse engineering teardown of how the Reddit Android app talks to the DataDome anti-bot service, and what it fingerprints about my device.',
+    body: "Reddit × DataDome is a mobile reverse engineering study of how the Reddit Android app integrates the DataDome anti-bot service, run entirely on my own GrapheneOS Pixel and my own account for privacy research. I pulled the APK and its splits over adb, decompressed all twelve dex files and the native libraries, and grepped the whole teardown, only to find Reddit bundles no DataDome SDK at all. The protection lives server side: Reddit's API sits behind DataDome's edge, and the app's Cronet HTTP stack transparently solves the challenge, receives a datadome clearance cookie, and replays it on every request after that. I confirmed it by blocking datadome.co at the DNS level and watching content loading break, while killing the ad and analytics SDKs changed nothing, proving which domains are load bearing versus parasitic. From there I'm working toward decrypting the challenge traffic with a patched network security config and mitmproxy to characterize exactly what the anti-bot layer learns about my device.",
+    links: { writeup: '/security/reverse-engineering-reddits-anti-bot', demo: null, github: null },
+    images: [],
+  },
+  {
     slug: 'kline-ai-siem',
     title: 'Kline: AI SIEM',
     category: 'cybersecurity',

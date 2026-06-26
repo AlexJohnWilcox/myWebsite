@@ -2,6 +2,16 @@ export const security = {
   intro: `Notes and reflections from my ongoing journey to secure my right to privacy on the internet. Follow along with my blog style narrative as I divulge what I'm doing to be safer and more secure online.`,
   posts: [
     {
+      slug: 'reverse-engineering-reddits-anti-bot',
+      date: '2026-06-20',
+      keywords: ['reddit', 'datadome', 'reverse-engineering'],
+      title: "Reverse engineering Reddit's anti-bot",
+      body: [
+        `After switching to GrapheneOS I started paying closer attention to which apps were quietly profiling my device, and Reddit kept coming up. I'd read that it leaned on a company called DataDome to tell humans apart from bots, so I set out to understand exactly what that meant for my privacy, working only on my own phone and my own account. I pulled the Reddit app off my Pixel over adb and tore the whole thing apart, every dex file, every native library, every asset, and went looking for DataDome. To my surprise it wasn't there at all.`,
+        `It turns out the anti-bot lives entirely on Reddit's servers. The app's networking layer quietly solves a challenge in the background, gets handed a clearance cookie, and sends it back on every request after that. I proved it to myself by blocking DataDome at the DNS level on my Pi-Hole and watching Reddit stop loading, while blocking the advertising and analytics trackers did nothing at all. That told me which connections actually keep the app working and which are only there to watch me. I'm still digging into exactly what the challenge measures about my device, but the lesson so far is the same one this whole journey keeps teaching me: you can't protect yourself from something until you understand how it works.`,
+      ],
+    },
+    {
       slug: 'a-pihole-with-a-forward-proxy',
       date: '2026-04-01',
       keywords: ['pi-hole', 'dns', 'home-network'],
