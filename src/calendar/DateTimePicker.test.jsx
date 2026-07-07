@@ -9,7 +9,7 @@ describe('DateTimePicker', () => {
     // Step 1: pick day 5
     fireEvent.click(screen.getByRole('button', { name: '5' }))
     // Step 2: time wheel visible — pick hour 10 then minute 30
-    fireEvent.click(screen.getByRole('button', { name: '10' }))
+    fireEvent.click(screen.getByRole('button', { name: '10 AM' }))
     fireEvent.click(screen.getByRole('button', { name: ':30' }))
     expect(onChange).toHaveBeenLastCalledWith('2026-06-05T10:30')
   })

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import styles from './EventEditor.module.css'
-import { monthMatrix, fmtMonthYear } from './datetime'
+import { monthMatrix, fmtMonthYear, fmtHour, fmtTime } from './datetime'
 
 const HOURS = Array.from({ length: 24 }, (_, h) => h)
-const MINS = [0, 15, 30, 45]
+const MINS = Array.from({ length: 12 }, (_, i) => i * 5)
 const pad = (n) => String(n).padStart(2, '0')
 
 export function DateTimePicker({ value, allDay, onChange, onClose }) {
@@ -64,11 +64,11 @@ export function DateTimePicker({ value, allDay, onChange, onClose }) {
       {step === 'time' && !allDay && (
         <div>
           <button className={styles.backLink} onClick={() => setStep('day')}>‹ back to day</button>
-          <div className={styles.timeBig}>{pad(hour)}:{pad(minute)}</div>
+          <div className={styles.timeBig}>{fmtTime(`${date}T${pad(hour)}:${pad(minute)}`)}</div>
           <div className={styles.wheels}>
             <div className={styles.wheel}>
               {HOURS.map((h) => (
-                <button key={h} className={h === hour ? styles.wheelOn : styles.wheelItem} onClick={() => pickHour(h)}>{pad(h)}</button>
+                <button key={h} className={h === hour ? styles.wheelOn : styles.wheelItem} onClick={() => pickHour(h)}>{fmtHour(h)}</button>
               ))}
             </div>
             <div className={styles.wheel}>

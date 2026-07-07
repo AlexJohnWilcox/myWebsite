@@ -38,7 +38,7 @@ describe('EventEditor start/end coupling', () => {
     render(<EventEditor initial={base} onSave={onSave} onCancel={vi.fn()} onDelete={vi.fn()} />)
     fireEvent.click(screen.getByText('2026-07-08 · 9:00 AM')) // open start picker
     fireEvent.click(screen.getAllByText('8')[0]) // pick July 8 in the day grid (a trailing Aug 8 cell also shows '8')
-    fireEvent.click(screen.getByText('14'))
+    fireEvent.click(screen.getByText('2 PM'))
     fireEvent.click(screen.getByText(':30'))
     fireEvent.click(screen.getByRole('button', { name: /^save$/i }))
     expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ start: '2026-07-08T14:30', end: '2026-07-08T15:30' }))

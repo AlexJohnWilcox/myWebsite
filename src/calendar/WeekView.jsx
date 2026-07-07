@@ -1,5 +1,5 @@
 import styles from './Calendar.module.css'
-import { weekDates, fmtTime } from './datetime'
+import { weekDates, fmtTime, fmtHour } from './datetime'
 
 const HOURS = Array.from({ length: 24 }, (_, h) => h)
 
@@ -11,7 +11,7 @@ export function WeekView({ anchorDate, events, onOpenEvent }) {
     <div className={styles.timeGrid}>
       <div className={styles.timeCol}>
         <div className={styles.dayColHead}> </div>
-        {HOURS.map((h) => <div key={h} className={styles.hourRow}>{h}:00</div>)}
+        {HOURS.map((h) => <div key={h} className={styles.hourRow}>{fmtHour(h)}</div>)}
       </div>
       <div className={styles.dayCols} style={{ gridTemplateColumns: `repeat(7, 1fr)` }}>
         {days.map((d) => (

@@ -2,7 +2,9 @@ const { getStore, connectLambda } = require('@netlify/blobs')
 const { randomUUID } = require('crypto')
 
 const PREFIX = 'events/'
-function store() { return getStore('calendar-events') }
+// Strong consistency so a list right after a create/delete sees the change —
+// the default eventual mode can serve stale reads for up to a minute.
+function store() { return getStore({ name: 'calendar-events', consistency: 'strong' }) }
 
 // Classic Lambda-signature functions don't get an auto-configured Blobs
 // environment in @netlify/blobs v10+. Wire it from the context Netlify injects

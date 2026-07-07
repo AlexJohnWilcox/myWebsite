@@ -36,3 +36,12 @@ describe('naive ms conversion', () => {
     expect(dt.msToNaive(dt.naiveToMs('2026-07-08T23:30') + dur, false)).toBe('2026-07-09T00:30')
   })
 })
+
+describe('fmtHour', () => {
+  it('formats hours in 12-hour style', () => {
+    expect(dt.fmtHour(0)).toBe('12 AM')
+    expect(dt.fmtHour(9)).toBe('9 AM')
+    expect(dt.fmtHour(12)).toBe('12 PM')
+    expect(dt.fmtHour(23)).toBe('11 PM')
+  })
+})

@@ -1,5 +1,5 @@
 import styles from './Calendar.module.css'
-import { fmtTime } from './datetime'
+import { fmtTime, fmtHour } from './datetime'
 
 const HOURS = Array.from({ length: 24 }, (_, h) => h)
 
@@ -9,7 +9,7 @@ export function DayView({ date, events, onOpenEvent }) {
     <div className={styles.timeGrid}>
       <div className={styles.timeCol}>
         <div className={styles.dayColHead}> </div>
-        {HOURS.map((h) => <div key={h} className={styles.hourRow}>{h}:00</div>)}
+        {HOURS.map((h) => <div key={h} className={styles.hourRow}>{fmtHour(h)}</div>)}
       </div>
       <div>
         <div className={styles.dayColHead}>{date}</div>

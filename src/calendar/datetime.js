@@ -40,6 +40,8 @@ export function fmtTime(naive) {
   return `${h}:${pad(m)} ${ampm}`
 }
 
+export function fmtHour(h) { return `${h % 12 || 12} ${h >= 12 ? 'PM' : 'AM'}` }
+
 export function fmtMonthYear(year, month) { return `${MONTHS[month - 1]} ${year}` }
 
 // Naive datetime ("YYYY-MM-DD" or "YYYY-MM-DDTHH:MM") <-> UTC ms, for duration math.

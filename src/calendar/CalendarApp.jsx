@@ -69,6 +69,18 @@ export function CalendarApp({ onAuthExpired }) {
 
   useEffect(() => { reload() }, [reload])
 
+  // Refetch when the tab regains focus so changes made elsewhere (e.g. the
+  // desktop quick-add) show up without a manual refresh.
+  useEffect(() => {
+    const onVisible = () => { if (!document.hidden) reload() }
+    window.addEventListener('focus', onVisible)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('focus', onVisible)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [reload])
+
   // In-app reminders: check once a minute while mounted.
   useEffect(() => {
     function check() {
