@@ -2,14 +2,12 @@ const { getStore, connectLambda } = require('@netlify/blobs')
 const { randomUUID } = require('crypto')
 
 const PREFIX = 'events/'
-// Strong consistency so a list right after a create/delete sees the change —
-// the default eventual mode can serve stale reads for up to a minute.
-// The local `netlify dev` Blobs sandbox has no uncachedEdgeURL and throws on
-// strong reads, so fall back to eventual there (local reads aren't stale anyway).
-function store() {
-  const consistency = process.env.NETLIFY_DEV === 'true' ? 'eventual' : 'strong'
-  return getStore({ name: 'calendar-events', consistency })
-}
+// Eventual consistency only: strong reads need an 'uncachedEdgeURL' in the
+// Blobs environment, which neither production classic-Lambda functions
+// (connectLambda) nor the local netlify dev sandbox provide — every read
+// throws. A just-saved event can take a moment to appear in the next list;
+// refresh resolves it.
+function store() { return getStore({ name: 'calendar-events' }) }
 
 // Classic Lambda-signature functions don't get an auto-configured Blobs
 // environment in @netlify/blobs v10+. Wire it from the context Netlify injects
