@@ -23,3 +23,16 @@ describe('client datetime', () => {
     expect(dt.fmtMonthYear(2026, 6)).toBe('June 2026')
   })
 })
+
+describe('naive ms conversion', () => {
+  it('round-trips a naive datetime', () => {
+    expect(dt.msToNaive(dt.naiveToMs('2026-07-08T14:30'), false)).toBe('2026-07-08T14:30')
+  })
+  it('handles date-only values and allDay output', () => {
+    expect(dt.msToNaive(dt.naiveToMs('2026-07-08') + 86400000, true)).toBe('2026-07-09')
+  })
+  it('supports duration math across days', () => {
+    const dur = dt.naiveToMs('2026-07-08T10:00') - dt.naiveToMs('2026-07-08T09:00')
+    expect(dt.msToNaive(dt.naiveToMs('2026-07-08T23:30') + dur, false)).toBe('2026-07-09T00:30')
+  })
+})

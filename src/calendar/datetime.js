@@ -41,3 +41,17 @@ export function fmtTime(naive) {
 }
 
 export function fmtMonthYear(year, month) { return `${MONTHS[month - 1]} ${year}` }
+
+// Naive datetime ("YYYY-MM-DD" or "YYYY-MM-DDTHH:MM") <-> UTC ms, for duration math.
+export function naiveToMs(naive) {
+  const [date, time = '00:00'] = naive.split('T')
+  const [y, m, d] = date.split('-').map(Number)
+  const [h, min] = time.split(':').map(Number)
+  return Date.UTC(y, m - 1, d, h, min)
+}
+
+export function msToNaive(ms, allDay) {
+  const t = new Date(ms)
+  const date = ymd(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate())
+  return allDay ? date : `${date}T${pad(t.getUTCHours())}:${pad(t.getUTCMinutes())}`
+}

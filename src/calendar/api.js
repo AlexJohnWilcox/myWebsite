@@ -3,7 +3,10 @@ const opts = (extra = {}) => ({ credentials: 'include', headers: { 'Content-Type
 
 async function asJson(res) {
   const data = await res.json().catch(() => ({}))
-  if (!res.ok) throw Object.assign(new Error(data.error || 'request failed'), { status: res.status, data })
+  if (!res.ok) {
+    const msg = data.error || (Array.isArray(data.errors) && data.errors.join(', ')) || 'request failed'
+    throw Object.assign(new Error(msg), { status: res.status, data })
+  }
   return data
 }
 

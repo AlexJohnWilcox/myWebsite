@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './EventEditor.module.css'
 import { DateTimePicker } from './DateTimePicker'
-import { fmtTime } from './datetime'
+import { fmtTime, naiveToMs, msToNaive } from './datetime'
 
 const FREQS = [['none', 'None'], ['daily', 'Daily'], ['weekly', 'Weekly'], ['monthly', 'Monthly']]
 const REMINDER_CHOICES = [5, 10, 30, 60, 1440]
@@ -83,7 +83,14 @@ export function EventEditor({ initial, onSave, onCancel, onDelete }) {
 
         {picking && (
           <DateTimePicker value={picking === 'start' ? f.start : f.end} allDay={f.allDay}
-            onChange={(v) => set({ [picking]: v })} onClose={() => setPicking(null)} />
+            onChange={(v) => {
+              if (picking === 'start') {
+                // setting the start resets the end to one hour later (same day for all-day events)
+                set({ start: v, end: f.allDay ? v : msToNaive(naiveToMs(v) + 3600000, false) })
+              } else {
+                set({ end: v < f.start ? f.start : v })
+              }
+            }} onClose={() => setPicking(null)} />
         )}
 
         <label className={styles.label}>Repeat</label>

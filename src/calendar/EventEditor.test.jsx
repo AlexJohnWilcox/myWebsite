@@ -29,3 +29,18 @@ describe('EventEditor', () => {
     expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument()
   })
 })
+
+describe('EventEditor start/end coupling', () => {
+  const base = { title: 'x', location: '', allDay: false, start: '2026-07-08T09:00', end: '2026-07-08T10:00', notes: '', recurrence: null, reminders: [] }
+
+  it('sets the end to one hour after a newly picked start', () => {
+    const onSave = vi.fn()
+    render(<EventEditor initial={base} onSave={onSave} onCancel={vi.fn()} onDelete={vi.fn()} />)
+    fireEvent.click(screen.getByText('2026-07-08 · 9:00 AM')) // open start picker
+    fireEvent.click(screen.getAllByText('8')[0]) // pick July 8 in the day grid (a trailing Aug 8 cell also shows '8')
+    fireEvent.click(screen.getByText('14'))
+    fireEvent.click(screen.getByText(':30'))
+    fireEvent.click(screen.getByRole('button', { name: /^save$/i }))
+    expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ start: '2026-07-08T14:30', end: '2026-07-08T15:30' }))
+  })
+})
