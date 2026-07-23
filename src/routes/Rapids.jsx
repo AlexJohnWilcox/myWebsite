@@ -137,10 +137,15 @@ function CallToAction() {
     <section className={styles.cta}>
       <Reveal className={styles.ctaInner}>
         <h2 className={styles.ctaTitle}>How far will you make it?</h2>
-        <button className={styles.steamBtn} type="button" disabled aria-disabled="true">
-          Coming to Steam
-        </button>
-        <p className={styles.ctaNote}>Wishlist coming soon · PC · 1–4 player online co-op</p>
+        <a
+          className={styles.steamBtn}
+          href="https://store.steampowered.com/app/4896950/Rapids/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Wishlist on Steam
+        </a>
+        <p className={styles.ctaNote}>PC · 1–4 player online co-op</p>
       </Reveal>
     </section>
   )

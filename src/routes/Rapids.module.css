@@ -272,9 +272,21 @@
   border: none;
   border-radius: 999px;
   padding: 18px 44px;
-  cursor: not-allowed;
+  display: inline-block;
+  text-decoration: none;
   box-shadow: 0 10px 0 rgba(58, 46, 34, 0.25), 0 18px 36px rgba(90, 125, 60, 0.4);
-  opacity: 0.95;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.steamBtn:hover,
+.steamBtn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 0 rgba(58, 46, 34, 0.25), 0 22px 40px rgba(90, 125, 60, 0.45);
+}
+
+.steamBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 6px 0 rgba(58, 46, 34, 0.25), 0 12px 24px rgba(90, 125, 60, 0.35);
 }
 
 .ctaNote {

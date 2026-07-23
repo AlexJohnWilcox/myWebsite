@@ -27,10 +27,10 @@ describe('Rapids landing page', () => {
     expect(screen.getByRole('heading', { name: /1–4 player|co-op chaos/i })).toBeInTheDocument()
   })
 
-  it('renders a non-functional Coming to Steam CTA', () => {
+  it('renders the Steam wishlist link', () => {
     render(<Rapids />)
-    const cta = screen.getByRole('button', { name: /coming to steam/i })
-    expect(cta).toBeInTheDocument()
-    expect(cta).toBeDisabled()
+    const cta = screen.getByRole('link', { name: /wishlist on steam/i })
+    expect(cta).toHaveAttribute('href', 'https://store.steampowered.com/app/4896950/Rapids/')
+    expect(cta).toHaveAttribute('target', '_blank')
   })
 })
