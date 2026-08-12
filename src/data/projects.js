@@ -1,5 +1,27 @@
 export const projects = [
   {
+    slug: 'rapids',
+    title: 'Rapids',
+    category: 'games',
+    year: 2026,
+    tags: ['Unity', 'C#', 'Online Co-op', 'Physics', 'Roguelite', 'Steam'],
+    summary: "First person co-op party game for 1-4 players, haul cargo down a river you can't steer while a wall of water chases you.",
+    body: "Rapids is the game I'm building in Unity, and it's the first thing I've made that's actually going on Steam. You play as a tiny woodland critter hauling cargo down a river on a raft with no engine, and the whole joke is that you can barely steer it, the current decides where you go and your job is to spot what's coming and hold on. Each of your hands works independently, so you're constantly choosing between holding the cargo down or holding yourself to the raft, and you can't do both. Behind you the entire way down is a wall of water that never gets tired. Every run gives you a quota, and hitting it just means shipping more cargo the next time, there's no winning, only getting further. It plays solo but it's built for one to four players online, because losing a crate is funny and getting washed overboard is funnier. Under the hood it's physics driven cargo, two currencies, upgrade trees, and roguelite unlocks that carry between runs. It's coming to PC and you can wishlist it now.",
+    links: { wishlist: 'https://store.steampowered.com/app/4896950/Rapids/', demo: null, github: null, writeup: null },
+    images: [],
+  },
+  {
+    slug: 'the-sanctum-homelab',
+    title: 'The Sanctum Homelab',
+    category: 'cybersecurity',
+    year: 2026,
+    tags: ['OpenWrt', 'WireGuard', 'Tailscale', 'Pi-hole', 'nftables', 'Raspberry Pi', 'Docker'],
+    summary: 'Three machines and one encrypted way out, a router with no path to the internet except a VPN tunnel that moves to a new exit every night.',
+    body: "The Sanctum is the network I built after moving into my apartment, and it's the largest thing I've put together outside of my internship. It runs on three machines, a GL.iNet Flint 2 flashed off its factory firmware to vanilla OpenWrt as the router, a Raspberry Pi 5 running Pi-hole, Immich, and Caddy, and my Arch desktop. Every device in the apartment leaves through a single WireGuard tunnel to Proton, my phone, my desktop, the TV, even the speakers, and the kill switch is structural rather than a setting, the firewall's default forward policy is REJECT and the only forwarding rule that exists at all is LAN to the tunnel. There is no path to my ISP for anything to leak out of, so if the tunnel dies the internet stops instead of quietly falling back. A script on the router moves the tunnel to a different Proton exit every night at 3am and makes it prove itself before keeping it, with a watchdog to catch an exit that dies after it already passed. Tailscale gets me back in from outside, the TV and the speakers are held to outbound allowlists of their own, and the whole network reports into a dashboard I can read on one screen.",
+    links: { writeup: '/security/tailscale-and-seven-exit-nodes', demo: null, github: null },
+    images: [],
+  },
+  {
     slug: 'reddit-datadome-re',
     title: 'Reddit × DataDome',
     category: 'cybersecurity',

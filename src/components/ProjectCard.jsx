@@ -26,8 +26,9 @@ export function ProjectCard({ project }) {
             className={styles.body}
           >
             <p>{project.body}</p>
-            {(project.links?.github || project.links?.demo || project.links?.writeup) && (
+            {(project.links?.github || project.links?.demo || project.links?.writeup || project.links?.wishlist) && (
               <div className={styles.links}>
+                {project.links.wishlist && <a href={project.links.wishlist} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ WISHLIST ]</a>}
                 {project.links.demo && <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ {project.category === 'games' ? 'PLAY' : 'DEMO'} ]</a>}
                 {project.links.github && <a href={project.links.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ GITHUB ]</a>}
                 {project.links.writeup && <a href={project.links.writeup} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>[ WRITEUP ]</a>}

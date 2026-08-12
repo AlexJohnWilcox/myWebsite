@@ -43,39 +43,42 @@ export function Hub() {
       </section>
 
       <section className={styles.grid}>
-        <Tile index={1} title="Reddit × DataDome" subtitle="Mobile RE · DataDome anti-bot teardown · GrapheneOS" to="/projects?category=cybersecurity" featured>
-{`   Reddit Android app · com.reddit.frontpage
-              │
-              ▼
-   ┌─────────────────────────┐
-   │   Cronet net stack      │ ═══▶  api-sdk.datadome.co
-   │   libcronet.143.so      │       · device challenge ◆
-   │                         │ ◀═══  · datadome= clearance
-   │   replays clearance     │       · all server-side
-   │   cookie on every req   │
-   └────────────┬────────────┘
-                ▼
-   reddit API / CDN  (behind DataDome's edge)
+        <Tile index={1} title="Rapids" subtitle="Unity · 1–4 player online co-op · Wishlist on Steam" to="/rapids" featured>
+{`≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈  THE WAVE  ≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈
+≈≈≈≈≈  a wall of water, the whole way down, and it never tires  ≈≈
+                                 │
+                                 ▼  always closing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                 ┌───────────────────────┐
+~~~~~~~~~~~~~~~  │  [#] [#] [#] [#]      │  ~~~~~~  ◀ cargo, loose
+~~~~~~~~~~~~~~~  │   o     o     o    o  │  ~~~~~~  ◀ 1-4 critters
+                 └───────────────────────┘
+~~~~~~~~~~~~~~~~~~~~ no engine · no steering ~~~~~~~~~~~~~~~~~~~~~
+      ▲ rock             ▲ log             ▲ the drop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   teardown ▸ 12 dex + native libs = 0 datadome SDKs
-   ✕ DNS-block datadome.co ▸ feed stops loading`}
+  two hands ▸ hold the cargo, or hold the raft. you can't do both
+  the loop  ▸ hit quota ─▶ ship more ─▶ quota rises ─▶ do it again
+  there is no winning, only further`}
         </Tile>
-        <Tile index={2} title="Pi-hole + Forward Proxy" subtitle="Home server · Arch · Docker · WireGuard" to="/projects?category=cybersecurity" featured>
-{`┌─ clients ─────┐       ┌──── ThinkPad · Arch Linux ────┐       ┌─ upstream ──┐
-│               │       │                                │       │             │
-│  phone        │◀═WG══▶│   WireGuard   :51820/udp      │       │   1.1.1.1   │
-│  laptop       │       │          │                     │       │   9.9.9.9   │
-│  desktop      │       │          ▼                     │       │   (DoT/DoH) │
-│               │◀─DNS─▶│   Pi-hole · 1M+ blocklist     │──────▶│             │
-└───────────────┘  :53  │          │                     │ allow └─────────────┘
-                        │     ┌────┴────┐                │
-                        │   match?    clean              │
-                        │     │          \\              │
-                        │  NXDOMAIN    forward           │
-                        │     ▼            │             │
-                        │   client   ◀─────┘             │
-                        │                                │
-                        └────────────────────────────────┘`}
+        <Tile index={2} title="The Sanctum Homelab" subtitle="Private network · OpenWrt · WireGuard · Pi-hole · Tailscale" to="/projects?category=cybersecurity" featured>
+{`┌─ the sanctum ─┐      ┌─── the Oracle · Pi 5 ────┐    ┌─ 7 roads ────────┐
+│               │      │                          │    │                  │
+│  pixel        │─:53─▶│  pi-hole  · 1M+ list     │    │  CA      US-MA   │
+│  erebus       │      │  immich   · caddy + TLS  │    │  US-VA   US-NC   │
+│  kafka        │      │  tailscale · exit node   │    │  US-DC   US-PA   │
+│  sonos ×2  ◆  │      │  dash.lan · one screen   │    │  US-TX           │
+│  LG TV     ◆  │      └──────────────────────┬───┘    └─────────▲────────┘
+└───────┬───────┘  dns upstream · 10.2.0.1    │                  │
+        │                                     ▼                  │
+        │    ┌──── the Gate · vanilla OpenWrt ────┐              │
+        └───▶│  forward = REJECT                  │              │
+             │  lan → wg  ◀ the only rule         │═══ wg0 ══════┘
+             │  no lan → wan path exists          │  new exit 03:00 ±15m
+             └────────────────────────────────────┘  verified, or rolled back
+
+  ◆ warded ▸ no egress until someone opens a window
+  ✕ tunnel drops ▸ the LAN goes dark, it never falls back to the ISP`}
         </Tile>
         <Tile index={3} title="About" subtitle="Me" to="/about" />
         <Tile index={4} title="Academics" subtitle="CS · Cyber" to="/academics" />
