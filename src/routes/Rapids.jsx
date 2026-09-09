@@ -32,11 +32,6 @@ const MECHANICS = [
     media: { type: 'video', src: `${M}/overboard.mp4`, label: 'A critter goes overboard reaching for cargo' },
   },
   {
-    title: 'The Lasso',
-    body: 'Twirl to wind up. The longer you hold, the further it flies. Hook a crate and haul it in hand over hand, or hook a crewmate and drag them back aboard before the water takes them.',
-    media: { type: 'video', src: `${M}/throw.mp4`, label: 'One critter throws another across the deck' },
-  },
-  {
     title: 'Success Is the Problem',
     body: 'You start empty, light and quick. Every crate you win makes the raft heavier, slower and more stressed, and hands the river more to take from you. "Do we go for that one?" gets answered out loud, at speed, with the crew disagreeing.',
     media: { type: 'image', src: `${M}/shot-04.jpg`, label: 'A loaded raft heading for a drop' },

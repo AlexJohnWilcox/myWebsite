@@ -14,10 +14,9 @@ describe('Rapid Raccoons landing page', () => {
     expect(screen.getByText(/rudder that nudges/i)).toBeInTheDocument()
   })
 
-  it('renders all four core mechanics', () => {
+  it('renders the core mechanics', () => {
     render(<Rapids />)
     expect(screen.getByRole('heading', { name: /clean-up crew/i })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /the lasso/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /success is the problem/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /river fights back/i })).toBeInTheDocument()
   })
