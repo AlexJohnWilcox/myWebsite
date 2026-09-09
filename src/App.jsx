@@ -40,7 +40,7 @@ function AnimatedRoutes() {
           <Route path="/security" element={<Security />} />
           <Route path="/security/:slug" element={<SecurityPost />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/rapids" element={<Rapids />} />
+          <Route path="/rapidraccoons" element={<Rapids />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>

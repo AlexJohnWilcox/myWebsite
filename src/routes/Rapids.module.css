@@ -58,14 +58,18 @@
 }
 
 .wordmark {
-  font-family: var(--r-display);
-  font-weight: 700;
-  font-size: clamp(72px, 20vw, 280px);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
   margin: 0;
-  color: #fff;
-  text-shadow: 0 6px 0 rgba(58, 46, 34, 0.25), 0 18px 40px rgba(58, 46, 34, 0.45);
+  line-height: 0;
+}
+
+.sign {
+  width: min(88vw, 900px);
+  height: auto;
+  filter: drop-shadow(0 18px 40px rgba(58, 46, 34, 0.45));
+}
+
+.heroBtn {
+  margin-top: 8px;
 }
 
 .tagline {
@@ -74,7 +78,7 @@
   font-size: clamp(18px, 3.5vw, 34px);
   color: #fff;
   margin: 0;
-  max-width: 18ch;
+  max-width: 30ch;
   text-shadow: 0 2px 14px rgba(58, 46, 34, 0.6);
 }
 
@@ -176,6 +180,92 @@
 @media (max-width: 760px) {
   .mechCard { grid-template-columns: 1fr; }
   .mechReverse .mechMedia { order: 0; }
+}
+
+.trailer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px clamp(60px, 10vw, 120px);
+}
+
+.trailerInner { text-align: center; }
+
+.trailerTitle {
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: clamp(30px, 5vw, 56px);
+  line-height: 1.02;
+  margin: 0 0 24px;
+  color: var(--r-bark);
+}
+
+.trailerVideo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 28px;
+  background: var(--r-bark);
+  box-shadow: 0 24px 60px rgba(58, 46, 34, 0.18);
+}
+
+.between {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(60px, 10vw, 120px) 24px;
+  text-align: center;
+}
+
+.betweenTitle {
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: clamp(30px, 5vw, 56px);
+  line-height: 1.02;
+  margin: 0 0 18px;
+  color: var(--r-bark);
+}
+
+.betweenBody {
+  font-size: clamp(17px, 2.4vw, 22px);
+  line-height: 1.55;
+  margin: 0;
+  color: rgba(58, 46, 34, 0.78);
+}
+
+.dates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px clamp(40px, 6vw, 80px);
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 18px;
+  border-radius: 24px;
+  background: var(--r-cream-deep);
+  box-shadow: 0 12px 30px rgba(58, 46, 34, 0.12);
+  text-align: center;
+}
+
+.dateWhen {
+  font-family: var(--r-display);
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 40px);
+  color: var(--r-amber);
+  line-height: 1;
+}
+
+.dateWhat {
+  font-size: clamp(15px, 2vw, 19px);
+  color: rgba(58, 46, 34, 0.8);
+}
+
+@media (max-width: 760px) {
+  .dates { grid-template-columns: 1fr; }
 }
 
 .showcase {

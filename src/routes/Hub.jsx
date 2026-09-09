@@ -43,7 +43,7 @@ export function Hub() {
       </section>
 
       <section className={styles.grid}>
-        <Tile index={1} title="Rapids" subtitle="Unity · 1–4 player online co-op · Wishlist on Steam" to="/rapids" featured>
+        <Tile index={1} title="Rapid Raccoons" subtitle="Unity · 1–4 player online co-op · Free demo Sep 22 · Wishlist on Steam" to="/rapidraccoons" featured>
 {`≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈  THE WAVE  ≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈
 ≈≈≈≈≈  a wall of water, the whole way down, and it never tires  ≈≈
                                  │

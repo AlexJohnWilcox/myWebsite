@@ -4,8 +4,8 @@ import { MemoryRouter } from 'react-router-dom'
 import { Layout } from '@/App'
 
 describe('chrome gating', () => {
-  it('hides the global nav on /rapids', () => {
-    render(<MemoryRouter initialEntries={['/rapids']}><Layout /></MemoryRouter>)
+  it('hides the global nav on /rapidraccoons', () => {
+    render(<MemoryRouter initialEntries={['/rapidraccoons']}><Layout /></MemoryRouter>)
     expect(screen.queryByRole('navigation')).toBeNull()
   })
 

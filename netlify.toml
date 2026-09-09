@@ -27,6 +27,17 @@
   to = "/games/firstgame/:splat"
   status = 301
 
+# The game page moved with the rename
+[[redirects]]
+  from = "/rapids"
+  to = "/rapidraccoons"
+  status = 301
+
+[[redirects]]
+  from = "/rapids/*"
+  to = "/rapidraccoons/:splat"
+  status = 301
+
 # SPA fallback. Static files (including /games/**/index.html) resolve first.
 [[redirects]]
   from = "/*"
