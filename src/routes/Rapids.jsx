@@ -90,9 +90,9 @@ function Pitch() {
     <section className={styles.pitch}>
       <Reveal>
         <p className={styles.pitchText}>
-          Haul cargo down a river on a raft with <em>no engine and no brakes</em>,
-          just a rudder that nudges and a current that decides, with a wall of
-          water closing in behind you.
+          Haul cargo down a river on a raft with <em>no engine</em>, just a rudder
+          that nudges, an anchor if you think you have the time, and a current
+          that decides, with a wall of water closing in behind you.
           Everything worth money is already in the water. Go and get it.
         </p>
       </Reveal>
