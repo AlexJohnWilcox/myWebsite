@@ -77,7 +77,7 @@ function Hero() {
         <h1 className={styles.wordmark}>
           <img className={styles.sign} src={`${M}/sign.png`} alt="Rapid Raccoons" />
         </h1>
-        <p className={styles.tagline}>1 to 4 tiny critters. One raft. No steering.</p>
+        <p className={styles.tagline}>1 to 4 tiny critters. One raft. A rudder that barely helps.</p>
         <a className={`${styles.steamBtn} ${styles.heroBtn}`} href={STEAM_URL} target="_blank" rel="noopener noreferrer">
           Wishlist on Steam
         </a>
@@ -95,8 +95,9 @@ function Pitch() {
     <section className={styles.pitch}>
       <Reveal>
         <p className={styles.pitchText}>
-          Haul cargo down a <em>river you can't steer</em>, on a raft with no
-          engine and no brakes, with a wall of water closing in behind you.
+          Haul cargo down a river on a raft with <em>no engine and no brakes</em>,
+          just a rudder that nudges and a current that decides, with a wall of
+          water closing in behind you.
           Everything worth money is already in the water. Go and get it.
         </p>
       </Reveal>

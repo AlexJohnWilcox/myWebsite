@@ -6,12 +6,12 @@ describe('Rapid Raccoons landing page', () => {
   it('renders the hero sign and tagline', () => {
     render(<Rapids />)
     expect(screen.getByRole('heading', { level: 1, name: /rapid raccoons/i })).toBeInTheDocument()
-    expect(screen.getByText(/one raft\. no steering/i)).toBeInTheDocument()
+    expect(screen.getByText(/rudder that barely helps/i)).toBeInTheDocument()
   })
 
   it('renders the pitch line', () => {
     render(<Rapids />)
-    expect(screen.getByText(/river you can't steer/i)).toBeInTheDocument()
+    expect(screen.getByText(/rudder that nudges/i)).toBeInTheDocument()
   })
 
   it('renders all four core mechanics', () => {

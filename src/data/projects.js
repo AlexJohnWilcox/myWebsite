@@ -5,7 +5,7 @@ export const projects = [
     category: 'games',
     year: 2026,
     tags: ['Unity', 'C#', 'Online Co-op', 'Physics', 'Roguelite', 'Steam'],
-    summary: "First person co-op party game for 1-4 players: a crew of tiny critters hauls cargo down a river they can't steer while a wall of water chases them.",
+    summary: "First person co-op party game for 1-4 players: a crew of tiny critters hauls cargo down a river on a raft that barely steers while a wall of water chases them.",
     body: "Rapid Raccoons is the game I'm building in Unity, and it's the first thing I've made that's actually going on Steam. You and your crew are tiny woodland critters working the last stretch of a river nobody else will run, on a raft with no engine and no brakes, just a rudder that nudges and a current that decides. Nothing is loaded for you: the cargo is out in the water, wedged against rocks and stranded on islands, and only what reaches the hold counts. You lasso crates in, lasso crewmates back aboard, and every crate you win makes the raft heavier, slower and more stressed while a wall of water that never gets tired closes in behind you. Between runs, shiny acorns buy raft modifications and the tavern's prize machine hands out perks at random. Every run gives you a quota, and hitting it just means shipping more next time. There's no winning, only getting further. It plays solo but it's built for one to four players online, because losing a crate is funny and getting washed overboard is funnier. The free demo lands on Steam on September 22, it's in October's Steam Next Fest, and Early Access opens December 1.",
     links: { wishlist: 'https://store.steampowered.com/app/4896950/Rapid_Raccoons/', demo: null, github: null, writeup: null },
     images: [],
