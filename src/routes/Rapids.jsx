@@ -231,7 +231,7 @@ function RapidsFooter() {
         {SOCIALS.map((s) => (
           <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
         ))}
-      </nav>
+      </div>
       <span className={styles.footerMeta}>© 2026 · Made with Unity</span>
     </footer>
   )
