@@ -39,4 +39,11 @@ describe('Rapid Raccoons landing page', () => {
     }
     expect(STEAM_URL).toBe('https://store.steampowered.com/app/4896950/Rapid_Raccoons/')
   })
+
+  it('links the social channels in the footer', () => {
+    render(<Rapids />)
+    expect(screen.getByRole('link', { name: /youtube/i })).toHaveAttribute('href', 'https://www.youtube.com/@rapidraccoons')
+    expect(screen.getByRole('link', { name: /tiktok/i })).toHaveAttribute('href', 'https://www.tiktok.com/@rapidraccoons')
+    expect(screen.getByRole('link', { name: /instagram/i })).toHaveAttribute('href', 'https://www.instagram.com/rapidraccoons')
+  })
 })

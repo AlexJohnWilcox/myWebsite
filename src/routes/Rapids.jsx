@@ -216,10 +216,22 @@ function CallToAction() {
   )
 }
 
+const SOCIALS = [
+  { label: 'Steam', href: STEAM_URL },
+  { label: 'YouTube', href: 'https://www.youtube.com/@rapidraccoons' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@rapidraccoons' },
+  { label: 'Instagram', href: 'https://www.instagram.com/rapidraccoons' },
+]
+
 function RapidsFooter() {
   return (
     <footer className={styles.footer}>
       <span className={styles.footerMark}>RAPID RACCOONS</span>
+      <div className={styles.footerLinks}>
+        {SOCIALS.map((s) => (
+          <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
+        ))}
+      </nav>
       <span className={styles.footerMeta}>© 2026 · Made with Unity</span>
     </footer>
   )

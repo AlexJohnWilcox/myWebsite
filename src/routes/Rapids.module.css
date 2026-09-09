@@ -404,6 +404,25 @@
   letter-spacing: 0.06em;
 }
 
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-family: var(--r-display);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.footerLinks a {
+  color: var(--r-cream);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.footerLinks a:hover,
+.footerLinks a:focus-visible { opacity: 1; text-decoration: underline; }
+
 .footerMeta {
   font-size: 14px;
   color: rgba(245, 236, 215, 0.6);
